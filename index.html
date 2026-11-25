@@ -212,6 +212,17 @@
   h3.lead-h { margin-top: 8px; padding-top: 22px; border-top: 1px solid var(--navy); font-size: 22px; }
   #overview .tiles { margin-top: 4px; }
   #overview .grid2 { margin-top: 40px; }
+  ul.changes li { margin: 10px 0; }
+  .eq-lede { font: 400 19px/1.55 var(--serif); color: var(--ink); max-width: 66ch; margin: 0 0 20px; }
+  .eq-stats { margin-bottom: 8px; }
+  ol.reasons { list-style: none; counter-reset: r; padding: 0; margin: 28px 0 0; max-width: 78ch; }
+  ol.reasons li { counter-increment: r; position: relative; padding: 14px 0 14px 44px; border-top: 1px solid var(--rule); line-height: 1.6; }
+  ol.reasons li::before { content: counter(r); position: absolute; left: 0; top: 12px; font: 600 22px var(--serif); color: var(--amber); }
+  ol.reasons li strong { display: block; font: 600 18px/1.4 var(--serif); color: var(--navy); margin-bottom: 4px; }
+  #relyChart .bar-label { width: auto; }
+  .usu-view { margin: 28px 0 8px; padding: 12px 16px; border: 1px solid var(--rule2); border-radius: 3px; max-width: 78ch; font-size: 15px; color: var(--muted); }
+  .usu-view strong { color: var(--ink); }
+  @media (min-width: 761px) { #relyChart .bar-row { grid-template-columns: 330px 1fr; } }
   .callout { border-left: 3px solid var(--navy); background: var(--parch); padding: 16px 20px; margin: 32px 0; font-size: 16px; line-height: 1.65; }
   .callout > strong:first-child { font-family: var(--serif); font-size: 18px; color: var(--navy); }
   .warn { border-left: 3px solid var(--amber); background: var(--parch); padding: 14px 18px; margin-top: 24px; font-size: 15px; }
@@ -258,23 +269,15 @@
 <section class="tab" id="overview">
   <h2>What's being proposed</h2>
   <p class="lede">Starting fall 2027, USU wants to charge every Logan student the same price per credit, no matter their major.
-    That would end both the flat price for 12–18 credits and the extra charges some colleges add. USU says it would collect
-    the same total, so business majors would mostly pay less and most other students would pay more.</p>
+    USU says it would collect the same total. The question is who pays.</p>
 
-  <h3 class="lead-h">Who pays for the business school's extra costs</h3>
-  <p class="cmp-lede">The business school costs more to run. Its extra per-credit charge pays for about half its budget, $14.9 million a year.
-    Today, business students pay that charge. Under the proposal, every student would pay a share of it.</p>
-  <div class="legend">
-    <span><i style="background:var(--today)"></i>Base tuition and fees</span>
-    <span><i style="background:var(--amber)"></i>Business school's extra costs</span>
-    <span><i style="background:var(--amber-lt)"></i>Other schools' extra costs</span>
-    <span><i style="background:var(--slate)"></i>New charge for credits 13–15</span>
-  </div>
-  <div id="cmpChart"></div>
-  <p class="note">A full-time Logan resident at 15 credits, per semester. Today's extra charge is each school's average per student
-    (its 2026–27 extra-charge budget divided by its students), so upper-division students pay more than this. The shared amounts are estimates. Hover a row for details.</p>
-
-  <h3>At 15 credits, per semester</h3>
+  <h3 class="lead-h">What changes</h3>
+  <ul class="tight changes">
+    <li><strong>The flat price for 12–18 credits ends.</strong> You'd pay a base charge plus a price for every credit.</li>
+    <li><strong>Extra charges on some schools' courses end.</strong> Their cost moves into everyone's tuition.</li>
+    <li><strong>Most course fees and student fees are folded in</strong>, except a separate $193 building fee.</li>
+  </ul>
+  <p class="note" style="margin-top:20px">USU's published prices at 15 credits, per semester (<a href="https://www.usu.edu/president/tuition-model/">proposal page</a>):</p>
   <div class="tiles">
     <div class="card tile"><div class="k">Logan resident</div><div class="v">$4,532 → $5,407</div><div class="s"><span class="cost">+$875</span> per semester</div></div>
     <div class="card tile"><div class="k">Logan nonresident</div><div class="v">$13,255 → $16,729</div><div class="s"><span class="cost">+$3,474</span> per semester</div></div>
@@ -282,25 +285,38 @@
     <div class="card tile"><div class="k">Price, Moab, Blanding</div><div class="v">$2,524 → $2,976</div><div class="s"><span class="cost">+$452</span> per semester</div></div>
   </div>
 
-  <div class="grid2">
-    <div class="card">
-      <h3>Who pays less</h3>
-      <ul class="tight">
-        <li>Business majors taking several upper-division business courses</li>
-        <li>Residents at most Statewide campuses</li>
-        <li>Graduate students taking 9–12 credits</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Who pays more</h3>
-      <ul class="tight">
-        <li>Most full-time Logan undergraduates</li>
-        <li>Engineering, arts and education majors</li>
-        <li>All nonresidents</li>
-        <li>Part-time students and students at Price, Moab and Blanding</li>
-      </ul>
-    </div>
+  <h3>Why it isn't equitable</h3>
+  <p class="eq-lede">Some programs cost more to run. Today, the students who take those courses pay for that. The proposal spreads the cost across everyone,
+    so most students pay more for programs they may never take.</p>
+
+  <div class="tiles eq-stats">
+    <div class="card tile"><div class="k">Business school budget from its extra charge</div><div class="v">49%</div><div class="s">Every other school: under 8%</div></div>
+    <div class="card tile"><div class="k">Students outside the business school</div><div class="v">4 in 5</div><div class="s">In USU's five colleges, fall 2026</div></div>
+    <div class="card tile"><div class="k">Logan resident, 18 credits</div><div class="v">+$1,453</div><div class="s">per semester, from USU's draft rates</div></div>
   </div>
+
+  <ol class="reasons">
+    <li><strong>Some programs cost more, and today the students in them pay for it.</strong>
+      The business school's extra charge, $226.92 per upper-division credit, funds about half its budget. No other school relies on its charge for more than 8%
+      (<a href="https://www.usu.edu/budget/budgetbook">2026–27 budget book</a>, <a href="https://www.usu.edu/financial-support/differential-tuition">USU differential tuition</a>).</li>
+    <li><strong>The proposal moves that cost onto the majority.</strong>
+      About 4 in 5 students in USU's five colleges are outside the business school (3,728 of 20,463, <a href="https://www.usu.edu/oda/enrollment.php">USU enrollment, fall 2026</a>).
+      USU's own FAQ says students whose programs have no extra charge “would likely pay more” (<a href="https://www.usu.edu/president/tuition-model/">FAQ</a>).</li>
+    <li><strong>Students with the least room in their budget get no cushion.</strong>
+      Pell grants and fixed-amount scholarships don't grow with tuition. 6,025 full-time undergraduates relied on need-based grants in 2024–25
+      (<a href="https://www.usu.edu/oda/files/common-data-sets/CDS2025-26.pdf">Common Data Set</a>). USU's promised transition scholarships have no amounts or rules yet.</li>
+    <li><strong>Taking a full load gets more expensive.</strong>
+      Credits 13–18 are free today. Under the draft, 15 credits cost $875 more and 18 credits $1,453 more per semester, which hits students trying to finish in four years.</li>
+  </ol>
+
+  <h3>How much each school depends on its extra charges</h3>
+  <div id="relyChart"></div>
+  <p class="note">Share of each school's 2026–27 budget paid for by its extra per-credit charge (<a href="https://www.usu.edu/budget/budgetbook">USU budget book</a>).
+    These figures include undergraduate and graduate charges. Graduate charges stay separate under the proposal; USU says the business school's undergraduate amount,
+    $10.8 million, would keep flowing to it but come from every student's tuition instead (<a href="https://www.usu.edu/president/tuition-model/">USU</a>).</p>
+
+  <p class="usu-view"><strong>USU's view:</strong> one price is more transparent, and “Students already help pay for each other's programs through tuition.
+    One rate makes that consistent and transparent.” (<a href="https://www.usu.edu/president/tuition-model/">USU President's Office</a>)</p>
 
   <details class="card">
     <summary>Full side-by-side comparison</summary>
@@ -826,45 +842,16 @@ addEventListener("load", () => setTimeout(() => window.scrollTo(0, 0), 0));
 const mastEl = document.querySelector(".mast");
 addEventListener("scroll", () => document.body.classList.toggle("scrolled", scrollY > mastEl.offsetHeight - 10), { passive: true });
 
-/* ============ TODAY VS PROPOSED CHART ============ */
+/* ============ RELIANCE ON EXTRA CHARGES (budget book) ============ */
 (function () {
-  const el = $("cmpChart"); if (!el) return;
-  const base = TODAY.res.tuition + TODAY.res.fees;          // $4,532.42 flat price today
-  const prop = proposed("res", 15);                          // $5,407 proposed
-  const bizShare = POOLED_SHARE * COLLEGES.huntsman.dt / DT_TOTAL;   // ≈ $395 of the shared pool
-  const otherShare = POOLED_SHARE - bizShare;                         // ≈ $120
-  const credits = prop - base - POOLED_SHARE;                         // ≈ $360 for credits 13–15
-  const schools = [
-    { k: "huntsman", name: "Huntsman School of Business" },
-    { k: "eng", name: "College of Engineering" },
-    { k: "cehhs", name: "College of Education, Health & Human Sciences" },
-    { k: "qanr", name: "Quinney College of Agriculture & Natural Resources" },
-    { k: "artsci", name: "College of Arts & Sciences" },
-  ].map(s => { const c = COLLEGES[s.k]; return { ...s, extra: c.dt / c.students / 2, pctBudget: c.dt / c.total * 100 }; });
-  const max = Math.max(prop, ...schools.map(s => base + s.extra));
-  const W = v => v / max * 82;
-  // one bar with several colored segments separated by 2px gaps
-  const bar = segs => {
-    const tot = segs.reduce((a, s) => a + s.v, 0); let at = 0; const stops = [];
-    segs.forEach((s, i) => { const a = at / tot * 100, b = (at += s.v) / tot * 100;
-      stops.push(`${s.c} ${i ? `calc(${a}% + 2px)` : "0"} ${b}%`); if (i < segs.length - 1) stops.push(`var(--bg) ${b}% calc(${b}% + 2px)`); });
-    return `<div class="b" style="width:${W(tot)}%;background:linear-gradient(to right, ${stops.join(", ")})"></div>`;
-  };
-  el.innerHTML = schools.map((s, i) => {
-    const t = base + s.extra, d = prop - t, isBiz = s.k === "huntsman";
-    const todaySegs = [{ v: base, c: "var(--today)" }, { v: s.extra, c: isBiz ? "var(--amber)" : "var(--amber-lt)" }];
-    const propSegs = [{ v: base, c: "var(--today)" }, { v: credits, c: "var(--slate)" }, { v: bizShare, c: "var(--amber)" }, { v: otherShare, c: "var(--amber-lt)" }];
-    return `<div class="flow-row" data-i="${i}"><div class="lab">${s.name}<small>Extra charges fund ${Math.round(s.pctBudget)}% of its budget</small></div>
-      <div class="pair">
-        <div class="ln">${bar(todaySegs)}${money(t)} <span class="tag">today</span></div>
-        <div class="ln">${bar(propSegs)}${money(prop)} <span class="tag">proposed</span></div>
-      </div>
-      <div class="d"><span class="${d > 0 ? "cost" : "save"}">${signed(d)}</span></div></div>`;
-  }).join("");
-  el.querySelectorAll(".flow-row").forEach(r => { const s = schools[+r.dataset.i];
-    hoverTip(r, () => `<strong>${s.name}</strong><br>Today: ${money(base)} base + ${money(s.extra)} average extra charge = ${money(base + s.extra)}` +
-      `<br>Proposed: ${money(base)} base + ${money(credits)} for credits 13–15 + ${money(bizShare)} toward business + ${money(otherShare)} toward other schools = ${money(prop)}` +
-      `<br><span class="note">Extra charges: ${short(COLLEGES[s.k].dt)} a year, ${Math.round(s.pctBudget)}% of the school's budget</span>`); });
+  const el = $("relyChart"); if (!el) return;
+  const rows = [
+    ["huntsman", "Huntsman School of Business"], ["cehhs", "College of Education, Health & Human Sciences"], ["eng", "College of Engineering"],
+    ["artsci", "College of Arts & Sciences"], ["qanr", "Quinney College of Agriculture & Natural Resources"],
+  ].map(([k, n]) => ({ n, pct: COLLEGES[k].dt / COLLEGES[k].total * 100, dt: COLLEGES[k].dt, tot: COLLEGES[k].total }));
+  el.innerHTML = rows.map(r => `<div class="bar-row" title="${r.n}: ${short(r.dt)} of ${short(r.tot)}"><div class="bar-label">${r.n}</div><div class="track">
+    <div class="bar" style="top:15px;left:0;width:${r.pct / 60 * 100}%;background:var(--navy)"></div>
+    <div class="bar-val" style="top:12px;left:calc(${r.pct / 60 * 100}% + 8px)">${Math.round(r.pct)}% <span class="note" style="font-weight:400">· ${short(r.dt)} of ${short(r.tot)}</span></div></div></div>`).join("");
 })();
 
 /* ============ YOUR MONEY ============ */
