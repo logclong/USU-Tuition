@@ -254,10 +254,9 @@
       <span class="grp" aria-hidden="true"></span>
       <a href="#money" role="tab">Your bill</a>
       <a href="#majors" role="tab">By major</a>
-      <a href="#netprice" role="tab">Net price</a>
       <span class="grp" aria-hidden="true"></span>
       <a href="#colleges" role="tab">Budgets</a>
-      <a href="#scholarships" role="tab">Scholarships</a>
+      <a href="#scholarships" role="tab">Financial aid</a>
       <span class="grp" aria-hidden="true"></span>
       <a href="#action" role="tab">Take action</a>
       <a href="#sources" role="tab">Sources</a>
@@ -285,7 +284,7 @@
     <div class="card tile"><div class="k">Price, Moab, Blanding</div><div class="v">$2,524 → $2,976</div><div class="s"><span class="cost">+$452</span> per semester</div></div>
   </div>
 
-  <h3>Why it isn't equitable</h3>
+  <h3>Who ends up paying</h3>
   <p class="eq-lede">Some programs cost more to run. Today, the students who take those courses pay for that. The proposal spreads the cost across everyone,
     so most students pay more for programs they may never take.</p>
 
@@ -354,7 +353,7 @@
         <tr><td><span class="fc-q">“Each additional credit would still add to your bill.”</span><span class="fc-src">President's email</span></td><td><span class="verdict v-ok">Accurate</span></td><td>Credits 13–18 are free today. At 18 credits the bill rises $1,453.</td></tr>
         <tr><td><span class="fc-q">Students with extra charges “would likely pay less”</span><span class="fc-src"><a href="https://www.usu.edu/president/tuition-model/">Proposal page</a></span></td><td><span class="verdict v-mislead">Misleading for most majors</span></td><td>Only business saves. Engineering, landscape architecture, arts and education majors still pay $321–$629 more. See <a href="#majors">By major</a>.</td></tr>
         <tr><td><span class="fc-q">The proposal is “not to raise more money”</span><span class="fc-src"><a href="https://www.usu.edu/president/tuition-model/">FAQ</a></span></td><td><span class="verdict v-mostly">Mostly accurate</span></td><td>Rates include a $750,000 contingency, and future increases aren't ruled out.</td></tr>
-        <tr><td><span class="fc-q">Other students “would share those costs”</span><span class="fc-src"><a href="https://www.usu.edu/president/tuition-model/">FAQ</a></span></td><td><span class="verdict v-ok">Accurate</span></td><td>Business holds 77% of the extra-charge money being shared ($14.9M of $19.5M, <a href="https://www.usu.edu/budget/budgetbook">budget book</a>).</td></tr>
+        <tr><td><span class="fc-q">Other students “would share those costs”</span><span class="fc-src"><a href="https://www.usu.edu/president/tuition-model/">FAQ</a></span></td><td><span class="verdict v-ok">Accurate</span></td><td>Business holds 77% of extra-charge money in college budgets ($14.9M of $19.5M, including graduate charges; <a href="https://www.usu.edu/budget/budgetbook">budget book</a>).</td></tr>
         <tr><td><span class="fc-q">Colleges “keep the funding they receive today”</span><span class="fc-src"><a href="https://www.usu.edu/president/tuition-model/">FAQ</a></span></td><td><span class="verdict v-ok">Accurate</span></td><td>It would be fixed at a three-year average instead of growing with enrollment.</td></tr>
         <tr><td><span class="fc-q">Business keeps “$10.8 million”</span><span class="fc-src"><a href="https://www.usu.edu/president/tuition-model/">Proposal page</a></span></td><td><span class="verdict v-context">Needs context</span></td><td>The <a href="https://www.usu.edu/budget/budgetbook">budget book</a> lists $14.9M in business extra-charge lines. USU hasn't explained the gap.</td></tr>
         <tr><td><span class="fc-q">Part-time students pay “about $140 to $200 more”</span><span class="fc-src"><a href="https://www.usu.edu/president/tuition-model/">FAQ</a></span></td><td><span class="verdict v-ok">Accurate</span></td><td>Official schedule: +$144 at 9 credits to +$206 at 3.</td></tr>
@@ -368,7 +367,7 @@
 <!-- ============ YOUR MONEY ============ -->
 <section class="tab" id="money">
   <h2>Your bill</h2>
-  <p class="lede">Enter your situation to see what you'd pay under the proposal and where the money goes. For Logan undergraduates.</p>
+  <p class="lede">Enter your situation to see what you'd pay under the proposal, and what your school's extra charge pays for today. For Logan undergraduates.</p>
 
   <div class="card panel">
     <div class="controls">
@@ -415,32 +414,20 @@
     </div>
   </div>
 
-  <h3>Where your money goes</h3>
-  <div class="legend"><span><i style="background:var(--today)"></i>Today</span><span><i style="background:var(--accent)"></i>Under the proposal</span></div>
-  <div class="card" id="flow"></div>
-  <div class="callout" id="ownCollege"></div>
+  <div class="callout"><strong>Why most students pay more.</strong> If your school adds no extra charge today, the proposal raises your bill to cover
+    the extra costs of programs that do, mainly the business school. See <a href="#overview">Overview</a>.</div>
 
+  <h3>What your school's extra charge pays for today</h3>
+  <div id="dtUses"></div>
   <blockquote class="src"><p>“Colleges and programs would keep the funding they receive today, including the Huntsman School of Business's $10.8 million.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU President's Office, Impact on University Programs</a></cite></blockquote>
-
-  <details class="card">
-    <summary>What your college's extra charge pays for</summary>
-    <div id="dtUses"></div>
-  </details>
-  <details class="card">
-    <summary>How this is calculated</summary>
-    <ul class="tight note">
-      <li>Tuition is pooled with state funds, so your tuition is spread across the budget in the same proportions as USU's 2026–27 general budget.</li>
-      <li>Fees follow USU's 2026–27 fee breakdown. Your college's extra charge goes straight to that college today.</li>
-      <li>Under the proposal, about $515 per student per semester replaces all colleges' extra charges and course fees. Fee-funded services such as athletics and recreation are assumed to keep today's funding.</li>
-      <li>These are estimates. Money is pooled, so no single dollar can be traced exactly.</li>
-    </ul>
-  </details>
+  <p class="note">Today's prices come from USU's 2026–27 tuition schedule and differential tuition rates. Proposed prices use USU's draft rates;
+    nonresident totals other than 12 and 15 credits are estimated from USU's published ratio.</p>
 </section>
 
 <!-- ============ BY MAJOR ============ -->
 <section class="tab" id="majors">
   <h2>Change by major</h2>
-  <p class="lede">How one semester's bill changes for a Logan student in each major. <span class="save">Green</span> means you'd pay less, <span class="cost">red</span> means you'd pay more.</p>
+  <p class="lede">How one semester's bill changes for a Logan student in each major. Most majors have no extra charge today, so they take the full increase. <span class="save">Green</span> means you'd pay less, <span class="cost">red</span> means you'd pay more.</p>
   <div class="card panel">
     <div class="controls">
       <div><label for="mRes">Residency</label><select id="mRes"><option value="res">Utah resident</option><option value="non">Nonresident</option></select></div>
@@ -482,7 +469,7 @@
   <div class="tiles">
     <div class="card tile"><div class="k">USU general budget</div><div class="v">$471.1M</div><div class="s">State funds and tuition</div></div>
     <div class="card tile"><div class="k">Goes to the colleges</div><div class="v">$163.4M</div><div class="s">35% of the total</div></div>
-    <div class="card tile"><div class="k">From extra charges</div><div class="v">$19.5M</div><div class="s">77% of it is business</div></div>
+    <div class="card tile"><div class="k">From extra charges</div><div class="v">$19.5M</div><div class="s">77% of it is business, including graduate charges</div></div>
   </div>
   <div class="legend" style="margin-top:28px"><span><i style="background:var(--accent)"></i>Other funding</span><span><i style="background:var(--dt)"></i>From extra charges</span></div>
   <div id="budBars"></div>
@@ -496,6 +483,7 @@
     <li>Business gets about half its budget from its extra charge. No other college gets more than 8%.</li>
     <li>USU froze the extra charges this year, describing it to the state board as “ending the practice of automatically increasing differential tuition with base tuition” (<a href="https://ushe.edu/wp-content/uploads/pdf/agendas/2026/032726/USU_Tuition_Fees.pdf">USU presentation, March 2026</a>).</li>
     <li>“Per student” divides each budget by the college's majors. Colleges also teach students from other majors.</li>
+    <li>The proposal doesn't change these budgets. It changes who pays for them: the undergraduate extra charges (USU says $10.8 million for business) would come from every student's tuition. Graduate charges stay separate.</li>
   </ul>
   <div class="quotes2">
   <blockquote class="src"><p>“The Huntsman School wouldn't get more money; it would keep the same funding it has today.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU tuition model FAQ</a></cite></blockquote>
@@ -506,51 +494,15 @@
   <div id="egBars"></div>
 </section>
 
-<!-- ============ NET PRICE ============ -->
-<section class="tab" id="netprice">
-  <h2>Net price by college</h2>
-  <p class="lede">What a typical full-time undergraduate pays per year after scholarships, grants and waivers. Based on USU's mix of 70% Utah residents and 30% out of state.</p>
-
-  <div class="card panel">
-    <div class="controls">
-      <div><input type="hidden" id="npMix" value="0.30"><label for="npView">Show</label>
-        <select id="npView"><option value="net">After financial aid</option><option value="sticker">Before financial aid</option></select></div>
-    </div>
-  </div>
-  <div class="legend" style="margin-top:20px"><span><i style="background:var(--today)"></i>Today</span><span><i style="background:var(--accent)"></i>Under the proposal</span></div>
-  <div id="npBars"></div>
-  <p class="note" id="npScale"></p>
-
-  <blockquote class="src"><p>“Students with waivers or scholarships should compare their own current and proposed costs after those awards.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU tuition model FAQ</a></cite></blockquote>
-
-  <div class="table-wrap" style="margin-top:28px">
-    <table>
-      <thead><tr><th>College</th><th>Students</th><th>Pays today</th><th>Would pay</th><th>Change per year</th></tr></thead>
-      <tbody id="npTable"></tbody>
-    </table>
-  </div>
-
-  <details class="card">
-    <summary>Full breakdown</summary>
-    <div class="table-wrap"><table>
-      <thead><tr><th>College</th><th>Average extra charge</th><th>Price today</th><th>Aid today</th><th>Price proposed</th><th>Aid proposed</th></tr></thead>
-      <tbody id="npTableFull"></tbody></table></div>
-  </details>
-  <details class="card">
-    <summary>How this is calculated</summary>
-    <ul class="tight note">
-      <li>Price is USU's full-time price plus each college's average extra charge per student.</li>
-      <li>Aid is USU's average grants, scholarships and waivers per undergraduate ($6,169 a year), adjusted for each college's own scholarships. Loans don't count.</li>
-      <li>Tuition waivers are assumed to grow with tuition. Pell grants and fixed scholarships stay the same.</li>
-      <li>Business is probably understated: the school reports 53% of its total price is covered by aid, more than this estimate.</li>
-    </ul>
-  </details>
-</section>
-
 <!-- ============ SCHOLARSHIPS ============ -->
 <section class="tab" id="scholarships">
-  <h2>Scholarships and aid</h2>
-  <p class="lede">Scholarships and grants change who really pays. Here is how different kinds of aid interact with the proposal.</p>
+  <h2>Financial aid</h2>
+  <p class="lede">Aid doesn't absorb the change for most students. Pell grants and fixed scholarships stay the same while the bill goes up, so the increase lands on the students who rely on them.</p>
+  <div class="tiles">
+    <div class="card tile"><div class="k">Need-based grants</div><div class="v">6,025</div><div class="s">full-time undergraduates, average $8,637 a year (<a href="https://www.usu.edu/oda/files/common-data-sets/CDS2025-26.pdf">CDS</a>)</div></div>
+    <div class="card tile"><div class="k">Merit scholarships</div><div class="v">5,241</div><div class="s">full-time undergraduates, average $3,403 a year (<a href="https://www.usu.edu/oda/files/common-data-sets/CDS2025-26.pdf">CDS</a>)</div></div>
+    <div class="card tile"><div class="k">Student loans</div><div class="v">$106.3M</div><div class="s">borrowed by undergraduates in 2024–25 (<a href="https://www.usu.edu/oda/files/common-data-sets/CDS2025-26.pdf">CDS</a>)</div></div>
+  </div>
 
   <h3>How each kind of aid is affected</h3>
   <div class="table-wrap">
@@ -573,9 +525,7 @@
   </div>
   <p class="note">USU hasn't said how the transition scholarships would work, or whether Promise would cover the new combined rate.</p>
 
-  <h3>Who pays business students' extra charge today</h3>
-  <div class="legend"><span><i style="background:var(--cost)"></i>Students and families</span><span><i style="background:var(--save)"></i>Scholarships and grants</span></div>
-  <div id="whoPaysHsb"></div>
+  <h3>How aid works with extra charges today</h3>
   <p class="note">74% of business students got scholarships or grants in 2024–25, averaging 72% off tuition (<a href="https://huntsman.usu.edu/files/DT_Advisory_Board_Meeting_Minutes_Nov_6_2025.pdf">Huntsman minutes</a>). Business also offers a donor-funded scholarship just for this charge, paying “the lesser of $1,250 per semester or total paid differential tuition” (<a href="https://huntsman.usu.edu/scholarships/hansen">Hansen scholarship</a>).</p>
   <blockquote class="src"><p>“[T]he university's central scholarship budget will be made whole from differential tuition funds for students whose differential tuition is covered by central scholarships or waivers.”</p><cite><a href="https://cehhs.usu.edu/files/differential-tuition-fy26.pdf">Education, Health & Human Sciences differential tuition report, FY2026</a></cite></blockquote>
   <p class="note">In other words, when a full-tuition award covers a student's extra charge, the college pays that money back, so the college goes without it.</p>
@@ -594,8 +544,8 @@
       <thead><tr><th>College</th><th>Per year</th><th>Number of awards</th><th>Typical award</th></tr></thead>
       <tbody>
         <tr><td>Huntsman School of Business</td><td>$4.0M</td><td>—</td><td>$500 to full tuition</td></tr>
-        <tr><td>Quinney Agriculture &amp; Natural Resources</td><td>$1.5M</td><td>900+</td><td>About $1,700</td></tr>
-        <tr><td>Education, Health &amp; Human Sciences</td><td>$1.4M</td><td>500+</td><td>About $2,800</td></tr>
+        <tr><td>Quinney Agriculture &amp; Natural Resources</td><td>$1.5M</td><td>900+</td><td>Quinney Scholar: $8,000 a year</td></tr>
+        <tr><td>Education, Health &amp; Human Sciences</td><td>$1.4M</td><td>500+</td><td>—</td></tr>
         <tr><td>Engineering</td><td>$500,000</td><td>90+</td><td>—</td></tr>
         <tr><td>Veterinary Medicine</td><td>$260,000</td><td>—</td><td>—</td></tr>
         <tr><td>Arts &amp; Sciences</td><td>Not published</td><td>450+</td><td>—</td></tr>
@@ -669,6 +619,7 @@ I support making costs clearer and more predictable. But USU's own published fig
 - A full-time Logan resident taking 15 credits would pay $5,407 a semester instead of $4,532, an increase of $875 (19%). At 18 credits the increase is about $1,450.
 - Nonresident students at 15 credits would pay $3,474 more per semester.
 - Students at Price, Moab and Blanding would pay more.
+- The business school's extra charge pays for about half its budget. Under the proposal, students in every other program would help cover those costs.
 - Using the 2026–27 differential tuition rates, only upper-division business students come out clearly ahead. An engineering, arts or education student would need more than 15 credits of upper-division courses in their own college to break even, which is impossible at a 15-credit load.
 
 In my case, [one sentence on your situation: e.g., "I take 15–17 credits to graduate on time, and my bill would rise by about $X per semester"].
@@ -717,7 +668,7 @@ Sincerely,
       <li><strong>Verified:</strong> today's tuition and fees ($4,135.87 + $396.55 = $4,532.42 resident; $12,858.44 + $396.55 = $13,254.99 nonresident, 12–18 credits) against USU's official schedule; all college budgets and differential-tuition lines against the 2026–27 Budget Book; differential tuition rates against USU's 2026–27 table.</li>
       <li><strong>Verified:</strong> fall 2025 and fall 2026 headcount by college (USU enrollment dashboard); undergraduate aid totals (Common Data Set); the “made whole” reimbursement rule (CEHHS FY26 report); Huntsman's 74% / 72% aid figures (Huntsman minutes).</li>
       <li><strong>From USU's proposal (draft):</strong> proposed totals at 12/15/18 credits (resident) and 12/15 (nonresident), and the per-credit rates. Other resident loads are computed from those rates.</li>
-      <li><strong>Estimated:</strong> nonresident totals at 13, 14, 16–18 credits (USU's ≈3.17× ratio); graduate rates (110% of the undergraduate formula); the “Your money” allocation (proportional spread of pooled tuition, the ≈$515 per-student share of former college charges, fee-funded services held at today's level); who covers Huntsman's differential tuition (applies the school's overall aid rate); average scholarship sizes.</li>
+      <li><strong>Estimated:</strong> nonresident totals at 13, 14, 16–18 credits (USU's ≈3.17× ratio); graduate rates (110% of the undergraduate formula); everything else on this site is taken directly from USU, USHE or Utah Legislature documents.</li>
       <li><strong>Still not public:</strong> total course-fee revenue; how much differential tuition colleges reimburse to central scholarships; how many students hold full-tuition awards by college; the building fee below 12 credits; graduate proposed dollar figures from USU; why Huntsman's budgeted differential tuition ($14.9M) differs from the $10.8M USU cites; what the $750,000 contingency is for; transition-scholarship details.</li>
     </ul>
   </div>
@@ -904,59 +855,13 @@ function calcMoney() {
   $("oSent").textContent = covered ? "Your award would cover most of the new price."
     : `You'd pay ${money(nP)} a semester instead of ${money(nT)}, or ${money(Math.abs(d) * 2)} ${d > 0 ? "more" : "less"} a year.`;
 
-  // ---- where the money goes (gross bill, before scholarships)
-  const feeAmt = f => T.fees * f.pct / 100;
-  const nonBuildingFees = FEES.filter(f => f.id !== "building").reduce((s, f) => s + feeAmt(f), 0);
-  const egT = egSplit(T.tuition);
-  const poolRest = P - BUILDING_NEW - nonBuildingFees - POOLED_SHARE;
-  const egP = egSplit(poolRest);
   const col = maj.college, colName = COLLEGES[col].name;
-  const sumCols = (eg) => Object.keys(COLLEGES).reduce((s, k) => s + eg["col_" + k], 0);
-
-  const otherFees = FEES.slice(1).reduce((s, f) => s + feeAmt(f), 0);
-  const sumIds = (eg, ids) => ids.reduce((s, id) => s + eg[id], 0);
-  const rows = [
-    { label: "Your college's extra charge", sub: dt || cf ? "Plus any course fees" : "None today", t: dt + cf, p: 0,
-      tip: () => dt ? `Today ${money2(dt)} goes straight to ${colName}${cf ? `, plus ${money(cf)} in course fees` : ""}. Under the proposal this charge ends.` : "You pay no extra charge today." },
-    { label: "Shared pool for all colleges' extra charges", sub: "Replaces extra charges and course fees", t: 0, p: POOLED_SHARE,
-      tip: () => `About ${money(POOLED_SHARE)} per student per semester, split across colleges: ` +
-        Object.values(COLLEGES).filter(c => c.dt).map(c => `${c.name.split(" ")[0]} ${money(POOLED_SHARE * c.dt / DT_TOTAL)}`).join(", ") },
-    { label: "Teaching", sub: "Colleges and libraries", t: sumCols(egT), p: sumCols(egP),
-      tip: () => Object.entries(COLLEGES).map(([k, c]) => `${c.name}: ${money(egT["col_" + k])} → ${money(egP["col_" + k])}`).join("<br>") },
-    { label: "Employee benefits", sub: "Health insurance and retirement", t: egT.benefits, p: egP.benefits, tip: () => "USU pays benefits for all employees from one central pool." },
-    { label: "Administration and reserves", sub: "Leadership, finance, central funds", t: sumIds(egT, ["admin", "central", "research"]), p: sumIds(egP, ["admin", "central", "research"]),
-      tip: () => "President, provost, finance, marketing, advancement, research office, and central reserves and initiatives." },
-    { label: "Statewide campuses", sub: "USU's other campuses", t: egT.statewide, p: egP.statewide, tip: () => "Operating costs of USU's campuses outside Logan." },
-    { label: "Buildings", sub: "Maintenance and building fee", t: egT.facilities + feeAmt(FEES[0]), p: egP.facilities + BUILDING_NEW,
-      tip: () => `Maintenance and utilities, plus the building fee (${money2(feeAmt(FEES[0]))} today, $193 proposed).` },
-    { label: "Student services", sub: "Advising, athletics, recreation, shuttle", t: sumIds(egT, ["success", "athleticsEG"]) + otherFees, p: sumIds(egP, ["success", "athleticsEG"]) + otherFees,
-      tip: () => "Advising and student success, athletics, campus recreation, activities, the Aggie Shuttle, music and theatre. Fee-funded services are assumed to keep today's funding." },
-  ].filter(r => r.t > 0.5 || r.p > 0.5);
-
-  const max = Math.max(...rows.flatMap(r => [r.t, r.p]));
-  $("flow").innerHTML = rows.map((r, i) => {
-      const dd = r.p - r.t;
-      return `<div class="flow-row" data-i="${i}"><div class="lab">${r.label}<small>${r.sub}</small></div>
-        <div class="pair">
-          <div class="ln"><div class="b" style="width:${r.t / max * 85}%;background:var(--today)"></div>${money(r.t)}</div>
-          <div class="ln"><div class="b" style="width:${r.p / max * 85}%;background:var(--accent)"></div>${money(r.p)}</div>
-        </div>
-        <div class="d"><span class="${Math.abs(dd) < 0.5 ? "" : dd > 0 ? "cost" : "save"}">${Math.abs(dd) < 0.5 ? "same" : signed(dd)}</span></div></div>`;
-    }).join("");
-  $("flow").querySelectorAll(".flow-row").forEach(el => { const r = rows[+el.dataset.i]; hoverTip(el, () => `<strong>${r.label}</strong><br>${r.tip()}`); });
-
-  // own college callout
-  const ownT = egT["col_" + col] + dt;
-  const ownP = egP["col_" + col] + POOLED_SHARE * COLLEGES[col].dt / DT_TOTAL;
-  $("ownCollege").innerHTML = `<strong>Your college.</strong> About <strong>${money(ownT)}</strong> of your bill reaches ${colName} today, and about <strong>${money(ownP)}</strong> would under the proposal.
-    Your college's total budget stays the same either way. What changes is who pays for it.`;
 
   // DT uses
   const u = DT_USES[col];
   $("dtUses").innerHTML = (u && COLLEGES[col].dt) ? `<p class="note">${colName}. Source: ${u.src}.</p>
-    <div class="table-wrap"><table><tbody>${u.items.map(([k, v]) => `<tr><td>${k}</td><td>${u.pct ? v + "%" : money(v)}</td>
-      ${dt ? `<td class="note">your ≈${money(dt * (u.pct ? v / 100 : v / u.items.reduce((s, x) => s + x[1], 0)))}</td>` : "<td></td>"}</tr>`).join("")}</tbody></table></div>` :
-    `<p class="note">${colName}: no differential-tuition programs.</p>`;
+    <div class="table-wrap"><table><tbody>${u.items.map(([k, v]) => `<tr><td>${k}</td><td>${u.pct ? v + "%" : money(v)}</td></tr>`).join("")}</tbody></table></div>` :
+    `<p class="note">${colName} adds no extra charge to its courses today, so its programs are paid from general tuition and state funds.</p>`;
 }
 $("iRes").addEventListener("change", () => { fillCredits($("iCr"), $("iRes").value, +$("iCr").value); calcMoney(); });
 ["iCr", "iMaj", "iDt", "iCf", "iSch", "iSchAmt"].forEach(id => $(id).addEventListener("input", calcMoney));
@@ -1037,14 +942,6 @@ drawMajors();
 
 /* ============ WHO PAYS ============ */
 (function () {
-  const stu = 1 - 0.74 * 0.72, aid = 0.74 * 0.72; // Huntsman FY25
-  const hsbDt = COLLEGES.huntsman.dt;
-  $("whoPaysHsb").innerHTML = `<div class="bar-row" style="border-top:0"><div class="bar-label">Business school<small>${short(hsbDt)} in extra charges</small></div>
-    <div class="track"><div class="bar" style="top:10px;height:22px;left:0;width:${stu * 100}%;background:var(--cost);border-radius:4px 0 0 4px"></div>
-      <div class="bar" style="top:10px;height:22px;left:calc(${stu * 100}% + 2px);width:calc(${aid * 100}% - 2px);background:var(--save)"></div>
-      <div class="bar-val" style="top:12px;left:8px;color:#fff">${Math.round(stu * 100)}% ≈ ${short(hsbDt * stu)}</div>
-      <div class="bar-val" style="top:12px;left:calc(${stu * 100}% + 10px);color:#fff">${Math.round(aid * 100)}% ≈ ${short(hsbDt * aid)}</div></div></div>`;
-
   const AID = [
     { l: "Student loans (repaid by students)", v: 34698611 + 71592838, c: "var(--cost)", d: "$34.7M need-based + $71.6M non-need-based (excludes $2.9M parent loans)" },
     { l: "Federal grants (mostly Pell)", v: 37989378, c: "var(--save)", d: "Need-based" },
@@ -1061,64 +958,6 @@ drawMajors();
     <div class="bar" style="top:14px;left:0;width:${a.v / m * 100}%;background:${a.c}"></div>
     <div class="bar-val" style="top:11px;left:calc(${a.v / m * 100}% + 6px)">${short(a.v)}</div></div></div>`).join("");
   $("aidBars").querySelectorAll(".bar-row").forEach(el => { const a = AID[+el.dataset.i]; hoverTip(el, () => `<strong>${a.l}</strong><br>${money(a.v)}${a.d ? "<br>" + a.d : ""}`); });
-})();
-
-/* ============ NET PRICE ============ */
-(function () {
-  const BASE = { res: 2 * (TODAY.res.tuition + TODAY.res.fees), non: 2 * (TODAY.non.tuition + TODAY.non.fees) };
-  const PROP = { res: 2 * PROPOSED.res[15], non: 2 * PROPOSED.non[15] };
-  const UG = 19574, AID_AVG = (50844381 + 31542977 + 31280525 + 7081241) / UG; // CDS H1, 2024-25
-  const WAIVER_AVG = 31280525 / UG;
-  const COLL_SCH_TOTAL = 4000000 + 1500000 + 1400000 + 500000 + 211000;
-  const COLL_SCH_AVG = COLL_SCH_TOTAL / UG;
-  const NP = [
-    { k: "huntsman", sch: 4000000 }, { k: "eng", sch: 500000 }, { k: "cehhs", sch: 1400000 },
-    { k: "qanr", sch: 1500000 }, { k: "artsci", sch: 211000, schNote: "only the former College of Science's total is published" },
-  ].map(x => ({ ...x, name: COLLEGES[x.k].name, students: COLLEGES[x.k].students, dt: COLLEGES[x.k].dt }))
-   .concat([{ k: "gen", name: "General University (undeclared, etc.)", students: 11679, dt: 0, sch: 0 }]);
-
-  let npRows = [];
-  function draw() {
-    const nr = +$("npMix").value, view = $("npView").value;
-    const baseT = (1 - nr) * BASE.res + nr * BASE.non, baseP = (1 - nr) * PROP.res + nr * PROP.non;
-    const rows = NP.map(c => {
-      const dtPer = c.dt / c.students, schPer = c.sch / c.students;
-      const aidT = AID_AVG - COLL_SCH_AVG + schPer;
-      const aidP = aidT + WAIVER_AVG * (baseP / baseT - 1);
-      const sT = baseT + dtPer, sP = baseP;
-      return { ...c, dtPer, aidT, aidP, sT, sP, nT: Math.max(0, sT - aidT), nP: Math.max(0, sP - aidP) };
-    });
-    const key = view === "net" ? ["nT", "nP"] : ["sT", "sP"];
-    // One fixed scale for both views (the largest sticker price), so switching shows how much aid shrinks each bar.
-    const max = Math.max(...rows.flatMap(r => [r.sT, r.sP]));
-    const box = $("npBars");
-    if (!box.dataset.built) {
-      box.innerHTML = rows.map((r, i) => `<div class="flow-row" data-i="${i}"><div class="lab">${r.name}<small>${r.students.toLocaleString()} students</small></div>
-        <div class="pair"><div class="ln"><div class="b np-b" style="background:var(--today)"></div><span class="np-v"></span></div>
-          <div class="ln"><div class="b np-b" style="background:var(--accent)"></div><span class="np-v"></span></div></div>
-        <div class="d"><span class="np-d"></span></div></div>`).join("");
-      box.dataset.built = "1";
-    }
-    box.querySelectorAll(".flow-row").forEach((el, i) => {
-      const r = rows[i], t = r[key[0]], p = r[key[1]], d = p - t;
-      const bars = el.querySelectorAll(".np-b"), vals = el.querySelectorAll(".np-v"), dEl = el.querySelector(".np-d");
-      bars[0].style.width = (t / max * 85) + "%"; bars[1].style.width = (p / max * 85) + "%";
-      vals[0].textContent = money(t); vals[1].textContent = money(p);
-      dEl.className = d > 0 ? "cost" : "save"; dEl.textContent = signed(d);
-      if (!el.dataset.tip) { el.dataset.tip = "1"; hoverTip(el, () => { const q = npRows[i];
-        return `<strong>${q.name}</strong><br>Today: ${money(q.sT)} price − ${money(q.aidT)} aid = <strong>${money(q.nT)}</strong><br>Proposed: ${money(q.sP)} price − ${money(q.aidP)} aid = <strong>${money(q.nP)}</strong>`; }); }
-    });
-    npRows = rows;
-    $("npScale").textContent = view === "net"
-      ? "Bars use the same scale as “before financial aid,” so the gap shows how much aid covers."
-      : "Full price before any scholarships, grants or waivers.";
-    $("npTable").innerHTML = rows.map(r => `<tr><td>${r.name}</td><td>${r.students.toLocaleString()}</td>
-      <td>${money(r.nT)}</td><td>${money(r.nP)}</td><td><span class="${r.nP - r.nT > 0 ? "cost" : "save"}">${signed(r.nP - r.nT)}</span></td></tr>`).join("");
-    $("npTableFull").innerHTML = rows.map(r => `<tr><td>${r.name}</td><td>${r.dtPer >= 1 ? money(r.dtPer) : "—"}</td>
-      <td>${money(r.sT)}</td><td>−${money(r.aidT)}</td><td>${money(r.sP)}</td><td>−${money(r.aidP)}</td></tr>`).join("");
-  }
-  ["npMix", "npView"].forEach(id => $(id).addEventListener("input", draw));
-  draw();
 })();
 
 /* ============ EMAIL ============ */
