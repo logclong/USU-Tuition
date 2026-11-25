@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>USU Tuition Proposal Explained</title>
+<meta name="description" content="Independent student analysis of Utah State University's proposed 2027 tuition model: what each student pays, where the money goes, and who decides.">
+<style>
+  :root {
+    --bg: #f6f6f4; --card: #ffffff; --ink: #1d1f23; --muted: #5d636e; --line: #e2e3e0;
+    --accent: #1f4e79; --accent-ink: #ffffff; --head: #0f2439; --head-ink: #e9eef4;
+    --save: #1a7f4b; --save-bg: #e6f4ec; --cost: #b3361f; --cost-bg: #fbeae6;
+    --today: #a3abb5; --dt: #c27c0e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #14161a; --card: #1d2025; --ink: #e8e9eb; --muted: #9ba1ab; --line: #30343a;
+      --accent: #7fb0e0; --accent-ink: #0f1a26; --head: #0b1622; --head-ink: #e9eef4;
+      --save: #5fd39a; --save-bg: #173226; --cost: #ff8c73; --cost-bg: #3a1f19; --today: #646c77; --dt: #e3ac4a; }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 120px; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  a { color: var(--accent); }
+
+  /* Header bar + tabs */
+  header.top { position: sticky; top: 0; z-index: 20; background: var(--head); color: var(--head-ink); box-shadow: 0 2px 10px rgba(0,0,0,.18); }
+  .top-inner { max-width: 1100px; margin: 0 auto; padding: 12px 16px 0; }
+  .brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .brand h1 { font-size: 19px; margin: 0; letter-spacing: .01em; }
+  .brand span { font-size: 12px; opacity: .7; }
+  nav.tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; margin-top: 8px; }
+  nav.tabs::-webkit-scrollbar { display: none; }
+  nav.tabs a { color: var(--head-ink); opacity: .72; text-decoration: none; padding: 9px 14px 11px; font-size: 14px; font-weight: 600;
+    white-space: nowrap; border-bottom: 3px solid transparent; }
+  nav.tabs a:hover { opacity: 1; }
+  nav.tabs a[aria-selected="true"] { opacity: 1; border-bottom-color: #f0b44c; }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 64px; }
+  section.tab { display: none; }
+  section.tab.active { display: block; }
+  h2 { font-size: 24px; margin: 4px 0 6px; color: var(--accent); }
+  h3 { font-size: 17px; margin: 28px 0 8px; }
+  p.lede { color: var(--muted); margin: 0 0 20px; max-width: 75ch; }
+  .note { font-size: 13px; color: var(--muted); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .tile .k { font-size: 13px; color: var(--muted); }
+  .tile .v { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .tile .s { font-size: 13px; color: var(--muted); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+  .save { color: var(--save); background: var(--save-bg); border-radius: 4px; padding: 1px 6px; }
+  .cost { color: var(--cost); background: var(--cost-bg); border-radius: 4px; padding: 1px 6px; }
+  ul.tight { margin: 6px 0; padding-left: 20px; } ul.tight li { margin: 4px 0; }
+
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; vertical-align: top; }
+  th:first-child, td:first-child, .l { text-align: left; white-space: normal; min-width: 170px; }
+  th { font-size: 12px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); font-weight: 600; }
+  tr.group td { font-weight: 700; background: var(--bg); text-align: left; }
+  table.wrap td { white-space: normal; text-align: left; }
+
+  label { display: block; font-size: 13px; color: var(--muted); margin: 12px 0 4px; }
+  select, input, textarea { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); font: inherit; }
+  input[type=range] { padding: 0; accent-color: var(--accent); }
+  textarea { font: 14px/1.5 ui-monospace, Consolas, monospace; resize: vertical; }
+  .controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 16px; }
+  @media (max-width: 760px) { .controls { grid-template-columns: 1fr; } }
+  button { padding: 8px 14px; border-radius: 6px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); font: inherit; font-weight: 600; cursor: pointer; }
+  button.ghost { background: transparent; color: var(--accent); }
+  .btns { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+
+  .big { font-size: 36px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  dl.sum { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; margin: 12px 0 0; font-variant-numeric: tabular-nums; }
+  dl.sum dt { color: var(--muted); } dl.sum dd { margin: 0; text-align: right; }
+  dl.sum .tot { color: var(--ink); font-weight: 700; border-top: 1px solid var(--line); padding-top: 4px; }
+
+  /* Bar charts */
+  .bar-row { display: grid; grid-template-columns: 210px 1fr; align-items: center; min-height: 42px; border-top: 1px solid var(--line); }
+  .bar-row:hover { background: var(--bg); }
+  .bar-label { font-size: 14px; padding-right: 12px; line-height: 1.25; }
+  .bar-label small { display: block; color: var(--muted); font-size: 12px; }
+  .track { position: relative; height: 42px; }
+  .bar { position: absolute; height: 14px; border-radius: 0 4px 4px 0; }
+  .bar-val { position: absolute; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .div .track::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; border-left: 1px dashed var(--muted); opacity: .6; }
+  .axis-head { display: grid; grid-template-columns: 210px 1fr 1fr 1fr; font-size: 12px; color: var(--muted); }
+  .axis-head span:nth-child(1) { grid-column: 2; } .axis-head span:nth-child(2) { text-align: center; } .axis-head span:nth-child(3) { text-align: right; }
+  @media (max-width: 760px) { .bar-row { grid-template-columns: 120px 1fr; } .axis-head { grid-template-columns: 120px 1fr 1fr 1fr; } }
+  .legend { display: flex; gap: 18px; font-size: 13px; color: var(--muted); margin-bottom: 8px; flex-wrap: wrap; }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+  /* Money flow paired rows */
+  .flow-row { display: grid; grid-template-columns: 230px 1fr 90px; gap: 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); }
+  .flow-row:hover { background: var(--bg); }
+  .flow-row .lab { font-size: 14px; line-height: 1.25; }
+  .flow-row .lab small { display: block; color: var(--muted); font-size: 12px; }
+  .pair { display: grid; gap: 3px; }
+  .pair .ln { display: flex; align-items: center; gap: 8px; font-size: 12px; font-variant-numeric: tabular-nums; }
+  .pair .b { height: 10px; border-radius: 0 3px 3px 0; min-width: 1px; }
+  .flow-row .d { text-align: right; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  @media (max-width: 760px) { .flow-row { grid-template-columns: 1fr 70px; } .flow-row .pair { grid-column: 1 / -1; grid-row: 2; } }
+  .callout { border-left: 4px solid var(--accent); background: var(--card); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; }
+  .warn { border-left: 4px solid var(--cost); background: var(--card); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 16px; font-size: 14px; }
+
+  ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin: 8px 0; }
+  details summary { cursor: pointer; font-weight: 600; }
+  #tip { position: fixed; pointer-events: none; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 10px; font-size: 13px; box-shadow: 0 4px 14px rgba(0,0,0,.18); display: none; max-width: 300px; z-index: 50; }
+  footer { max-width: 1100px; margin: 0 auto; padding: 0 16px 40px; font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand"><h1>USU Tuition Proposal Explained</h1><span>Independent student analysis · not affiliated with Utah State University · data as of Nov 24, 2026</span></div>
+    <nav class="tabs" role="tablist">
+      <a href="#overview" role="tab">Overview</a>
+      <a href="#money" role="tab">Your money</a>
+      <a href="#majors" role="tab">By major</a>
+      <a href="#colleges" role="tab">College budgets</a>
+      <a href="#scholarships" role="tab">Scholarships</a>
+      <a href="#action" role="tab">Take action</a>
+      <a href="#sources" role="tab">Sources &amp; methods</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ============ OVERVIEW ============ -->
+<section class="tab" id="overview">
+  <h2>What's being proposed</h2>
+  <p class="lede">For fall 2027, USU proposes one Logan tuition schedule. Differential tuition (extra per-credit charges in some colleges),
+    course fees and most mandatory fees would be folded into tuition, and the flat price for 12–18 credits would be replaced by
+    per-credit pricing: a $900 base charge, ≈$296/credit for credits 1–12, ≈$254 for 13–15 and ≈$192 above 15, plus a $193 building fee.
+    USU says total revenue stays the same, so every dollar one group saves, another group pays.</p>
+
+  <div class="tiles">
+    <div class="card tile"><div class="k">Logan resident, 15 credits</div><div class="v">$4,532 → $5,407</div><div class="s"><span class="cost">+$875 / semester</span></div></div>
+    <div class="card tile"><div class="k">Logan nonresident, 15 credits</div><div class="v">$13,255 → $16,729</div><div class="s"><span class="cost">+$3,474 / semester</span></div></div>
+    <div class="card tile"><div class="k">Statewide resident, most campuses</div><div class="v">$4,085 → $2,976</div><div class="s"><span class="save">−$1,109 / semester</span> (15 cr)</div></div>
+    <div class="card tile"><div class="k">Price, Moab, Blanding</div><div class="v">$2,524 → $2,976</div><div class="s"><span class="cost">+$452 / semester</span> (15 cr)</div></div>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3 style="margin-top:0">Who pays less</h3>
+      <ul class="tight">
+        <li><strong>Upper-division business students</strong>: today they pay $226.92/credit extra; at 15 credits, 4+ business credits means you save.</li>
+        <li><strong>Statewide residents</strong> at most campuses (≈$1,100–1,400/semester less).</li>
+        <li><strong>Graduate nonresidents</strong>; graduate residents at 9–12 credits about the same.</li>
+        <li><strong>Utah State Promise</strong> recipients in differential-tuition majors may gain, if Promise covers the folded-in amount (unconfirmed).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Who pays more</h3>
+      <ul class="tight">
+        <li><strong>Most full-time Logan undergrads</strong>: +$114 at 12 credits, +$875 at 15, ≈+$1,450 at 18.</li>
+        <li><strong>Engineering, arts, education majors</strong>: their current extra charge is too small to offset the increase at 15 credits.</li>
+        <li><strong>Every nonresident</strong> at 15 credits, even business majors.</li>
+        <li><strong>Part-time students</strong> (+$140–200) and <strong>Price/Moab/Blanding</strong> students.</li>
+        <li>Anyone on a <strong>fixed-dollar scholarship</strong>; full-tuition awards absorb most of it.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout"><strong>Bottom line:</strong> the proposal moves about $27M in separate college charges into one rate that everyone pays.
+    Business, which funds ≈49% of its budget from differential tuition, is protected; most other Logan students pick up the cost,
+    especially those taking full loads to graduate on time.</div>
+
+  <h3>Key dates</h3>
+  <div class="card">
+    <ul class="tight">
+      <li><strong>Jan 12–13, 2027</strong>: student information sessions (Eccles Conference Center + Zoom)</li>
+      <li><strong>Early March 2027</strong>: Truth-in-Tuition public hearing (date not yet posted)</li>
+      <li><strong>Mar 19, 2027</strong>: USU Board of Trustees meeting</li>
+      <li><strong>Late March 2027</strong>: Utah Board of Higher Education decides (USU says Mar 31; the Board's schedule says Mar 25–26)</li>
+    </ul>
+    <p class="note" style="margin-bottom:0">Details and how to weigh in: <a href="#action">Take action</a>.</p>
+  </div>
+</section>
+
+<!-- ============ YOUR MONEY ============ -->
+<section class="tab" id="money">
+  <h2>Your money: what you pay and what it pays for</h2>
+  <p class="lede">Set your situation once. The page shows your bill today and under the proposal, then follows each dollar to what it funds,
+    using USU's 2026–27 budget book and fee breakout. Logan campus undergraduates only.</p>
+
+  <div class="card">
+    <div class="controls">
+      <div><label for="iRes">Residency</label>
+        <select id="iRes"><option value="res">Utah resident</option><option value="non">Nonresident</option></select></div>
+      <div><label for="iCr">Credits this semester</label><select id="iCr"></select></div>
+      <div><label for="iMaj">Your major</label>
+        <select id="iMaj"></select></div>
+      <div><label for="iDt">Credits in courses that carry your college's extra charge: <strong id="iDtV">9</strong></label>
+        <input id="iDt" type="range" min="0" max="18" step="1" value="9">
+        <div class="note" id="iDtNote"></div></div>
+      <div><label for="iCf">Course/lab fees you pay today ($, optional)</label>
+        <input id="iCf" type="number" min="0" step="1" value="0"></div>
+      <div><label for="iSch">Scholarship</label>
+        <select id="iSch">
+          <option value="none">None</option>
+          <option value="fixed">Fixed-dollar (Deans, Merit, college/donor…)</option>
+          <option value="full">Full-tuition (Presidential, Ambassador…)</option>
+          <option value="promise">Utah State Promise</option>
+        </select>
+        <div id="iSchAmtWrap"><label for="iSchAmt">Amount per semester ($)</label><input id="iSchAmt" type="number" min="0" step="50" value="0"></div></div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <div class="note" style="margin-bottom:8px">Change in your bill per semester</div>
+      <div class="big" id="oDiff">—</div>
+      <p class="note" id="oNote"></p>
+    </div>
+    <div class="card">
+      <dl class="sum">
+        <dt>Today: tuition</dt><dd id="oTT"></dd>
+        <dt>Today: mandatory fees</dt><dd id="oTF"></dd>
+        <dt>Today: differential tuition</dt><dd id="oTD"></dd>
+        <dt>Today: course fees</dt><dd id="oTC"></dd>
+        <dt class="tot">Today total</dt><dd class="tot" id="oTot"></dd>
+        <dt class="tot">Proposed total</dt><dd class="tot" id="oPot"></dd>
+        <dt>Scholarship</dt><dd id="oS"></dd>
+        <dt class="tot">You pay: today → proposed</dt><dd class="tot" id="oNet"></dd>
+      </dl>
+    </div>
+  </div>
+
+  <h3>Where your money goes</h3>
+  <div class="legend"><span><i style="background:var(--today)"></i>Today</span><span><i style="background:var(--accent)"></i>Proposed</span><span>Right column: change</span></div>
+  <div class="card" id="flow"></div>
+  <div class="callout" id="ownCollege"></div>
+
+  <details class="card" style="margin-top:12px">
+    <summary>What your college's differential tuition pays for today</summary>
+    <div id="dtUses" style="margin-top:10px"></div>
+  </details>
+  <details class="card" style="margin-top:12px">
+    <summary>How this is calculated</summary>
+    <ul class="tight note">
+      <li><strong>Tuition</strong> goes into USU's general (E&amp;G) budget, pooled with $278M in state tax funds. Your share is spread across uses
+        in the same proportions as the $451.6M budget (excluding differential-tuition lines): colleges, employee benefits, Statewide campuses, administration, etc.</li>
+      <li><strong>Mandatory fees today</strong> ($396.55 Logan) follow USU's 2026–27 fee breakout: building 35.89%, athletics 30.32%, campus rec 14.17%,
+        activity 9.70%, shuttle 6.05%, music &amp; theatre 3.11%, SNAC 0.76%.</li>
+      <li><strong>Differential tuition today</strong> goes straight to your college's budget lines for it.</li>
+      <li><strong>Under the proposal:</strong> $193 goes to the building fee. Fee-funded services (athletics, rec, shuttle, activities, music &amp; theatre, SNAC)
+        are assumed to keep today's $254/student, since USU says the change is revenue-neutral. About <strong>$515</strong> is the per-student share of former college charges
+        (USU's $27.3M of separate charges, minus the ≈$9M of non-building fees, split over 17,743 Logan undergrads, per semester). That pool funds the programs differential tuition
+        and course fees pay for today, split across colleges by their current differential-tuition share. The rest goes into the general budget like tuition does today.</li>
+      <li>These are estimates for illustration; money is pooled, so no individual dollar is literally traceable.</li>
+    </ul>
+  </details>
+</section>
+
+<!-- ============ BY MAJOR ============ -->
+<section class="tab" id="majors">
+  <h2>How much your bill changes, by major</h2>
+  <p class="lede">Each bar is the change in one semester's bill for a Logan student. <span class="save">Green, left</span> = pays less.
+    <span class="cost">Red, right</span> = pays more. Today some colleges charge extra per credit on their courses; the proposal removes
+    that charge but raises the base price.</p>
+  <div class="card">
+    <div class="controls">
+      <div><label for="mRes">Residency</label><select id="mRes"><option value="res">Utah resident</option><option value="non">Nonresident</option></select></div>
+      <div><label for="mCr">Credits this semester</label><select id="mCr"><option>12</option><option selected>15</option></select></div>
+      <div><label for="mDt">Credits in your major's upper-division courses: <strong id="mDtV">9</strong></label>
+        <input id="mDt" type="range" min="0" max="15" step="1" value="9"></div>
+    </div>
+    <div class="axis-head" style="margin-top:12px"><span>← pays less</span><span>no change</span><span>pays more →</span></div>
+    <div id="majBars" class="div"></div>
+    <p class="note" id="majNote"></p>
+  </div>
+  <details class="card" style="margin-top:12px"><summary>Show as a table</summary>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Major</th><th>Extra charge today / credit</th><th>Today</th><th>Proposed</th><th>Change</th><th>Credits to break even</th></tr></thead>
+      <tbody id="majTable"></tbody></table></div>
+  </details>
+</section>
+
+<!-- ============ COLLEGES ============ -->
+<section class="tab" id="colleges">
+  <h2>College budgets (2026–27)</h2>
+  <p class="lede">From USU's official 2026–27 Budget Book (state-appropriated “Education &amp; General” budget). The <span style="color:var(--dt);font-weight:700">amber</span>
+    part of each bar is paid for by differential tuition, the money the proposal would fold into base tuition and replace from the shared pool.
+    Employee benefits are paid from a central pool and aren't in these college totals.</p>
+  <div class="tiles">
+    <div class="card tile"><div class="k">Total E&amp;G budget</div><div class="v">$471.1M</div><div class="s">$278.4M state tax funds, $178.3M tuition, other</div></div>
+    <div class="card tile"><div class="k">Goes to the colleges</div><div class="v">$163.4M</div><div class="s">35% of E&amp;G</div></div>
+    <div class="card tile"><div class="k">E&amp;G per student, USU-wide</div><div class="v">≈ $14,600</div><div class="s">÷ 32,286 students (fall 2026, all campuses)</div></div>
+    <div class="card tile"><div class="k">Differential tuition in college budgets</div><div class="v">$19.5M</div><div class="s">77% of it is Huntsman's</div></div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <div class="legend"><span><i style="background:var(--accent)"></i>Other college budget</span><span><i style="background:var(--dt)"></i>Funded by differential tuition</span></div>
+    <div id="budBars"></div>
+  </div>
+  <div class="card table-wrap" style="margin-top:12px">
+    <table>
+      <thead><tr><th>College</th><th>Budget</th><th>Employee FTE</th><th>Differential tuition</th><th>Share</th><th>Extra $ / credit</th><th>Students</th><th>Per student</th></tr></thead>
+      <tbody id="budTable"></tbody>
+    </table>
+  </div>
+  <h3>Where the rest of the general budget goes</h3>
+  <div class="card" id="egBars"></div>
+  <ul class="tight note" style="margin-top:12px">
+    <li><strong>Huntsman depends on differential tuition far more than any other college</strong>: about half its budget, versus under 8% elsewhere. USU promises Huntsman keeps $10.8M but “would not receive more money.” The budget book lists $14.9M in Huntsman differential-tuition lines (incl. a $5.5M unassigned holding account); the gap from $10.8M is likely graduate differential tuition, which stays separate, but USU doesn't say.</li>
+    <li><strong>Per-student figures are rough.</strong> USU publishes college enrollment only in dashboards that couldn't be read. Huntsman's count is undergraduates only (fall 2025); Engineering's is all students (2025–26).</li>
+    <li><strong>Veterinary Medicine</strong> is a separate state line item ($23.5M, 71 FTE) and is excluded from the new model. Its first DVM class of 42 started August 2025.</li>
+    <li>USU already moved $3.85M of student fees into tuition this year (“Fees-to-Tuition Initiative”) and raised tuition 3.36%.</li>
+  </ul>
+</section>
+
+<!-- ============ SCHOLARSHIPS ============ -->
+<section class="tab" id="scholarships">
+  <h2>Scholarships</h2>
+  <p class="lede">How much each college gives its own students per year, and how each kind of award interacts with the proposal.
+    Colleges count this differently, so treat these as rough comparisons. University-wide awards (Presidential, Deans, Promise) aren't included.</p>
+  <div class="card"><div id="schBars"></div>
+    <p class="note">Huntsman students receive “more than $11.7 million” from all sources (2025–26); ≈$4M comes from the school itself, the comparable figure.</p></div>
+  <details class="card" style="margin-top:12px"><summary>Show as a table</summary>
+    <div class="table-wrap"><table>
+      <thead><tr><th>College</th><th>Per year</th><th>Awards</th><th>Typical / average award</th><th>Year</th><th>Share of differential tuition spent on scholarships</th></tr></thead>
+      <tbody>
+        <tr><td>Huntsman School of Business</td><td>$4.0M (school-funded)</td><td>—</td><td>$500 to full tuition; 74% of students get aid</td><td>2024–25</td><td>≈ 0% (donor-funded)</td></tr>
+        <tr><td>Quinney Agriculture &amp; Natural Resources</td><td>$1.5M+</td><td>900+</td><td>≈ $1,700 avg (est.); Quinney Scholar $8,000/yr</td><td>2027–28 cycle</td><td>Not reported</td></tr>
+        <tr><td>Education, Health &amp; Human Sciences</td><td>$1.4M+</td><td>500+</td><td>≈ $2,800 avg (est.)</td><td>2024–25</td><td>3% (grad tuition waivers)</td></tr>
+        <tr><td>Engineering</td><td>≈ $500,000</td><td>90+</td><td>—</td><td>not dated</td><td>0%</td></tr>
+        <tr><td>Veterinary Medicine</td><td>$260,000+</td><td>—</td><td>—</td><td>not dated</td><td>No differential tuition</td></tr>
+        <tr><td>Former College of Science</td><td>$211,000+</td><td>—</td><td>—</td><td>Mar 2024</td><td>No differential tuition</td></tr>
+        <tr><td>Arts &amp; Sciences (incl. Caine)</td><td>Not published</td><td>450+</td><td>—</td><td>2026–27</td><td>Caine: none listed</td></tr>
+      </tbody></table></div>
+  </details>
+  <h3>How your scholarship interacts with the proposal</h3>
+  <div class="tiles">
+    <div class="card tile"><div class="k">Full-tuition awards</div><div class="v" style="font-size:18px">Mostly protected</div>
+      <div class="s">Presidential, Ambassador and other 100%-of-tuition awards pay whatever tuition is and already cover differential tuition. Fees may not be covered.</div></div>
+    <div class="card tile"><div class="k">Fixed-dollar awards</div><div class="v" style="font-size:18px">Full increase hits you</div>
+      <div class="s">Deans ($7,500/yr), Merit, Scholar, Land Grant, Trustee and most college/donor awards don't grow with tuition.</div></div>
+    <div class="card tile"><div class="k">Utah State Promise</div><div class="v" style="font-size:18px">Possible gain</div>
+      <div class="s">Pays “up to full tuition” but not differential tuition today. If that becomes base tuition, Promise may cover it. Unconfirmed.</div></div>
+    <div class="card tile"><div class="k">College scholarships</div><div class="v" style="font-size:18px">Not funded by the extra charge</div>
+      <div class="s">Huntsman ≈0%, Engineering 0%, CEHHS 3% of differential tuition goes to scholarships; most are donor-funded.</div></div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <ul class="tight">
+      <li><strong>Hansen Differential Tuition Scholarship</strong> (Huntsman, need-based, up to $1,250/semester) exists to offset differential tuition; its purpose would need redefining.</li>
+      <li><strong>Transition help is undefined</strong>: USU is “exploring scholarship options to help ease the transition,” with no amounts or rules.</li>
+      <li><strong>University-wide (2025–26):</strong> $90M non-federal aid to 14,187 students; $10.7M donor scholarships to 4,835 students. Avg non-need institutional award (full-time UG) $3,403; avg need-based grant $8,637.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ ACTION ============ -->
+<section class="tab" id="action">
+  <h2>Who decides, and how to weigh in</h2>
+  <div class="card">
+    <ol class="steps">
+      <li><strong>USU President's Office</strong> proposes the model (no individual author named). Announced Nov 24, 2026.</li>
+      <li><strong>Faculty &amp; staff open conversations</strong>: Dec 8 and Dec 16, 2026, 11 a.m.–noon, Eccles Conference Center.</li>
+      <li><strong>Student information sessions</strong>: Tue Jan 12, 2027, 10–11 a.m. (Eccles Conference Center) and 5–6 p.m. (Zoom, link “sent later”); Wed Jan 13, 4–5 p.m. (Eccles Conference Center).</li>
+      <li><strong>Online surveys</strong>: promised for Jan–Feb 2027; none linked yet.</li>
+      <li><strong>Truth-in-Tuition hearing</strong>: “early March” 2027; date not posted. Past hearings were in the TSC Ballroom and livestreamed on <a href="https://aggiecast.usu.edu/">AggieCast</a>.</li>
+      <li><strong>USU Board of Trustees</strong> votes: meetings Jan 15 and <strong>Mar 19, 2027</strong>.</li>
+      <li><strong>Utah Board of Higher Education</strong> decides: USU says Mar 31; the Board's schedule lists tuition for <strong>Mar 25–26, 2027</strong>.</li>
+    </ol>
+    <p class="note">Precedent: for 2026–27 USU asked for 3.97% and the Board approved 3.22%. The Board does change USU's numbers.</p>
+  </div>
+
+  <h3>Who to contact</h3>
+  <p class="note">Only contacts published on official USU, USHE or Utah Legislature pages. Legislators are from the 2026 session.</p>
+  <div class="card table-wrap">
+    <table class="wrap">
+      <thead><tr><th>Who</th><th>Role</th><th>Contact</th></tr></thead>
+      <tbody>
+        <tr class="group"><td colspan="3">USU administration</td></tr>
+        <tr><td>Brad L. Mortensen</td><td>USU President; proposal comes from his office</td><td><a href="mailto:brad.mortensen@usu.edu">brad.mortensen@usu.edu</a></td></tr>
+        <tr><td>Jessica Oyler</td><td>VP / Chief of Staff</td><td><a href="mailto:jessica.oyler@usu.edu">jessica.oyler@usu.edu</a></td></tr>
+        <tr><td>Chris Corcoran</td><td>Provost &amp; Executive VP</td><td>USU directory</td></tr>
+        <tr><td>David T. Cowley</td><td>VP, Finance &amp; Administrative Services</td><td>435-797-1146</td></tr>
+        <tr><td>Whitney Pugh</td><td>Executive Director, Budget &amp; Planning</td><td>435-797-1174</td></tr>
+        <tr class="group"><td colspan="3">USU Board of Trustees</td></tr>
+        <tr><td>Janalyn Brown</td><td>Secretary to the Board; ask her to share your email with the trustees</td><td><a href="mailto:janalyn.brown@usu.edu">janalyn.brown@usu.edu</a></td></tr>
+        <tr><td>Tessa White / Gina Gagon</td><td>Chair / Vice Chair</td><td>Via board secretary; (435) 797-7172</td></tr>
+        <tr><td>Max Alder</td><td>USUSA President, voting trustee</td><td>No published email</td></tr>
+        <tr class="group"><td colspan="3">Student government (USUSA)</td></tr>
+        <tr><td>J.J. Watts</td><td>Executive VP, chair of the Student Fee Board</td><td><a href="mailto:executivevp.ususa@usu.edu">executivevp.ususa@usu.edu</a> <span class="note">(also listed as execvp.ususa@usu.edu)</span></td></tr>
+        <tr><td>Kylie Back</td><td>Logan VP</td><td><a href="mailto:loganvp.ususa@usu.edu">loganvp.ususa@usu.edu</a></td></tr>
+        <tr><td>College senators</td><td>Your college's student senator</td><td>e.g. <a href="mailto:engrsenator.ususa@usu.edu">engrsenator.ususa@usu.edu</a>, <a href="mailto:huntsmansenator.ususa@usu.edu">huntsmansenator.ususa@usu.edu</a></td></tr>
+        <tr class="group"><td colspan="3">State</td></tr>
+        <tr><td>Amanda Covington</td><td>Chair, Utah Board of Higher Education</td><td>801-646-4784 · <a href="https://ushe.edu/report-a-concern/">Report a concern</a></td></tr>
+        <tr><td>Sen. Chris H. Wilson</td><td>Logan (SD 2); Senate Education + Higher Ed Appropriations</td><td><a href="https://le.utah.gov/asp/roster/leglookup.asp?house=S&amp;leg=Wilson,_C.">le.utah.gov</a></td></tr>
+        <tr><td>Sen. Ann Millner / Rep. Karen M. Peterson</td><td>Chairs, Higher Ed Appropriations Subcommittee</td><td><a href="https://le.utah.gov/committee/committee.jsp?com=APPHED">le.utah.gov</a></td></tr>
+        <tr><td>Your legislators</td><td>Find yours by address</td><td><a href="https://le.utah.gov/GIS/findDistrict.jsp">le.utah.gov/GIS/findDistrict.jsp</a></td></tr>
+        <tr class="group"><td colspan="3">Press</td></tr>
+        <tr><td>The Utah Statesman</td><td>Student newspaper</td><td><a href="https://usustatesman.com">usustatesman.com</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Email template</h3>
+  <p class="note">Edit the [bracketed] parts. Use <a href="#money">Your money</a> for your own dollar figure. A short email with your own situation carries more weight than identical copies.</p>
+  <div class="card">
+    <label for="emSubj">Subject</label>
+    <input id="emSubj" value="Concerns about the proposed tuition model ending the 12–18 credit plateau">
+    <label for="emBody">Body</label>
+    <textarea id="emBody" rows="32">Dear President Mortensen,
+
+I'm a [year] [major] student at USU's [Logan / campus] campus, and I'm writing about the proposed tuition model for fall 2027.
+
+I support making costs clearer and more predictable. But USU's own published figures show that, for most Logan undergraduates, this proposal raises the bill rather than simplifying it:
+
+- A full-time Logan resident taking 15 credits would pay $5,407 a semester instead of $4,532, an increase of $875 (19%). At 18 credits the increase is about $1,450.
+- Nonresident students at 15 credits would pay $3,474 more per semester.
+- Students at Price, Moab and Blanding would pay more.
+- Using the 2026–27 differential tuition rates, only upper-division business students come out clearly ahead. An engineering, arts or education student would need more than 15 credits of upper-division courses in their own college to break even, which is impossible at a 15-credit load.
+
+In my case, [one sentence on your situation: e.g., "I take 15–17 credits to graduate on time, and my bill would rise by about $X per semester"].
+
+Ending the plateau penalizes students who take full loads to graduate in four years, which runs against USU's and the state's completion goals. I ask that the university:
+
+1. Keep a flat rate for full-time loads (for example, 12–15 credits), or cap the per-credit charge above 12.
+2. Grandfather continuing students or phase the change in, instead of relying on undefined "scholarship options."
+3. Publish how many students would pay more and how many would pay less, broken down by college, residency and campus, before the Truth-in-Tuition hearing.
+4. Explain the $750,000 contingency and whether it is added on top of the $29.3 million the new rates replace.
+5. Post the hearing date and a feedback survey now, and schedule the hearing when most students can attend.
+
+Thank you for your time. I plan to attend the [Jan 12 / Jan 13] information session and the Truth-in-Tuition hearing, and I would appreciate a response.
+
+Sincerely,
+[Name]
+[Major, year]</textarea>
+    <div class="btns">
+      <button id="emCopy" type="button">Copy email text</button>
+      <button id="emOpen" type="button" class="ghost">Open in my email app</button>
+      <span class="note" id="emStatus"></span>
+    </div>
+    <p class="note">“Open in my email app” addresses the President and CCs the Board secretary, USUSA Executive VP and Chief of Staff. Nothing sends until you press send.</p>
+  </div>
+</section>
+
+<!-- ============ SOURCES ============ -->
+<section class="tab" id="sources">
+  <h2>Sources &amp; methods</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Primary sources</h3>
+    <ul class="tight">
+      <li><a href="https://www.usu.edu/president/tuition-model/">USU President's Office: Proposed tuition model</a> · <a href="https://www.usu.edu/today/story/usu-considers-new-tuition-model-for-cost-transparency">USU Today announcement (Nov 24, 2026)</a></li>
+      <li><a href="https://www.usu.edu/budget/budgetbook">USU 2026–27 Budget Book</a> (<a href="https://usu.box.com/s/mydngvmmy4zy6fjkqf5z47htm9nedqbq">Budget Summaries</a>)</li>
+      <li><a href="https://www.usu.edu/budget/tuitionfee">USU tuition &amp; fee schedules</a>: <a href="https://usu.box.com/s/fvb5ifolvlcqorj05l1g96h5zoh9kmi3">2026 Fall / 2027 Spring schedule</a> · <a href="https://usu.box.com/s/io31mqyjwywagbbagpbcb6a90k3zr9lc">2026–27 fee breakout</a></li>
+      <li><a href="https://www.usu.edu/financial-support/differential-tuition">USU: 2026–27 differential tuition per credit</a> · <a href="https://huntsman.usu.edu/differential-tuition.php">Huntsman</a> · <a href="https://engineering.usu.edu/students/differential-tuition/2024-2025">Engineering 2024–25 use report</a> · <a href="https://artsci.usu.edu/caine/differential-tuition/index.php">Caine</a> · <a href="https://cehhs.usu.edu/files/differential-tuition-fy26.pdf">CEHHS FY26 report</a> · <a href="https://huntsman.usu.edu/files/minutes-nov-5-2026.pdf">Huntsman DT minutes (Nov 2026)</a></li>
+      <li>Scholarships: <a href="https://huntsman.usu.edu/scholarships/">Huntsman</a> · <a href="https://engineering.usu.edu/advising/scholarships">Engineering</a> · <a href="https://cehhs.usu.edu/news/2025/cehs-scholarships">CEHHS</a> · <a href="https://qanr.usu.edu/students/scholarships">Quinney</a> · <a href="https://artsci.usu.edu/student-resources/scholarships">Arts &amp; Sciences</a> · <a href="https://vetmed.usu.edu/cvm/scholarships">Vet Med</a> · <a href="https://www.usu.edu/financial-support/scholarships/future-aggie">University awards</a> · <a href="https://www.usu.edu/financial-support/scholarships/promise-faq">Promise FAQ</a> · <a href="https://www.usu.edu/oda/files/common-data-sets/CDS2025-26.pdf">Common Data Set 2025–26</a> · <a href="https://www.usu.edu/about/fast-facts">Fast facts</a></li>
+      <li>Enrollment: <a href="https://www.usu.edu/about/at-a-glance/">USU at a glance (fall 2026)</a> · <a href="https://engineering.usu.edu/about/">Engineering</a> · <a href="https://www.usu.edu/today/story/long-time-dean-will-transition-back-to-the-classroom/">Huntsman undergrads (fall 2025)</a></li>
+      <li>Governance: <a href="https://www.usu.edu/president/staff/">President's staff</a> · <a href="https://www.usu.edu/trustees/members/">Trustees</a> · <a href="https://www.usu.edu/trustees/schedule">Trustee schedule</a> · <a href="https://www.usu.edu/student-success/student-fees">Student Fee Board</a> · <a href="https://www.utah.gov/pmn/files/1326039.pdf">USHE 2026–27 meeting schedule</a> · <a href="https://ushe.edu/tuition-and-fee-increases-remain-modest-following-board-review-and-adjustments/">USHE 2026–27 tuition decisions</a></li>
+    </ul>
+    <h3>Verified vs. estimated</h3>
+    <ul class="tight">
+      <li><strong>Verified:</strong> today's tuition and fees ($4,135.87 + $396.55 = $4,532.42 resident; $12,858.44 + $396.55 = $13,254.99 nonresident, 12–18 credits) against USU's official schedule; all college budgets and differential-tuition lines against the 2026–27 Budget Book; differential tuition rates against USU's 2026–27 table.</li>
+      <li><strong>From USU's proposal (draft):</strong> proposed totals at 12/15/18 credits and the per-credit rates. Other resident credit loads are computed from those rates. Nonresident proposed totals exist only for 12 and 15 credits.</li>
+      <li><strong>Estimated:</strong> the “Your money” allocation (proportional spread of pooled tuition, the ≈$515 per-student share of former college charges, fee-funded services held at today's level), per-student college budgets, and average scholarship sizes.</li>
+      <li><strong>Not available:</strong> enrollment for most colleges, course-fee totals, graduate proposed rates, transition-scholarship details.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>Independent analysis by a USU student using public documents. Not affiliated with or endorsed by Utah State University. Figures may change; check the sources tab.</footer>
+<div id="tip"></div>
+
+<script>
+/* ============ DATA ============ */
+const TODAY = { res: { tuition: 4135.87, fees: 396.55 }, non: { tuition: 12858.44, fees: 396.55 } };
+const PROPOSED = { res: { 12: 4646, 15: 5407, 18: 5985 }, non: { 12: 14287, 15: 16729 } };
+const BUILDING_NEW = 193;
+const FEES = [ // 2026-27 Logan fee breakout (% of $396.55)
+  { id: "building", label: "Building fee", pct: 35.89 }, { id: "athletics", label: "Athletics fee", pct: 30.32 },
+  { id: "rec", label: "Campus recreation", pct: 14.17 }, { id: "activity", label: "Student activities", pct: 9.70 },
+  { id: "shuttle", label: "Aggie Shuttle", pct: 6.05 }, { id: "music", label: "Music & theatre", pct: 3.11 }, { id: "snac", label: "SNAC", pct: 0.76 } ];
+const POOLED_SHARE = 515; // est. per-student/semester share of former college charges
+
+// College budgets (2026-27 Budget Book, E&G). dt = sum of "DIFF TUIT" lines.
+const COLLEGES = {
+  artsci:  { name: "Arts & Sciences", total: 47460797, dt: 1124000, fte: 534.9 },
+  huntsman:{ name: "Huntsman School of Business", total: 30601671, dt: 14945000, fte: 164.3, students: 2884, sNote: "undergrads only, fall 2025" },
+  cehhs:   { name: "Education, Health & Human Sciences", total: 30343711, dt: 2354000, fte: 279.1 },
+  eng:     { name: "Engineering", total: 22691323, dt: 864000, fte: 174.4, students: 2354, sNote: "2,009 UG + 345 grad, 2025–26" },
+  qanr:    { name: "Quinney Agriculture & Natural Resources", total: 20263071, dt: 190000, fte: 198.0 },
+  lib:     { name: "University Libraries", total: 12068121, dt: 0, fte: 70.9 },
+};
+const DT_TOTAL = Object.values(COLLEGES).reduce((s, c) => s + c.dt, 0);
+
+// Rest of E&G (2026-27), grouped
+const EG_OTHER = [
+  { id: "benefits", label: "Employee benefits (all USU staff)", sub: "Central benefits pool", v: 102936927 },
+  { id: "central", label: "Central reserves & initiatives", sub: "Strategic reinvestment, growth/performance funds, out-of-state tuition, etc.", v: 43869735 },
+  { id: "statewide", label: "Statewide campuses", sub: "Operations of USU's other campuses", v: 40676036 },
+  { id: "admin", label: "Administration", sub: "President, Provost, Finance & Admin, Marketing, Advancement, Gov. relations, Academic programs", v: 15708938 + 9983491 + 4308832 + 24115628 + 760397 + 1140894 + 3756446 + 3949774 },
+  { id: "facilities", label: "Facilities & maintenance", sub: "Buildings, grounds, utilities", v: 27206391 },
+  { id: "success", label: "Student Success", sub: "Advising, student services", v: 12558844 },
+  { id: "athleticsEG", label: "Athletics (general budget)", sub: "On top of the athletics fee", v: 11761908 },
+  { id: "research", label: "Research office", sub: "", v: 4905865 },
+];
+const EG_BASE = Object.values(COLLEGES).reduce((s, c) => s + (c.total - c.dt), 0) + EG_OTHER.reduce((s, x) => s + x.v, 0);
+
+// Majors -> college + differential tuition
+const MAJORS = [
+  { id: "bus", name: "Business", college: "huntsman", rate: 226.92, rateNote: "$226.92/credit on 3000–5000 business courses ($2.25 lower-division)" },
+  { id: "eng", name: "Engineering", college: "eng", rate: 50.32, rateNote: "$50.32/credit on 3000–5000 engineering courses ($2.09 lower-division)" },
+  { id: "laep", name: "Landscape Architecture", college: "qanr", rate: 61.50, rateNote: "$61.50/credit on 3000+ LAEP courses" },
+  { id: "arts", name: "Art, Music, Theatre", college: "artsci", rate: 39.90, rateNote: "$39.90/credit on all Art + Design, Music, Theatre courses" },
+  { id: "edu", name: "Education, Health & Human Sciences", college: "cehhs", rate: 27.24, rateNote: "$27.24/credit on 3000–5000 education courses ($5.46 lower-division)" },
+  { id: "artsciO", name: "Other Arts & Sciences (science, humanities, social sciences)", college: "artsci", rate: 0, rateNote: "No differential tuition" },
+  { id: "qanrO", name: "Other Agriculture & Natural Resources", college: "qanr", rate: 0, rateNote: "No differential tuition" },
+];
+
+// What each college's differential tuition pays for
+const DT_USES = {
+  huntsman: { src: "2026–27 Budget Book lines", items: [["Faculty & department positions", 6184545], ["Unassigned holding account", 5476011], ["Advising, Freshman Academy, global, entrepreneurship, data science", 2138131], ["Marketing, external relations & recruiting", 1146313]] },
+  eng: { src: "Engineering 2024–25 use report (shares)", pct: true, items: [["TA & grader wages", 53.6], ["Dean's office", 20], ["Supplies, equipment & clubs", 15.2], ["Student travel", 11.2]] },
+  artsci: { src: "2026–27 Budget Book (Caine School lines)", items: [["Instruction (visiting artists, equipment, staffing, student research)", 1060962], ["Academic support", 63038]] },
+  cehhs: { src: "CEHHS FY26 differential tuition report (shares)", pct: true, items: [["Compliance", 43.1], ["Course support", 32.2], ["Accreditation", 14.1], ["Program enhancements", 4.3], ["Graduate tuition waivers", 3.0], ["Student research", 1.5], ["Digital engagement", 1.2], ["Clinical support", 0.6]] },
+  qanr: { src: "2026–27 Budget Book", items: [["LAEP operating", 139000], ["Natural Resources (online master's)", 51000]] },
+};
+
+const SCH = [
+  { name: "Huntsman School of Business", v: 4000000, d: "$4M school-funded (2024–25); $11.7M+ from all sources (2025–26). Awards $500 to full tuition." },
+  { name: "Quinney Agriculture & Natural Resources", v: 1500000, d: "$1.5M+ across 900+ awards. Quinney Scholar $8,000/yr." },
+  { name: "Education, Health & Human Sciences", v: 1400000, d: "$1.4M+ across 500+ scholarships (2024–25)." },
+  { name: "Engineering", v: 500000, d: "≈ $500,000/yr across 90+ scholarships." },
+  { name: "Veterinary Medicine", v: 260000, d: "$260,000+ “last year”." },
+  { name: "Former College of Science", v: 211000, d: "$211,000+/yr (March 2024, before merger)." },
+  { name: "Arts & Sciences (incl. Caine)", v: null, d: "450+ scholarships (2026–27); no dollar total published." },
+];
+
+/* ============ HELPERS ============ */
+const $ = id => document.getElementById(id);
+const money = n => (n < -0.5 ? "−" : "") + "$" + Math.abs(Math.round(n)).toLocaleString("en-US");
+const money2 = n => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const signed = n => (n > 0.5 ? "+" : "") + money(n);
+const short = v => v >= 1e6 ? "$" + (v / 1e6).toFixed(1) + "M" : "$" + Math.round(v / 1000) + "K";
+function proposed(res, c) {
+  if (PROPOSED[res][c] !== undefined) return PROPOSED[res][c];
+  if (res !== "res") return null;
+  return 900 + Math.min(c, 12) * 296 + Math.max(0, Math.min(c, 15) - 12) * 254 + Math.max(0, c - 15) * 192 + BUILDING_NEW;
+}
+const todayTotal = res => TODAY[res].tuition + TODAY[res].fees;
+const tip = $("tip");
+function hoverTip(el, html) {
+  el.addEventListener("mousemove", e => { tip.innerHTML = html(); tip.style.display = "block";
+    tip.style.left = Math.min(e.clientX + 14, innerWidth - 310) + "px"; tip.style.top = (e.clientY + 14) + "px"; });
+  el.addEventListener("mouseleave", () => tip.style.display = "none");
+}
+
+/* ============ TABS ============ */
+function showTab() {
+  const id = (location.hash || "#overview").slice(1);
+  const el = document.getElementById(id);
+  const valid = el && el.classList.contains("tab") ? id : "overview";
+  document.querySelectorAll("section.tab").forEach(s => s.classList.toggle("active", s.id === valid));
+  document.querySelectorAll("nav.tabs a").forEach(a => a.setAttribute("aria-selected", a.getAttribute("href") === "#" + valid));
+  window.scrollTo(0, 0);
+}
+addEventListener("hashchange", showTab);
+showTab();
+
+/* ============ YOUR MONEY ============ */
+$("iMaj").innerHTML = MAJORS.map(m => `<option value="${m.id}">${m.name}</option>`).join("");
+function fillCredits(sel, res, cur) {
+  const opts = res === "res" ? [12, 13, 14, 15, 16, 17, 18] : [12, 15];
+  sel.innerHTML = opts.map(c => `<option ${c === cur ? "selected" : ""}>${c}</option>`).join("");
+  if (!opts.includes(cur)) sel.value = 15;
+}
+fillCredits($("iCr"), "res", 15);
+
+function egSplit(amount) { // spread a pooled amount across E&G uses proportionally
+  const out = {};
+  for (const [k, c] of Object.entries(COLLEGES)) out["col_" + k] = amount * (c.total - c.dt) / EG_BASE;
+  for (const x of EG_OTHER) out[x.id] = amount * x.v / EG_BASE;
+  return out;
+}
+
+function calcMoney() {
+  const res = $("iRes").value, c = +$("iCr").value, maj = MAJORS.find(m => m.id === $("iMaj").value);
+  $("iDt").max = c;
+  const dtCr = maj.rate ? Math.min(+$("iDt").value, c) : 0;
+  $("iDtV").textContent = dtCr;
+  $("iDt").disabled = !maj.rate;
+  $("iDtNote").textContent = maj.rateNote;
+  const cf = Math.max(0, +$("iCf").value || 0);
+  const sch = $("iSch").value;
+  $("iSchAmtWrap").style.display = sch === "fixed" ? "" : "none";
+
+  const T = TODAY[res], dt = maj.rate * dtCr;
+  const tTot = T.tuition + T.fees + dt + cf;
+  const P = proposed(res, c);
+
+  // ---- bill
+  let schT = 0, schP = 0; const notes = [];
+  if (sch === "fixed") { schT = schP = Math.max(0, +$("iSchAmt").value || 0); notes.push("Fixed-dollar awards don't grow with tuition, so the full increase reaches you."); }
+  if (sch === "full") notes.push("Full-tuition awards pay whatever tuition is (including differential tuition today), so most of this change is absorbed by the award. The uncovered fee portion can't be calculated because USU hasn't split the new rate into tuition vs. fees.");
+  if (sch === "promise") notes.push("Promise covers up to full tuition but not differential tuition today. If it covers the folded-in amount, the proposal could be neutral or better for you. USU hasn't confirmed this.");
+  if (res === "res" && PROPOSED.res[c] === undefined) notes.push("Proposed total computed from USU's draft per-credit rates.");
+  const covered = sch === "full" || sch === "promise";
+  const nT = Math.max(0, tTot - schT), nP = Math.max(0, P - schP), d = nP - nT;
+  $("oDiff").innerHTML = covered ? `<span class="save" style="font-size:24px">Mostly covered by your award</span>` : `<span class="${d > 0 ? "cost" : "save"}">${signed(d)}</span>`;
+  $("oNote").textContent = notes.join(" ");
+  $("oTT").textContent = money2(T.tuition); $("oTF").textContent = money2(T.fees);
+  $("oTD").textContent = money2(dt) + (dtCr ? ` (${dtCr} cr × ${money2(maj.rate)})` : "");
+  $("oTC").textContent = money(cf); $("oTot").textContent = money(tTot); $("oPot").textContent = money(P);
+  $("oS").textContent = sch === "fixed" ? "−" + money(schT) : sch === "none" ? "$0" : "see note";
+  $("oNet").textContent = covered ? "—" : `${money(nT)} → ${money(nP)}`;
+
+  // ---- where the money goes (gross bill, before scholarships)
+  const feeAmt = f => T.fees * f.pct / 100;
+  const nonBuildingFees = FEES.filter(f => f.id !== "building").reduce((s, f) => s + feeAmt(f), 0);
+  const egT = egSplit(T.tuition);
+  const poolRest = P - BUILDING_NEW - nonBuildingFees - POOLED_SHARE;
+  const egP = egSplit(poolRest);
+  const col = maj.college, colName = COLLEGES[col].name;
+  const sumCols = (eg) => Object.keys(COLLEGES).reduce((s, k) => s + eg["col_" + k], 0);
+
+  const rows = [
+    { label: "Your college's differential-tuition programs", sub: dt ? colName : "You pay none today", t: dt, p: 0,
+      tip: () => dt ? `Today ${money2(dt)} goes straight to ${colName}'s differential-tuition budget. Under the proposal this charge ends; those programs are funded from the shared pool (next row).` : "No differential tuition in your courses today." },
+    { label: "Former college charges, now shared by everyone", sub: "Differential tuition & course fees, all colleges (est.)", t: 0, p: POOLED_SHARE,
+      tip: () => `≈${money(POOLED_SHARE)} per student per semester: USU's $27.3M of separate charges, minus ≈$9M of non-building fees, over 17,743 Logan undergrads.<br>By college (differential-tuition share): ` +
+        Object.values(COLLEGES).filter(c => c.dt).map(c => `${c.name.split(" ")[0]} ${money(POOLED_SHARE * c.dt / DT_TOTAL)}`).join(", ") },
+    { label: "Course & lab fees", sub: cf ? "Paid per course today" : "None entered", t: cf, p: 0, tip: () => "Folded into the shared pool under the proposal." },
+    { label: "Academic colleges (instruction)", sub: "All colleges + libraries, from general tuition", t: sumCols(egT), p: sumCols(egP),
+      tip: () => Object.entries(COLLEGES).map(([k, c]) => `${c.name}: ${money(egT["col_" + k])} → ${money(egP["col_" + k])}`).join("<br>") },
+    ...EG_OTHER.map(x => ({ label: x.label, sub: x.sub, t: egT[x.id], p: egP[x.id], tip: () => `${(x.v / EG_BASE * 100).toFixed(1)}% of the general budget (${short(x.v)}).` })),
+    { label: "Building fee", sub: "Building bonds & construction", t: feeAmt(FEES[0]), p: BUILDING_NEW, tip: () => `Today 35.89% of mandatory fees (${money2(feeAmt(FEES[0]))}); proposed $193 flat for 12+ credits.` },
+    { label: "Athletics fee", sub: "Mandatory fee", t: feeAmt(FEES[1]), p: feeAmt(FEES[1]), tip: () => "Assumed to keep today's funding when folded into tuition." },
+    { label: "Rec, shuttle, activities, music & theatre, SNAC", sub: "Mandatory fees", t: FEES.slice(2).reduce((s, f) => s + feeAmt(f), 0), p: FEES.slice(2).reduce((s, f) => s + feeAmt(f), 0),
+      tip: () => FEES.slice(2).map(f => `${f.label}: ${money2(feeAmt(f))}`).join("<br>") + "<br>Assumed to keep today's funding." },
+  ].filter(r => r.t > 0.5 || r.p > 0.5);
+
+  const max = Math.max(...rows.flatMap(r => [r.t, r.p]));
+  $("flow").innerHTML = `<div class="note" style="margin-bottom:6px">Your bill before scholarships: <strong>${money(tTot)}</strong> today → <strong>${money(P)}</strong> proposed</div>` +
+    rows.map((r, i) => {
+      const dd = r.p - r.t;
+      return `<div class="flow-row" data-i="${i}"><div class="lab">${r.label}<small>${r.sub}</small></div>
+        <div class="pair">
+          <div class="ln"><div class="b" style="width:${r.t / max * 85}%;background:var(--today)"></div>${money(r.t)}</div>
+          <div class="ln"><div class="b" style="width:${r.p / max * 85}%;background:var(--accent)"></div>${money(r.p)}</div>
+        </div>
+        <div class="d"><span class="${Math.abs(dd) < 0.5 ? "" : dd > 0 ? "cost" : "save"}">${Math.abs(dd) < 0.5 ? "same" : signed(dd)}</span></div></div>`;
+    }).join("");
+  $("flow").querySelectorAll(".flow-row").forEach(el => { const r = rows[+el.dataset.i]; hoverTip(el, () => `<strong>${r.label}</strong><br>${r.tip()}`); });
+
+  // own college callout
+  const ownT = egT["col_" + col] + dt;
+  const ownP = egP["col_" + col] + POOLED_SHARE * COLLEGES[col].dt / DT_TOTAL;
+  $("ownCollege").innerHTML = `<strong>Money reaching your own college (${colName}):</strong> about <strong>${money(ownT)}</strong> today → <strong>${money(ownP)}</strong> under the proposal.
+    ${dt > ownP - egP["col_" + col] ? `Today your differential tuition (${money(dt)}) funds your college directly; under the proposal those programs are paid by every Logan student through the shared pool.` :
+      `Under the proposal you help fund other colleges' former differential-tuition programs through the shared pool (≈${money(POOLED_SHARE)}).`}
+    <span class="note">Your college's total budget doesn't shrink: USU says colleges keep current funding. What changes is who pays for it.</span>`;
+
+  // DT uses
+  const u = DT_USES[col];
+  $("dtUses").innerHTML = (u && COLLEGES[col].dt) ? `<p class="note">${colName} · source: ${u.src}${maj.rate ? "" : " (your major's courses don't carry it)"}</p>
+    <div class="table-wrap"><table><tbody>${u.items.map(([k, v]) => `<tr><td>${k}</td><td>${u.pct ? v + "%" : money(v)}</td>
+      ${dt ? `<td class="note">your ≈${money(dt * (u.pct ? v / 100 : v / u.items.reduce((s, x) => s + x[1], 0)))}</td>` : "<td></td>"}</tr>`).join("")}</tbody></table></div>` :
+    `<p class="note">${colName}: no differential-tuition programs.</p>`;
+}
+$("iRes").addEventListener("change", () => { fillCredits($("iCr"), $("iRes").value, +$("iCr").value); calcMoney(); });
+["iCr", "iMaj", "iDt", "iCf", "iSch", "iSchAmt"].forEach(id => $(id).addEventListener("input", calcMoney));
+calcMoney();
+
+/* ============ BY MAJOR ============ */
+function drawMajors() {
+  const res = $("mRes").value, c = +$("mCr").value, x = Math.min(+$("mDt").value, c);
+  $("mDtV").textContent = x;
+  const P = proposed(res, c), base = todayTotal(res);
+  const list = MAJORS.filter(m => m.rate).concat([{ name: "Most other majors", college: "", rate: 0 }]);
+  const rows = list.map(m => { const t = base + m.rate * x; return { ...m, t, d: P - t, need: m.rate ? Math.ceil((P - base) / m.rate - 1e-9) : Infinity }; });
+  const max = Math.max(...rows.map(r => Math.abs(r.d)), 1) * 1.4;
+  $("majBars").innerHTML = rows.map((r, i) => {
+    const w = Math.abs(r.d) / max * 50, pos = r.d >= 0;
+    return `<div class="bar-row" data-i="${i}"><div class="bar-label">${r.name}<small>${r.college ? COLLEGES[r.college].name : "No differential tuition"}</small></div>
+      <div class="track"><div class="bar" style="top:14px;${pos ? `left:50%;background:var(--cost)` : `right:50%;background:var(--save);border-radius:4px 0 0 4px`};width:${w}%"></div>
+      <div class="bar-val" style="top:11px;${pos ? `left:calc(50% + ${w}% + 6px)` : `right:calc(50% + ${w}% + 6px)`}">${signed(r.d)}</div></div></div>`;
+  }).join("");
+  $("majBars").querySelectorAll(".bar-row").forEach(el => { const r = rows[+el.dataset.i];
+    hoverTip(el, () => `<strong>${r.name}</strong><br>Today ${money(r.t)}${r.rate ? ` (${money(base)} + ${x} cr × ${money2(r.rate)})` : ""}<br>Proposed ${money(P)}<br><strong>${r.d >= 0 ? "Pays " + money(r.d) + " more" : "Saves " + money(-r.d)}</strong>` +
+      (r.rate ? `<br><span class="note">${r.need <= c ? "Breaks even at " + r.need + " credits" : "Can't break even at " + c + " credits"}</span>` : "")); });
+  $("majTable").innerHTML = rows.map(r => `<tr><td>${r.name}</td><td>${r.rate ? money2(r.rate) : "—"}</td><td>${money(r.t)}</td><td>${money(P)}</td>
+    <td><span class="${r.d >= 0 ? "cost" : "save"}">${signed(r.d)}</span></td><td>${r.rate ? (r.need <= c ? r.need + " cr" : "never") : "—"}</td></tr>`).join("");
+  $("majNote").textContent = `Assumes ${c} total credits with ${x} in your major's upper-division courses (Caine: any of its courses). Freshmen taking mostly lower-division courses pay almost no differential tuition now ($2–5/credit), so they look like “Most other majors.” Course fees not included. Hover a bar for the math.`;
+}
+["mRes", "mCr", "mDt"].forEach(id => $(id).addEventListener("input", drawMajors));
+drawMajors();
+
+/* ============ COLLEGES ============ */
+(function () {
+  const list = Object.values(COLLEGES), max = Math.max(...list.map(b => b.total)) * 1.18;
+  const rate = { huntsman: 226.92, eng: 50.32, cehhs: 27.24, artsci: "39.90 (Caine only)", qanr: "61.50 (LAEP only)", lib: null };
+  $("budBars").innerHTML = Object.entries(COLLEGES).map(([k, b]) => {
+    const wo = (b.total - b.dt) / max * 100, wd = b.dt / max * 100;
+    return `<div class="bar-row" data-k="${k}"><div class="bar-label">${b.name}</div><div class="track">
+      <div class="bar" style="top:14px;left:0;width:${wo}%;background:var(--accent);border-radius:0"></div>
+      ${b.dt ? `<div class="bar" style="top:14px;left:calc(${wo}% + 2px);width:${wd}%;background:var(--dt)"></div>` : ""}
+      <div class="bar-val" style="top:11px;left:calc(${wo + wd}% + 8px)">${short(b.total)}</div></div></div>`;
+  }).join("");
+  $("budBars").querySelectorAll(".bar-row").forEach(el => { const b = COLLEGES[el.dataset.k];
+    hoverTip(el, () => `<strong>${b.name}</strong><br>Budget ${money(b.total)}<br>Differential tuition ${money(b.dt)} (${(b.dt / b.total * 100).toFixed(1)}%)<br>Employee FTE ${b.fte}` +
+      (b.students ? `<br>≈ ${money(b.total / b.students)} per student (${b.sNote})` : "")); });
+  $("budTable").innerHTML = Object.entries(COLLEGES).map(([k, b]) => `<tr><td>${b.name}</td><td>${money(b.total)}</td><td>${b.fte}</td>
+    <td>${b.dt ? money(b.dt) : "—"}</td><td>${b.dt ? (b.dt / b.total * 100).toFixed(1) + "%" : "—"}</td>
+    <td>${rate[k] == null ? "—" : "$" + (typeof rate[k] === "number" ? rate[k].toFixed(2) : rate[k])}</td>
+    <td>${b.students ? b.students.toLocaleString() + `<br><span class="note">${b.sNote}</span>` : "not published"}</td>
+    <td>${b.students ? "≈ " + money(b.total / b.students) : "—"}</td></tr>`).join("") +
+    `<tr><td><strong>All colleges</strong></td><td><strong>${money(list.reduce((s, b) => s + b.total, 0))}</strong></td><td>1,421.6</td><td>${money(DT_TOTAL)}</td><td>${(DT_TOTAL / 163428694 * 100).toFixed(1)}%</td><td></td><td></td><td></td></tr>`;
+
+  const eg = [{ label: "Colleges & libraries", v: 163428694 }, ...EG_OTHER.map(x => ({ label: x.label, v: x.v }))].sort((a, b) => b.v - a.v);
+  const m2 = eg[0].v * 1.18;
+  $("egBars").innerHTML = eg.map(x => `<div class="bar-row"><div class="bar-label">${x.label}</div><div class="track">
+    <div class="bar" style="top:14px;left:0;width:${x.v / m2 * 100}%;background:var(--accent)"></div>
+    <div class="bar-val" style="top:11px;left:calc(${x.v / m2 * 100}% + 8px)">${short(x.v)} · ${(x.v / 471068800 * 100).toFixed(0)}%</div></div></div>`).join("");
+})();
+
+/* ============ SCHOLARSHIPS ============ */
+(function () {
+  const max = Math.max(...SCH.filter(s => s.v).map(s => s.v)) * 1.2;
+  $("schBars").innerHTML = SCH.map((s, i) => `<div class="bar-row" data-i="${i}"><div class="bar-label">${s.name}</div><div class="track">${s.v
+    ? `<div class="bar" style="top:14px;left:0;width:${s.v / max * 100}%;background:var(--accent)"></div><div class="bar-val" style="top:11px;left:calc(${s.v / max * 100}% + 6px)">${short(s.v)}</div>`
+    : `<div class="bar-val note" style="top:11px;left:0;font-weight:400">not published</div>`}</div></div>`).join("");
+  $("schBars").querySelectorAll(".bar-row").forEach(el => { const s = SCH[+el.dataset.i]; hoverTip(el, () => `<strong>${s.name}</strong><br>${s.d}`); });
+})();
+
+/* ============ EMAIL ============ */
+$("emCopy").addEventListener("click", async () => {
+  const text = "Subject: " + $("emSubj").value + "\n\n" + $("emBody").value;
+  try { await navigator.clipboard.writeText(text); } catch { $("emBody").select(); document.execCommand("copy"); }
+  $("emStatus").textContent = "Copied.";
+});
+$("emOpen").addEventListener("click", () => {
+  const cc = ["janalyn.brown@usu.edu", "executivevp.ususa@usu.edu", "jessica.oyler@usu.edu"].join(",");
+  location.href = "mailto:brad.mortensen@usu.edu?cc=" + cc + "&subject=" + encodeURIComponent($("emSubj").value) + "&body=" + encodeURIComponent($("emBody").value);
+});
+</script>
+</body>
+</html>
