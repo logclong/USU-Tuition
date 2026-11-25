@@ -152,9 +152,18 @@
   .pair { display: grid; gap: 5px; }
   .pair .ln { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; color: var(--ink); }
   .pair .b { height: 9px; border-radius: 0 2px 2px 0; min-width: 1px; }
+  .pair .np-b { transition: width .45s ease; }
+  @media (prefers-reduced-motion: reduce) { .pair .np-b { transition: none; } }
   .flow-row .d { text-align: right; font-size: 13.5px; }
   @media (max-width: 760px) { .flow-row { grid-template-columns: 1fr 84px; } .flow-row .pair { grid-column: 1 / -1; grid-row: 2; margin-top: 6px; } }
 
+  blockquote.src { margin: 28px 0; padding: 2px 0 2px 20px; border-left: 3px solid var(--amber); max-width: 68ch; }
+  blockquote.src p { font: italic 400 19px/1.55 var(--serif); color: var(--ink); margin: 0; }
+  blockquote.src cite { display: block; margin-top: 8px; font: 600 12px/1.4 var(--sans); font-style: normal; letter-spacing: .04em; text-transform: uppercase; }
+  blockquote.src cite a { color: var(--faint); text-decoration: none; } blockquote.src cite a:hover { color: var(--amber); text-decoration: underline; }
+  blockquote.src cite a::after { content: " ↗"; }
+  .quotes2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; } .quotes2 blockquote.src { margin: 12px 0; }
+  @media (max-width: 760px) { .quotes2 { grid-template-columns: 1fr; } blockquote.src p { font-size: 17px; } }
   .callout { border-left: 3px solid var(--navy); background: var(--parch); padding: 16px 20px; margin: 32px 0; font-size: 16px; line-height: 1.65; }
   .callout > strong:first-child { font-family: var(--serif); font-size: 18px; color: var(--navy); }
   .warn { border-left: 3px solid var(--amber); background: var(--parch); padding: 14px 18px; margin-top: 24px; font-size: 15px; }
@@ -200,6 +209,8 @@
     Starting fall 2027, USU wants to replace both with a single price per credit. USU says it would collect the same total,
     so some students would pay less and most would pay more.</p>
 
+  <blockquote class="src"><p>“This change to the tuition model would not increase USU's overall revenue, but it would change how students are charged. Some would pay more and some less, depending on their program of study.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU President's Office, Proposed Tuition Model Change</a></cite></blockquote>
+
   <div class="tiles">
     <div class="card tile"><div class="k">Logan resident</div><div class="v">$4,532 → $5,407</div><div class="s"><span class="cost">+$875</span> per semester</div></div>
     <div class="card tile"><div class="k">Logan nonresident</div><div class="v">$13,255 → $16,729</div><div class="s"><span class="cost">+$3,474</span> per semester</div></div>
@@ -226,6 +237,16 @@
         <li>Part-time students and students at Price, Moab and Blanding</li>
       </ul>
     </div>
+  </div>
+
+
+  <blockquote class="src"><p>“But if your program doesn't have differential tuition or course fees now, you would likely pay more, and business students would likely pay less. We want to be honest about that.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU tuition model FAQ</a></cite></blockquote>
+
+  <h3>USU's reasons for the change</h3>
+  <div class="quotes2">
+  <blockquote class="src"><p>“Students and their families should know what college will cost even before choosing a major or picking classes.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU President's Office</a></cite></blockquote>
+
+  <blockquote class="src"><p>“Some programs cost more than others to provide, but only some currently charge students extra to cover those costs. Students already help pay for each other's programs through tuition. One rate makes that consistent and transparent.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU President's Office</a></cite></blockquote>
   </div>
 
   <div class="callout"><strong>The bottom line.</strong> The business school gets about half its budget from its extra per-credit charge,
@@ -294,6 +315,8 @@
   <div class="card" id="flow"></div>
   <div class="callout" id="ownCollege"></div>
 
+  <blockquote class="src"><p>“Colleges and programs would keep the funding they receive today, including the Huntsman School of Business's $10.8 million.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU President's Office, Impact on University Programs</a></cite></blockquote>
+
   <details class="card">
     <summary>What your college's extra charge pays for</summary>
     <div id="dtUses"></div>
@@ -321,6 +344,8 @@
         <input id="mDt" type="range" min="0" max="15" step="1" value="9"></div>
     </div>
   </div>
+
+  <blockquote class="src"><p>“Ending the 12–18 credit plateau also shifts more of the bill to students taking more credits.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU tuition model FAQ</a></cite></blockquote>
   <div class="axis-head"><span>← pays less</span><span>no change</span><span>pays more →</span></div>
   <div id="majBars" class="div"></div>
   <p class="note" id="majNote"></p>
@@ -331,6 +356,8 @@
   </details>
 
   <h3>Graduate students</h3>
+
+  <blockquote class="src"><p>“Counting fees and the $193 building fee, graduate residents taking 9 to 12 credits would pay about the same as today or slightly less, and graduate nonresidents would pay less. Bills would rise above 12 credits and at very light loads.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU President's Office, Changes to Graduate Tuition</a></cite></blockquote>
   <p class="note">USU hasn't published graduate prices. These are estimates using its rule that graduate tuition would be 110% of the undergraduate rate. Below 12 credits, add a smaller building fee USU hasn't stated.</p>
   <div class="table-wrap">
     <table>
@@ -360,9 +387,14 @@
   </div>
   <ul class="tight note">
     <li>Business gets about half its budget from its extra charge. No other college gets more than 8%.</li>
-    <li>USU froze the extra charges this year and says it will stop raising them automatically.</li>
+    <li>USU froze the extra charges this year, describing it to the state board as “ending the practice of automatically increasing differential tuition with base tuition” (<a href="https://ushe.edu/wp-content/uploads/pdf/agendas/2026/032726/USU_Tuition_Fees.pdf">USU presentation, March 2026</a>).</li>
     <li>“Per student” divides each budget by the college's majors. Colleges also teach students from other majors.</li>
   </ul>
+  <div class="quotes2">
+  <blockquote class="src"><p>“The Huntsman School wouldn't get more money; it would keep the same funding it has today.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU tuition model FAQ</a></cite></blockquote>
+
+  <blockquote class="src"><p>“…if differential tuition were to decline, HSB would need to unwind course offerings and student experiences.”</p><cite><a href="https://huntsman.usu.edu/files/DT_Advisory_Board_Meeting_Minutes_Nov_6_2025.pdf">Huntsman Differential Tuition Advisory Board minutes, Nov. 6, 2025</a></cite></blockquote>
+  </div>
   <h3>Where the rest of the budget goes</h3>
   <div id="egBars"></div>
 </section>
@@ -380,6 +412,9 @@
   </div>
   <div class="legend" style="margin-top:20px"><span><i style="background:var(--today)"></i>Today</span><span><i style="background:var(--accent)"></i>Under the proposal</span></div>
   <div id="npBars"></div>
+  <p class="note" id="npScale"></p>
+
+  <blockquote class="src"><p>“Students with waivers or scholarships should compare their own current and proposed costs after those awards.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU tuition model FAQ</a></cite></blockquote>
 
   <div class="table-wrap" style="margin-top:28px">
     <table>
@@ -424,18 +459,28 @@
       </tbody>
     </table>
   </div>
-  <p class="note">USU hasn't said how its promised “transition scholarships” for current students would work.</p>
+  <div class="quotes2">
+  <blockquote class="src"><p>“Because continuing students would feel this change most, we're also exploring scholarship options to help ease the transition.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU tuition model FAQ</a></cite></blockquote>
+
+  <blockquote class="src"><p>“The Utah State Promise does not pay differential tuition charges.”</p><cite><a href="https://www.usu.edu/financial-support/scholarships/promise-faq">Utah State Promise FAQ</a></cite></blockquote>
+  </div>
+  <p class="note">USU hasn't said how the transition scholarships would work, or whether Promise would cover the new combined rate.</p>
 
   <h3>Who pays business students' extra charge today</h3>
   <div class="legend"><span><i style="background:var(--cost)"></i>Students and families</span><span><i style="background:var(--save)"></i>Scholarships and grants</span></div>
   <div id="whoPaysHsb"></div>
-  <p class="note">74% of business students get aid, averaging 72% off. When a full-tuition award covers the extra charge, the college pays that money back to USU's scholarship office.</p>
+  <p class="note">74% of business students got scholarships or grants in 2024–25, averaging 72% off tuition (<a href="https://huntsman.usu.edu/files/DT_Advisory_Board_Meeting_Minutes_Nov_6_2025.pdf">Huntsman minutes</a>). Business also offers a donor-funded scholarship just for this charge, paying “the lesser of $1,250 per semester or total paid differential tuition” (<a href="https://huntsman.usu.edu/scholarships/hansen">Hansen scholarship</a>).</p>
+  <blockquote class="src"><p>“[T]he university's central scholarship budget will be made whole from differential tuition funds for students whose differential tuition is covered by central scholarships or waivers.”</p><cite><a href="https://cehhs.usu.edu/files/differential-tuition-fy26.pdf">Education, Health & Human Sciences differential tuition report, FY2026</a></cite></blockquote>
+  <p class="note">In other words, when a full-tuition award covers a student's extra charge, the college pays that money back, so the college goes without it.</p>
+
 
   <h3>Where undergraduates' money comes from</h3>
   <div id="aidBars"></div>
   <p class="note">All USU undergraduates, 2024–25. Students borrowed more in loans than they received in all grants and scholarships combined.</p>
 
   <h3>Scholarships each college gives</h3>
+  <blockquote class="src"><p>“…scholarships are generally funded by donors rather than differential tuition.”</p><cite><a href="https://huntsman.usu.edu/files/minutes-nov-5-2026.pdf">Huntsman Differential Tuition Advisory Board minutes, Nov. 5, 2026</a></cite></blockquote>
+
   <div id="schBars"></div>
   <details class="card"><summary>Show as a table</summary>
     <div class="table-wrap"><table>
@@ -454,6 +499,8 @@
 <!-- ============ ACTION ============ -->
 <section class="tab" id="action">
   <h2>Who decides, and how to weigh in</h2>
+
+  <blockquote class="src"><p>“State law requires a public hearing whenever an institution considers increasing undergraduate tuition, so students and the public can comment before a decision is made.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU President's Office, Approval Process</a></cite></blockquote>
   <div class="card">
     <ol class="steps">
       <li><strong>USU President's Office</strong> proposes the model (no individual author named). Announced Nov 24, 2026.</li>
@@ -892,6 +939,7 @@ drawMajors();
   ].map(x => ({ ...x, name: COLLEGES[x.k].name, students: COLLEGES[x.k].students, dt: COLLEGES[x.k].dt }))
    .concat([{ k: "gen", name: "General University (undeclared, etc.)", students: 11679, dt: 0, sch: 0 }]);
 
+  let npRows = [];
   function draw() {
     const nr = +$("npMix").value, view = $("npView").value;
     const baseT = (1 - nr) * BASE.res + nr * BASE.non, baseP = (1 - nr) * PROP.res + nr * PROP.non;
@@ -903,17 +951,29 @@ drawMajors();
       return { ...c, dtPer, aidT, aidP, sT, sP, nT: Math.max(0, sT - aidT), nP: Math.max(0, sP - aidP) };
     });
     const key = view === "net" ? ["nT", "nP"] : ["sT", "sP"];
-    const max = Math.max(...rows.flatMap(r => [r[key[0]], r[key[1]]]));
-    $("npBars").innerHTML = rows.map((r, i) => {
-      const t = r[key[0]], p = r[key[1]], d = p - t;
-      return `<div class="flow-row" data-i="${i}"><div class="lab">${r.name}<small>${r.students.toLocaleString()} students</small></div>
-        <div class="pair"><div class="ln"><div class="b" style="width:${t / max * 85}%;background:var(--today)"></div>${money(t)}</div>
-          <div class="ln"><div class="b" style="width:${p / max * 85}%;background:var(--accent)"></div>${money(p)}</div></div>
-        <div class="d"><span class="${d > 0 ? "cost" : "save"}">${signed(d)}</span></div></div>`;
-    }).join("");
-    $("npBars").querySelectorAll(".flow-row").forEach(el => { const r = rows[+el.dataset.i];
-      hoverTip(el, () => `<strong>${r.name}</strong><br>Today: ${money(r.sT)} sticker − ${money(r.aidT)} aid = <strong>${money(r.nT)}</strong><br>Proposed: ${money(r.sP)} sticker − ${money(r.aidP)} aid = <strong>${money(r.nP)}</strong>` +
-        `<br><span class="note">College scholarships ≈ ${money(r.sch / r.students)}/student${r.schNote ? " (" + r.schNote + ")" : ""}</span>`); });
+    // One fixed scale for both views (the largest sticker price), so switching shows how much aid shrinks each bar.
+    const max = Math.max(...rows.flatMap(r => [r.sT, r.sP]));
+    const box = $("npBars");
+    if (!box.dataset.built) {
+      box.innerHTML = rows.map((r, i) => `<div class="flow-row" data-i="${i}"><div class="lab">${r.name}<small>${r.students.toLocaleString()} students</small></div>
+        <div class="pair"><div class="ln"><div class="b np-b" style="background:var(--today)"></div><span class="np-v"></span></div>
+          <div class="ln"><div class="b np-b" style="background:var(--accent)"></div><span class="np-v"></span></div></div>
+        <div class="d"><span class="np-d"></span></div></div>`).join("");
+      box.dataset.built = "1";
+    }
+    box.querySelectorAll(".flow-row").forEach((el, i) => {
+      const r = rows[i], t = r[key[0]], p = r[key[1]], d = p - t;
+      const bars = el.querySelectorAll(".np-b"), vals = el.querySelectorAll(".np-v"), dEl = el.querySelector(".np-d");
+      bars[0].style.width = (t / max * 85) + "%"; bars[1].style.width = (p / max * 85) + "%";
+      vals[0].textContent = money(t); vals[1].textContent = money(p);
+      dEl.className = d > 0 ? "cost" : "save"; dEl.textContent = signed(d);
+      if (!el.dataset.tip) { el.dataset.tip = "1"; hoverTip(el, () => { const q = npRows[i];
+        return `<strong>${q.name}</strong><br>Today: ${money(q.sT)} price − ${money(q.aidT)} aid = <strong>${money(q.nT)}</strong><br>Proposed: ${money(q.sP)} price − ${money(q.aidP)} aid = <strong>${money(q.nP)}</strong>`; }); }
+    });
+    npRows = rows;
+    $("npScale").textContent = view === "net"
+      ? "Bars use the same scale as “before financial aid,” so the gap shows how much aid covers."
+      : "Full price before any scholarships, grants or waivers.";
     $("npTable").innerHTML = rows.map(r => `<tr><td>${r.name}</td><td>${r.students.toLocaleString()}</td>
       <td>${money(r.nT)}</td><td>${money(r.nP)}</td><td><span class="${r.nP - r.nT > 0 ? "cost" : "save"}">${signed(r.nP - r.nT)}</span></td></tr>`).join("");
     $("npTableFull").innerHTML = rows.map(r => `<tr><td>${r.name}</td><td>${r.dtPer >= 1 ? money(r.dtPer) : "—"}</td>
