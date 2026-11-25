@@ -12,494 +12,447 @@
   :root {
     --bg: #f8f7f4; --paper: #ffffff; --ink: #0f172a; --ink2: #1e293b; --muted: #475569; --faint: #64748b;
     --rule: #e2e8f0; --rule2: #cbd5e1; --navy: #0f2942; --navy-h: #1a3b5c; --accent: #0f2942; --accent-ink: #ffffff;
-    --amber: #b45309; --dt: #b45309; --parch: #f4f2ec;
+    --amber: #b45309; --dt: #b45309; --parch: #f1efe8;
     --save: #1b5e20; --save-bg: #e8f5e9; --cost: #b71c1c; --cost-bg: #ffebee; --today: #a8b3c2;
     --serif: "Newsreader", Georgia, "Times New Roman", serif; --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --w: 1080px; --gut: 24px; --label: 220px;
   }
   @media (prefers-color-scheme: dark) {
     :root { --bg: #11161d; --paper: #171d25; --ink: #e6e9ee; --ink2: #d4d9e0; --muted: #a3adbb; --faint: #8b96a5;
       --rule: #273140; --rule2: #364355; --navy: #b0c9e8; --navy-h: #d1e4ff; --accent: #b0c9e8; --accent-ink: #0f1a26;
       --amber: #f0a35e; --dt: #f0a35e; --parch: #1c232d; --save: #7fd08a; --save-bg: #16301b; --cost: #ff8a80; --cost-bg: #3a1a1a; --today: #556173; }
   }
+  @media (max-width: 760px) { :root { --gut: 16px; --label: 128px; } }
   * { box-sizing: border-box; }
-  html { scroll-padding-top: 70px; }
-  body { margin: 0; background: var(--bg); color: var(--ink2); font: 15px/1.6 var(--sans); font-feature-settings: "tnum" 1, "cv05" 1; -webkit-font-smoothing: antialiased; }
+  html { scroll-padding-top: 64px; }
+  body { margin: 0; background: var(--bg); color: var(--ink2); font: 16px/1.65 var(--sans); font-feature-settings: "tnum" 1, "cv05" 1; -webkit-font-smoothing: antialiased; }
   a { color: var(--navy); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
   a:hover { color: var(--amber); }
+  .wrap-w { width: calc(100% - 2 * var(--gut)); max-width: var(--w); margin: 0 auto; }
 
-  /* Masthead */
-  .meta { border-bottom: 1px solid var(--rule); background: var(--paper); }
-  .meta .in { max-width: 1160px; margin: 0 auto; padding: 6px 24px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
-    font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--faint); }
-  .meta .in b { color: var(--navy); } .meta .sep { color: var(--rule2); }
-  .meta .status { margin-left: auto; color: var(--amber); display: flex; align-items: center; gap: 6px; }
-  .meta .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
+  /* ---------- Masthead ---------- */
   .mast { background: var(--paper); }
-  .mast .in { width: calc(100% - 48px); max-width: 1112px; margin: 0 auto; padding: 28px 0 16px; border-bottom: 2px solid var(--navy); }
-  @media (max-width: 760px) { .mast .in { width: calc(100% - 32px); padding-left: 0 !important; padding-right: 0 !important; } }
-  .mast h1 { font: 600 44px/1.15 var(--serif); letter-spacing: -.02em; color: var(--navy); margin: 0; }
-  .mast p { font: italic 400 18px/1.5 var(--serif); color: var(--muted); margin: 8px 0 0; max-width: 70ch; }
-  @media (max-width: 760px) { .mast h1 { font-size: 32px; } .mast p { font-size: 16px; } }
+  .mast .in { padding: 36px 0 20px; border-bottom: 3px double var(--navy); }
+  .mast .kicker { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); margin-bottom: 10px; }
+  .mast h1 { font: 600 46px/1.1 var(--serif); letter-spacing: -.02em; color: var(--navy); margin: 0; }
+  .mast p { font: italic 400 19px/1.5 var(--serif); color: var(--muted); margin: 10px 0 0; max-width: 62ch; }
+  @media (max-width: 760px) { .mast .in { padding: 24px 0 16px; } .mast h1 { font-size: 32px; } .mast p { font-size: 17px; } }
+
+  /* ---------- Section bar ---------- */
   header.top { position: sticky; top: 0; z-index: 20; background: var(--paper); border-bottom: 1px solid var(--rule2); }
-  nav.tabs { max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; gap: 28px; overflow-x: auto; scrollbar-width: none; }
+  header.top .navbar { display: flex; align-items: stretch; gap: 32px; height: 50px; }
+  .mark { align-self: center; font: 600 17px var(--serif); color: var(--navy); text-decoration: none; white-space: nowrap; opacity: 0; transition: opacity .15s; pointer-events: none; }
+  body.scrolled .mark { opacity: 1; pointer-events: auto; }
+  nav.tabs { display: flex; gap: 28px; overflow-x: auto; scrollbar-width: none; }
   nav.tabs::-webkit-scrollbar { display: none; }
-  nav.tabs a { color: var(--muted); text-decoration: none; padding: 13px 0 11px; font-size: 13px; font-weight: 600; letter-spacing: .01em;
-    white-space: nowrap; border-bottom: 2px solid transparent; }
-  nav.tabs a:hover { color: var(--navy); }
-  nav.tabs a[aria-selected="true"] { color: var(--navy); font-weight: 700; border-bottom-color: var(--navy); }
+  nav.tabs a { display: flex; align-items: center; color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500;
+    white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  nav.tabs a:hover { color: var(--ink); }
+  nav.tabs a[aria-selected="true"] { color: var(--ink); font-weight: 600; border-bottom-color: var(--navy); }
+  @media (max-width: 900px) { .mark { display: none; } nav.tabs { margin-left: 0; gap: 22px; } }
 
-  main { max-width: 1160px; margin: 0 auto; padding: 36px 24px 72px; }
-  @media (max-width: 760px) { main, nav.tabs, .mast .in, .meta .in, footer .in { padding-left: 16px; padding-right: 16px; } }
+  /* ---------- Page ---------- */
+  main { padding: 44px 0 80px; }
   section.tab { display: none; } section.tab.active { display: block; }
-  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--amber); margin-bottom: 4px; }
-  h2 { font: 600 32px/1.25 var(--serif); letter-spacing: -.015em; color: var(--navy); margin: 0 0 10px; }
-  h3 { font: 600 22px/1.3 var(--serif); color: var(--navy); margin: 44px 0 12px; padding-top: 18px; border-top: 1px solid var(--rule2); }
-  .card > h3:first-child, .grid2 h3 { border-top: 0; padding-top: 0; margin-top: 0; }
-  @media (max-width: 760px) { h2 { font-size: 26px; } }
-  p.lede { font-size: 17px; line-height: 1.65; color: var(--muted); margin: 0 0 28px; max-width: 72ch; }
-  .note { font-size: 13px; line-height: 1.55; color: var(--faint); }
+  h2 { font: 600 34px/1.2 var(--serif); letter-spacing: -.015em; color: var(--navy); margin: 0 0 12px; }
+  h3 { font: 600 23px/1.3 var(--serif); color: var(--navy); margin: 56px 0 14px; padding-top: 20px; border-top: 1px solid var(--rule2); }
+  .grid2 h3, .card > h3:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+  @media (max-width: 760px) { h2 { font-size: 27px; } h3 { font-size: 20px; margin-top: 44px; } }
+  p.lede { font-size: 18px; line-height: 1.65; color: var(--muted); margin: 0 0 32px; max-width: 66ch; }
+  .tab > p, .tab > ul, .tab > .note, details ul, .callout { max-width: 75ch; }
+  .note { font-size: 14px; line-height: 1.6; color: var(--faint); }
+  p.note { margin: 12px 0 0; }
 
-  /* Panels: white analytical surfaces with hairlines, no shadows */
-  .card { background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 20px 22px; }
+  /* Content blocks share one left edge: no boxed panels */
+  .card { background: transparent; border: 0; border-radius: 0; padding: 0; }
+  /* Control panels: ruled band */
+  .card.panel { border-top: 1px solid var(--rule2); border-bottom: 1px solid var(--rule); padding: 4px 0 22px; margin-bottom: 8px; }
+  details.card { border-top: 1px solid var(--rule2); padding: 14px 0; margin-top: 20px; }
+  details.card[open] summary { margin-bottom: 8px; }
+  details summary { cursor: pointer; font: 600 17px var(--serif); color: var(--navy); }
+  details summary:hover { color: var(--amber); }
 
-  /* Stat strips instead of tile cards */
-  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; border-top: 1px solid var(--rule2); border-bottom: 1px solid var(--rule2); }
-  .tiles .card.tile { background: transparent; border: 0; border-radius: 0; border-right: 1px solid var(--rule); padding: 16px 20px; }
+  /* Stat strip */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); border-top: 1px solid var(--navy); border-bottom: 1px solid var(--rule2); margin: 8px 0 8px; }
+  .tiles .card.tile { border-right: 1px solid var(--rule); padding: 18px 22px; }
   .tiles .card.tile:first-child { padding-left: 0; }
   .tiles .card.tile:last-child { border-right: 0; }
-  @media (max-width: 760px) { .tiles .card.tile { padding-left: 0; border-right: 0; border-bottom: 1px solid var(--rule); } .tiles .card.tile:last-child { border-bottom: 0; } }
-  .tile .k { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--faint); }
-  .tile .v { font-size: 22px; font-weight: 700; letter-spacing: -.02em; color: var(--ink); margin: 4px 0 2px; }
-  .tile .s { font-size: 13px; color: var(--muted); }
+  @media (max-width: 760px) { .tiles .card.tile { padding: 14px 0; border-right: 0; border-bottom: 1px solid var(--rule); } .tiles .card.tile:last-child { border-bottom: 0; } }
+  .tile .k { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--faint); line-height: 1.4; }
+  .tile .v { font-size: 23px; font-weight: 700; letter-spacing: -.02em; color: var(--ink); margin: 6px 0 4px; line-height: 1.25; }
+  .tile .s { font-size: 14px; color: var(--muted); line-height: 1.5; }
 
-  /* Side-by-side comparisons separated by a vertical rule */
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
-  .grid2 > .card { background: transparent; border: 0; border-radius: 0; padding: 4px 28px 4px 0; }
-  .grid2 > .card + .card { border-left: 1px solid var(--rule2); padding: 4px 0 4px 28px; }
-  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } .grid2 > .card + .card { border-left: 0; border-top: 1px solid var(--rule2); padding: 20px 0 0; margin-top: 16px; } }
-  #money .grid2 { gap: 16px; }
-  #money .grid2 > .card, #money .grid2 > .card + .card { background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 20px 22px; margin-top: 0; }
+  /* Two columns divided by a rule */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; margin-top: 36px; }
+  .grid2 > .card { padding: 0 32px 0 0; }
+  .grid2 > .card + .card { border-left: 1px solid var(--rule2); padding: 0 0 0 32px; }
+  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } .grid2 > .card { padding: 0; } .grid2 > .card + .card { border-left: 0; border-top: 1px solid var(--rule2); padding: 20px 0 0; margin-top: 20px; } }
 
   .save { color: var(--save); background: var(--save-bg); border-radius: 2px; padding: 1px 6px; font-weight: 600; }
   .cost { color: var(--cost); background: var(--cost-bg); border-radius: 2px; padding: 1px 6px; font-weight: 600; }
-  ul.tight { margin: 6px 0; padding-left: 18px; } ul.tight li { margin: 6px 0; }
+  ul.tight { margin: 8px 0; padding-left: 20px; } ul.tight li { margin: 8px 0; padding-left: 2px; }
+  ul.tight li::marker { color: var(--faint); }
 
-  /* Tables */
+  /* ---------- Tables ---------- */
   .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { padding: 12px; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; vertical-align: top; }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  th, td { padding: 12px 11px; border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; vertical-align: top; }
   th:first-child, td:first-child { padding-left: 0; } th:last-child, td:last-child { padding-right: 0; }
-  th:first-child, td:first-child, .l { text-align: left; white-space: normal; min-width: 170px; }
-  thead th { font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid var(--navy); vertical-align: bottom; }
-  td { font-weight: 500; color: var(--ink2); }
-  tr.group td { font: 600 16px/1.3 var(--serif); color: var(--navy); background: transparent; text-align: left; padding-top: 22px; border-bottom: 1px solid var(--rule2); }
-  table.wrap td { white-space: normal; text-align: left; font-weight: 400; }
-  .card.table-wrap { padding: 4px 22px 8px; }
+  th:first-child, td:first-child { text-align: left; white-space: normal; min-width: 160px; }
+  thead th { white-space: normal; }
+  thead th { font-size: 11.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid var(--navy); vertical-align: bottom; line-height: 1.35; }
+  td { color: var(--ink2); }
+  td .note { font-size: 12.5px; }
+  tr.group td { font: 600 17px/1.3 var(--serif); color: var(--navy); text-align: left; padding-top: 26px; border-bottom: 1px solid var(--rule2); }
+  table.wrap th, table.wrap td { text-align: left; white-space: normal; }
+  table.wrap td { line-height: 1.5; }
+  table.contacts td:nth-child(1) { width: 24%; } table.contacts td:nth-child(2) { width: 42%; }
+  table.compare td { width: 25%; }
 
-  /* Controls */
-  label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 14px 0 6px; }
+  /* ---------- Controls ---------- */
+  label { display: block; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 18px 0 6px; }
   label strong { color: var(--navy); }
-  select, input, textarea { width: 100%; padding: 8px 10px; border: 1px solid var(--rule2); border-radius: 4px; background: var(--paper); color: var(--ink); font: 14px/1.4 var(--sans); }
+  select, input, textarea { width: 100%; height: 40px; padding: 8px 10px; border: 1px solid var(--rule2); border-radius: 3px; background: var(--paper); color: var(--ink); font: 15px/1.4 var(--sans); }
+  textarea { height: auto; font: 14px/1.6 ui-monospace, Consolas, monospace; resize: vertical; }
   select:focus, input:focus, textarea:focus { outline: 1px solid var(--navy); border-color: var(--navy); }
-  input[type=range] { padding: 0; border: 0; accent-color: var(--navy); }
-  textarea { font: 14px/1.6 ui-monospace, Consolas, monospace; resize: vertical; }
-  .controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 24px; }
+  input[type=range] { height: 24px; padding: 0; border: 0; background: transparent; accent-color: var(--navy); }
+  .controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 28px; align-items: start; }
+  .controls .note { margin-top: 4px; font-size: 13px; }
   @media (max-width: 760px) { .controls { grid-template-columns: 1fr; } }
-  button { padding: 8px 16px; border-radius: 4px; border: 1px solid var(--navy); background: var(--navy); color: var(--accent-ink); font: 600 14px var(--sans); cursor: pointer; }
+  button { height: 40px; padding: 0 18px; border-radius: 3px; border: 1px solid var(--navy); background: var(--navy); color: var(--accent-ink); font: 600 14px var(--sans); cursor: pointer; }
   button:hover { background: var(--navy-h); }
   button.ghost { background: transparent; color: var(--navy); border-color: var(--rule2); } button.ghost:hover { background: var(--parch); }
-  .btns { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+  .btns { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 16px; }
 
-  .big { font: 700 40px/1.1 var(--sans); letter-spacing: -.02em; }
-  dl.sum { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; margin: 0; }
-  dl.sum dt { color: var(--muted); } dl.sum dd { margin: 0; text-align: right; font-weight: 500; }
-  dl.sum .tot { color: var(--ink); font-weight: 700; border-top: 1px solid var(--rule2); padding-top: 6px; }
+  /* Result block */
+  .big { font: 700 44px/1.1 var(--sans); letter-spacing: -.02em; margin-top: 6px; }
+  dl.sum { display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; margin: 0; font-size: 15px; }
+  dl.sum dt { color: var(--muted); } dl.sum dd { margin: 0; text-align: right; color: var(--ink); }
+  dl.sum .tot { color: var(--ink); font-weight: 700; border-top: 1px solid var(--rule2); padding-top: 8px; }
 
-  /* Bar charts */
-  .bar-row { display: grid; grid-template-columns: 220px 1fr; align-items: center; min-height: 44px; border-top: 1px solid var(--rule); }
+  /* ---------- Charts ---------- */
+  .bar-row { display: grid; grid-template-columns: var(--label) 1fr; align-items: center; min-height: 46px; border-top: 1px solid var(--rule); }
+  .bar-row:first-child { border-top: 0; }
   .bar-row:hover { background: var(--parch); }
-  .bar-label { font-size: 14px; font-weight: 500; color: var(--ink); padding-right: 14px; line-height: 1.3; }
-  .bar-label small { display: block; color: var(--faint); font-size: 12px; font-weight: 400; }
-  .track { position: relative; height: 44px; }
+  .bar-label { font-size: 14.5px; font-weight: 500; color: var(--ink); padding: 6px 16px 6px 0; line-height: 1.3; }
+  .bar-label small { display: block; color: var(--faint); font-size: 12.5px; font-weight: 400; margin-top: 1px; }
+  .track { position: relative; height: 46px; }
   .bar { position: absolute; height: 14px; border-radius: 0 2px 2px 0; }
-  .bar-val { position: absolute; font-size: 13px; font-weight: 600; white-space: nowrap; color: var(--ink); }
+  .bar-val { position: absolute; font-size: 13.5px; font-weight: 600; white-space: nowrap; color: var(--ink); }
   .div .track::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; border-left: 1px solid var(--rule2); }
-  .axis-head { display: grid; grid-template-columns: 220px 1fr 1fr 1fr; font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--faint); padding-bottom: 6px; }
+  .axis-head { display: grid; grid-template-columns: var(--label) 1fr 1fr 1fr; font-size: 11.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--faint); padding: 18px 0 8px; border-bottom: 1px solid var(--rule); }
   .axis-head span:nth-child(1) { grid-column: 2; } .axis-head span:nth-child(2) { text-align: center; } .axis-head span:nth-child(3) { text-align: right; }
-  @media (max-width: 760px) { .bar-row { grid-template-columns: 120px 1fr; } .axis-head { grid-template-columns: 120px 1fr 1fr 1fr; } }
-  .legend { display: flex; gap: 20px; font-size: 12px; color: var(--muted); margin-bottom: 10px; flex-wrap: wrap; }
-  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+  .legend { display: flex; gap: 22px; font-size: 13px; color: var(--muted); margin: 4px 0 10px; flex-wrap: wrap; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 7px; vertical-align: -1px; }
 
-  .flow-row { display: grid; grid-template-columns: 240px 1fr 96px; gap: 12px; align-items: center; padding: 10px 0; border-top: 1px solid var(--rule); }
+  .flow-row { display: grid; grid-template-columns: var(--label) 1fr 96px; gap: 0 16px; align-items: center; padding: 10px 0; border-top: 1px solid var(--rule); }
   .flow-row:hover { background: var(--parch); }
-  .flow-row .lab { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.3; }
-  .flow-row .lab small { display: block; color: var(--faint); font-size: 12px; font-weight: 400; }
-  .pair { display: grid; gap: 4px; }
-  .pair .ln { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; }
+  .flow-row .lab { font-size: 14.5px; font-weight: 500; color: var(--ink); line-height: 1.3; }
+  .flow-row .lab small { display: block; color: var(--faint); font-size: 12.5px; font-weight: 400; margin-top: 1px; }
+  .pair { display: grid; gap: 5px; }
+  .pair .ln { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; color: var(--ink); }
   .pair .b { height: 9px; border-radius: 0 2px 2px 0; min-width: 1px; }
-  .flow-row .d { text-align: right; font-size: 13px; }
-  @media (max-width: 760px) { .flow-row { grid-template-columns: 1fr 80px; } .flow-row .pair { grid-column: 1 / -1; grid-row: 2; } }
+  .flow-row .d { text-align: right; font-size: 13.5px; }
+  @media (max-width: 760px) { .flow-row { grid-template-columns: 1fr 84px; } .flow-row .pair { grid-column: 1 / -1; grid-row: 2; margin-top: 6px; } }
 
-  .callout { border-left: 3px solid var(--navy); background: var(--parch); padding: 16px 20px; margin: 24px 0; font-size: 15px; line-height: 1.6; }
-  .callout > strong:first-child { font-family: var(--serif); font-size: 17px; color: var(--navy); }
-  .warn { border-left: 3px solid var(--amber); background: var(--parch); padding: 14px 18px; margin-top: 20px; font-size: 14px; }
+  .callout { border-left: 3px solid var(--navy); background: var(--parch); padding: 16px 20px; margin: 32px 0; font-size: 16px; line-height: 1.65; }
+  .callout > strong:first-child { font-family: var(--serif); font-size: 18px; color: var(--navy); }
+  .warn { border-left: 3px solid var(--amber); background: var(--parch); padding: 14px 18px; margin-top: 24px; font-size: 15px; }
 
-  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; }
-  ol.steps li { counter-increment: s; position: relative; padding: 10px 0 10px 40px; border-bottom: 1px solid var(--rule); }
-  ol.steps li:last-child { border-bottom: 0; }
-  ol.steps li::before { content: counter(s, decimal-leading-zero); position: absolute; left: 0; top: 10px; font: 600 15px var(--serif); color: var(--amber); }
-  details summary { cursor: pointer; font: 600 16px var(--serif); color: var(--navy); }
+  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; border-top: 1px solid var(--navy); }
+  ol.steps li { counter-increment: s; position: relative; padding: 12px 0 12px 44px; border-bottom: 1px solid var(--rule); line-height: 1.55; }
+  ol.steps li::before { content: counter(s); position: absolute; left: 0; top: 11px; font: 600 17px var(--serif); color: var(--amber); }
+  dl.dates { display: grid; grid-template-columns: 170px 1fr; margin: 0; border-top: 1px solid var(--navy); }
+  dl.dates dt, dl.dates dd { margin: 0; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  dl.dates dt { font-weight: 600; color: var(--ink); }
+  @media (max-width: 760px) { dl.dates { grid-template-columns: 1fr; } dl.dates dt { border-bottom: 0; padding-bottom: 0; } }
   #tip { position: fixed; pointer-events: none; background: var(--paper); color: var(--ink); border: 1px solid var(--rule2); border-radius: 2px;
     padding: 10px 12px; font-size: 13px; line-height: 1.5; box-shadow: 0 4px 12px rgba(15, 41, 66, .08); display: none; max-width: 320px; z-index: 50; }
-  footer { border-top: 2px solid var(--navy); background: var(--paper); }
-  footer .in { max-width: 1160px; margin: 0 auto; padding: 22px 24px 40px; display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between; font-size: 12px; color: var(--faint); }
-  footer .in b { font: 600 16px var(--serif); color: var(--navy); display: block; margin-bottom: 4px; }
+  footer { border-top: 3px double var(--navy); background: var(--paper); }
+  footer .in { padding: 24px 0 44px; display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between; font-size: 13px; color: var(--faint); }
+  footer .in b { font: 600 17px var(--serif); color: var(--navy); display: block; margin-bottom: 4px; }
 </style>
 </head>
 <body>
-<div class="meta"><div class="in"><b>Policy brief</b><span class="sep">|</span><span>Independent student analysis</span><span class="sep">|</span><span>Not affiliated with Utah State University</span><span class="sep">|</span><span>Data as of Nov 24, 2026</span><span class="status">Proposal under review</span></div></div>
-<div class="mast"><div class="in"><h1>USU Tuition Proposal Explained</h1><p>What Utah State University's proposed fall 2027 tuition model would cost each student, where the money goes, and who decides.</p></div></div>
-<header class="top">
+<div class="mast"><div class="in wrap-w">
+  <div class="kicker">An independent student analysis &nbsp;·&nbsp; Updated November 24, 2026</div>
+  <h1>USU Tuition Proposal Explained</h1>
+  <p>What Utah State University's proposed fall 2027 tuition model would cost each student, where the money goes, and who decides.</p>
+</div></div>
+<header class="top"><div class="navbar wrap-w">
   <nav class="tabs" role="tablist">
       <a href="#overview" role="tab">Overview</a>
       <a href="#money" role="tab">Your money</a>
       <a href="#majors" role="tab">By major</a>
-      <a href="#colleges" role="tab">College budgets</a>
+      <a href="#colleges" role="tab">Budgets</a>
       <a href="#netprice" role="tab">Net price</a>
       <a href="#scholarships" role="tab">Scholarships</a>
       <a href="#action" role="tab">Take action</a>
-      <a href="#sources" role="tab">Sources &amp; methods</a>
+      <a href="#sources" role="tab">Sources</a>
     </nav>
-</header>
+</div></header>
 
-<main>
+<main class="wrap-w">
 <!-- ============ OVERVIEW ============ -->
 <section class="tab" id="overview">
-  <div class="eyebrow">01 · The proposal</div>
   <h2>What's being proposed</h2>
-  <p class="lede">For fall 2027, USU proposes one Logan tuition schedule. Differential tuition (extra per-credit charges in some colleges),
-    course fees and most mandatory fees would be folded into tuition, and the flat price for 12–18 credits would be replaced by
-    per-credit pricing: a $900 base charge, ≈$296/credit for credits 1–12, ≈$254 for 13–15 and ≈$192 above 15, plus a $193 building fee.
-    USU says total revenue stays the same, so every dollar one group saves, another group pays.</p>
+  <p class="lede">Today, full-time Logan students pay one flat price for 12 to 18 credits, and some colleges add extra charges on their courses.
+    Starting fall 2027, USU wants to replace both with a single price per credit. USU says it would collect the same total,
+    so some students would pay less and most would pay more.</p>
 
   <div class="tiles">
-    <div class="card tile"><div class="k">Logan resident, 15 credits</div><div class="v">$4,532 → $5,407</div><div class="s"><span class="cost">+$875 / semester</span></div></div>
-    <div class="card tile"><div class="k">Logan nonresident, 15 credits</div><div class="v">$13,255 → $16,729</div><div class="s"><span class="cost">+$3,474 / semester</span></div></div>
-    <div class="card tile"><div class="k">Statewide resident, most campuses</div><div class="v">$4,085 → $2,976</div><div class="s"><span class="save">−$1,109 / semester</span> (15 cr)</div></div>
-    <div class="card tile"><div class="k">Price, Moab, Blanding</div><div class="v">$2,524 → $2,976</div><div class="s"><span class="cost">+$452 / semester</span> (15 cr)</div></div>
+    <div class="card tile"><div class="k">Logan resident</div><div class="v">$4,532 → $5,407</div><div class="s"><span class="cost">+$875</span> per semester</div></div>
+    <div class="card tile"><div class="k">Logan nonresident</div><div class="v">$13,255 → $16,729</div><div class="s"><span class="cost">+$3,474</span> per semester</div></div>
+    <div class="card tile"><div class="k">Most Statewide campuses</div><div class="v">$4,085 → $2,976</div><div class="s"><span class="save">−$1,109</span> per semester</div></div>
+    <div class="card tile"><div class="k">Price, Moab, Blanding</div><div class="v">$2,524 → $2,976</div><div class="s"><span class="cost">+$452</span> per semester</div></div>
   </div>
+  <p class="note">Full-time undergraduate at 15 credits. Proposed Logan price: $900 per semester, plus about $296 per credit up to 12 credits, $254 for credits 13–15, $192 above 15, and a $193 building fee.</p>
 
-  <div class="grid2" style="margin-top:16px">
+  <div class="grid2">
     <div class="card">
-      <h3 style="margin-top:0">Who pays less</h3>
+      <h3>Who pays less</h3>
       <ul class="tight">
-        <li><strong>Upper-division business students</strong>: today they pay $226.92/credit extra; at 15 credits, 4+ business credits means you save.</li>
-        <li><strong>Statewide residents</strong> at most campuses (≈$1,100–1,400/semester less).</li>
-        <li><strong>Graduate students at 9–12 credits</strong> (≈$150–225 less for residents; ≈$1,100 less for nonresidents, est.). Graduate loads above 12 credits pay more.</li>
-        <li><strong>Utah State Promise</strong> recipients in differential-tuition majors may gain, if Promise covers the folded-in amount (unconfirmed).</li>
+        <li>Business majors taking several upper-division business courses</li>
+        <li>Residents at most Statewide campuses</li>
+        <li>Graduate students taking 9–12 credits</li>
       </ul>
     </div>
     <div class="card">
-      <h3 style="margin-top:0">Who pays more</h3>
+      <h3>Who pays more</h3>
       <ul class="tight">
-        <li><strong>Most full-time Logan undergrads</strong>: +$114 at 12 credits, +$875 at 15, ≈+$1,450 at 18.</li>
-        <li><strong>Engineering, arts, education majors</strong>: their current extra charge is too small to offset the increase at 15 credits.</li>
-        <li><strong>Every nonresident</strong> at 15 credits, even business majors.</li>
-        <li><strong>Part-time students</strong> (+$140–200) and <strong>Price/Moab/Blanding</strong> students.</li>
-        <li>Anyone on a <strong>fixed-dollar scholarship</strong>; full-tuition awards absorb most of it.</li>
+        <li>Most full-time Logan undergraduates</li>
+        <li>Engineering, arts and education majors</li>
+        <li>All nonresidents</li>
+        <li>Part-time students and students at Price, Moab and Blanding</li>
       </ul>
     </div>
   </div>
 
-  <div class="callout"><strong>Bottom line:</strong> the proposal moves about $27M in separate college charges into one rate that everyone pays.
-    Business, which funds ≈49% of its budget from differential tuition, is protected; most other Logan students pick up the cost,
-    especially those taking full loads to graduate on time.</div>
+  <div class="callout"><strong>The bottom line.</strong> The business school gets about half its budget from its extra per-credit charge,
+    and USU promises to keep that funding. Under the proposal, students in every other major help pay for it.</div>
 
   <h3>Key dates</h3>
-  <div class="card">
-    <ul class="tight">
-      <li><strong>Jan 12–13, 2027</strong>: student information sessions (Eccles Conference Center + Zoom)</li>
-      <li><strong>Early March 2027</strong>: Truth-in-Tuition public hearing (date not yet posted)</li>
-      <li><strong>Mar 19, 2027</strong>: USU Board of Trustees meeting</li>
-      <li><strong>Late March 2027</strong>: Utah Board of Higher Education decides (USU says Mar 31; the Board's schedule says Mar 25–26)</li>
-    </ul>
-    <p class="note" style="margin-bottom:0">Details and how to weigh in: <a href="#action">Take action</a>.</p>
-  </div>
+  <dl class="dates">
+    <dt>Jan 12–13, 2027</dt><dd>Student information sessions, Eccles Conference Center and Zoom</dd>
+    <dt>Early March 2027</dt><dd>Truth-in-Tuition public hearing (date not yet posted)</dd>
+    <dt>March 19, 2027</dt><dd>USU Board of Trustees meeting</dd>
+    <dt>Late March 2027</dt><dd>Utah Board of Higher Education makes the final decision</dd>
+  </dl>
+  <p class="note">More detail and who to contact: <a href="#action">Take action</a>.</p>
 </section>
 
 <!-- ============ YOUR MONEY ============ -->
 <section class="tab" id="money">
-  <div class="eyebrow">02 · Calculator</div>
-  <h2>Your money: what you pay and what it pays for</h2>
-  <p class="lede">Set your situation once. The page shows your bill today and under the proposal, then follows each dollar to what it funds,
-    using USU's 2026–27 budget book and fee breakout. Logan campus undergraduates only.</p>
+  <h2>Your bill</h2>
+  <p class="lede">Enter your situation to see what you'd pay under the proposal and where the money goes. For Logan undergraduates.</p>
 
-  <div class="card">
+  <div class="card panel">
     <div class="controls">
       <div><label for="iRes">Residency</label>
         <select id="iRes"><option value="res">Utah resident</option><option value="non">Nonresident</option></select></div>
       <div><label for="iCr">Credits this semester</label><select id="iCr"></select></div>
-      <div><label for="iMaj">Your major</label>
+      <div><label for="iMaj">Major</label>
         <select id="iMaj"></select></div>
-      <div><label for="iDt">Credits in courses that carry your college's extra charge: <strong id="iDtV">9</strong></label>
+      <div><label for="iDt">Upper-division credits in your major: <strong id="iDtV">9</strong></label>
         <input id="iDt" type="range" min="0" max="18" step="1" value="9">
         <div class="note" id="iDtNote"></div></div>
-      <div><label for="iCf">Course/lab fees you pay today ($, optional)</label>
+      <div><label for="iCf">Course fees today (optional)</label>
         <input id="iCf" type="number" min="0" step="1" value="0"></div>
       <div><label for="iSch">Scholarship</label>
         <select id="iSch">
           <option value="none">None</option>
-          <option value="fixed">Fixed-dollar (Deans, Merit, college/donor…)</option>
-          <option value="full">Full-tuition (Presidential, Ambassador…)</option>
+          <option value="fixed">Fixed amount (Deans, Merit, college or donor)</option>
+          <option value="full">Full tuition (Presidential, Ambassador)</option>
           <option value="promise">Utah State Promise</option>
         </select>
-        <div id="iSchAmtWrap"><label for="iSchAmt">Amount per semester ($)</label><input id="iSchAmt" type="number" min="0" step="50" value="0"></div></div>
+        <div id="iSchAmtWrap"><label for="iSchAmt">Amount per semester</label><input id="iSchAmt" type="number" min="0" step="50" value="0"></div></div>
     </div>
   </div>
 
-  <div class="grid2" style="margin-top:16px">
+  <div class="grid2">
     <div class="card">
-      <div class="note" style="margin-bottom:8px">Change in your bill per semester</div>
+      <div class="note">Change per semester</div>
       <div class="big" id="oDiff">—</div>
       <p class="note" id="oNote"></p>
     </div>
     <div class="card">
       <dl class="sum">
-        <dt>Today: tuition</dt><dd id="oTT"></dd>
-        <dt>Today: mandatory fees</dt><dd id="oTF"></dd>
-        <dt>Today: differential tuition</dt><dd id="oTD"></dd>
-        <dt>Today: course fees</dt><dd id="oTC"></dd>
-        <dt class="tot">Today total</dt><dd class="tot" id="oTot"></dd>
-        <dt class="tot">Proposed total</dt><dd class="tot" id="oPot"></dd>
+        <dt>Tuition today</dt><dd id="oTT"></dd>
+        <dt>Fees today</dt><dd id="oTF"></dd>
+        <dt>Extra charge today</dt><dd id="oTD"></dd>
+        <dt>Course fees today</dt><dd id="oTC"></dd>
+        <dt class="tot">Total today</dt><dd class="tot" id="oTot"></dd>
+        <dt class="tot">Total under proposal</dt><dd class="tot" id="oPot"></dd>
         <dt>Scholarship</dt><dd id="oS"></dd>
-        <dt class="tot">You pay: today → proposed</dt><dd class="tot" id="oNet"></dd>
+        <dt class="tot">You pay</dt><dd class="tot" id="oNet"></dd>
       </dl>
     </div>
   </div>
 
   <h3>Where your money goes</h3>
-  <div class="legend"><span><i style="background:var(--today)"></i>Today</span><span><i style="background:var(--accent)"></i>Proposed</span><span>Right column: change</span></div>
+  <div class="legend"><span><i style="background:var(--today)"></i>Today</span><span><i style="background:var(--accent)"></i>Under the proposal</span></div>
   <div class="card" id="flow"></div>
   <div class="callout" id="ownCollege"></div>
 
-  <details class="card" style="margin-top:12px">
-    <summary>What your college's differential tuition pays for today</summary>
-    <div id="dtUses" style="margin-top:10px"></div>
+  <details class="card">
+    <summary>What your college's extra charge pays for</summary>
+    <div id="dtUses"></div>
   </details>
-  <details class="card" style="margin-top:12px">
+  <details class="card">
     <summary>How this is calculated</summary>
     <ul class="tight note">
-      <li><strong>Tuition</strong> goes into USU's general (E&amp;G) budget, pooled with $278M in state tax funds. Your share is spread across uses
-        in the same proportions as the $451.6M budget (excluding differential-tuition lines): colleges, employee benefits, Statewide campuses, administration, etc.</li>
-      <li><strong>Mandatory fees today</strong> ($396.55 Logan) follow USU's 2026–27 fee breakout: building 35.89%, athletics 30.32%, campus rec 14.17%,
-        activity 9.70%, shuttle 6.05%, music &amp; theatre 3.11%, SNAC 0.76%.</li>
-      <li><strong>Differential tuition today</strong> goes straight to your college's budget lines for it.</li>
-      <li><strong>Under the proposal:</strong> $193 goes to the building fee. Fee-funded services (athletics, rec, shuttle, activities, music &amp; theatre, SNAC)
-        are assumed to keep today's $254/student, since USU says the change is revenue-neutral. About <strong>$515</strong> is the per-student share of former college charges
-        (USU's $27.3M of separate charges, minus the ≈$9M of non-building fees, split over 17,743 Logan undergrads, per semester). That pool funds the programs differential tuition
-        and course fees pay for today, split across colleges by their current differential-tuition share. The rest goes into the general budget like tuition does today.</li>
-      <li>These are estimates for illustration; money is pooled, so no individual dollar is literally traceable.</li>
+      <li>Tuition is pooled with state funds, so your tuition is spread across the budget in the same proportions as USU's 2026–27 general budget.</li>
+      <li>Fees follow USU's 2026–27 fee breakdown. Your college's extra charge goes straight to that college today.</li>
+      <li>Under the proposal, about $515 per student per semester replaces all colleges' extra charges and course fees. Fee-funded services such as athletics and recreation are assumed to keep today's funding.</li>
+      <li>These are estimates. Money is pooled, so no single dollar can be traced exactly.</li>
     </ul>
   </details>
 </section>
 
 <!-- ============ BY MAJOR ============ -->
 <section class="tab" id="majors">
-  <div class="eyebrow">03 · Comparison</div>
-  <h2>How much your bill changes, by major</h2>
-  <p class="lede">Each bar is the change in one semester's bill for a Logan student. <span class="save">Green, left</span> = pays less.
-    <span class="cost">Red, right</span> = pays more. Today some colleges charge extra per credit on their courses; the proposal removes
-    that charge but raises the base price.</p>
-  <div class="card">
+  <h2>Change by major</h2>
+  <p class="lede">How one semester's bill changes for a Logan student in each major. <span class="save">Green</span> means you'd pay less, <span class="cost">red</span> means you'd pay more.</p>
+  <div class="card panel">
     <div class="controls">
       <div><label for="mRes">Residency</label><select id="mRes"><option value="res">Utah resident</option><option value="non">Nonresident</option></select></div>
       <div><label for="mCr">Credits this semester</label><select id="mCr"><option>12</option><option>13</option><option>14</option><option selected>15</option><option>16</option><option>17</option><option>18</option></select></div>
-      <div><label for="mDt">Credits in your major's upper-division courses: <strong id="mDtV">9</strong></label>
+      <div><label for="mDt">Upper-division credits in your major: <strong id="mDtV">9</strong></label>
         <input id="mDt" type="range" min="0" max="15" step="1" value="9"></div>
     </div>
-    <div class="axis-head" style="margin-top:12px"><span>← pays less</span><span>no change</span><span>pays more →</span></div>
-    <div id="majBars" class="div"></div>
-    <p class="note" id="majNote"></p>
   </div>
-  <details class="card" style="margin-top:12px"><summary>Show as a table</summary>
+  <div class="axis-head"><span>← pays less</span><span>no change</span><span>pays more →</span></div>
+  <div id="majBars" class="div"></div>
+  <p class="note" id="majNote"></p>
+  <details class="card"><summary>Show as a table</summary>
     <div class="table-wrap"><table>
-      <thead><tr><th>Major</th><th>Extra charge today / credit</th><th>Today</th><th>Proposed</th><th>Change</th><th>Credits to break even</th></tr></thead>
+      <thead><tr><th>Major</th><th>Extra charge per credit</th><th>Today</th><th>Proposed</th><th>Change</th><th>Credits to break even</th></tr></thead>
       <tbody id="majTable"></tbody></table></div>
   </details>
 
-  <h3>Graduate students (estimated)</h3>
-  <p class="note" style="max-width:80ch">USU hasn't published graduate dollar figures, only that graduate tuition would be “110% of the undergraduate rate” with graduate differentials and program fees staying separate.
-    This applies 110% to the undergraduate tuition formula ($900 base + per-credit), then adds the $193 building fee at 12+ credits. The building fee below 12 credits is “lower” but unstated, so it's left out.
-    Today's figures are from USU's official 2026–27 schedule (resident graduate tuition + fees).</p>
-  <div class="card table-wrap">
+  <h3>Graduate students</h3>
+  <p class="note">USU hasn't published graduate prices. These are estimates using its rule that graduate tuition would be 110% of the undergraduate rate. Below 12 credits, add a smaller building fee USU hasn't stated.</p>
+  <div class="table-wrap">
     <table>
-      <thead><tr><th>Credits</th><th>Resident today</th><th>Resident proposed (est.)</th><th>Change</th><th>Nonresident today</th><th>Nonresident proposed (est.)</th><th>Change</th></tr></thead>
+      <thead><tr><th>Credits</th><th>Resident today</th><th>Resident proposed</th><th>Change</th><th>Nonresident today</th><th>Nonresident proposed</th><th>Change</th></tr></thead>
       <tbody id="gradTable"></tbody>
     </table>
   </div>
-  <p class="note">This matches USU's description: “graduate residents taking 9 to 12 credits would pay about the same as today or slightly less, and graduate nonresidents would pay less. Bills would rise above 12 credits and at very light loads.”</p>
 </section>
 
 <!-- ============ COLLEGES ============ -->
 <section class="tab" id="colleges">
-  <div class="eyebrow">04 · Budgets</div>
-  <h2>College budgets (2026–27)</h2>
-  <p class="lede">From USU's official 2026–27 Budget Book (state-appropriated “Education &amp; General” budget). The <span style="color:var(--dt);font-weight:700">amber</span>
-    part of each bar is paid for by differential tuition, the money the proposal would fold into base tuition and replace from the shared pool.
-    Employee benefits are paid from a central pool and aren't in these college totals.</p>
+  <h2>College budgets</h2>
+  <p class="lede">What each college spends in 2026–27, and how much of it comes from the extra per-credit charges the proposal would remove
+    (shown in <span style="color:var(--dt);font-weight:600">amber</span>).</p>
   <div class="tiles">
-    <div class="card tile"><div class="k">Total E&amp;G budget</div><div class="v">$471.1M</div><div class="s">$278.4M state tax funds, $178.3M tuition, other</div></div>
-    <div class="card tile"><div class="k">Goes to the colleges</div><div class="v">$163.4M</div><div class="s">35% of E&amp;G</div></div>
-    <div class="card tile"><div class="k">E&amp;G per student, USU-wide</div><div class="v">≈ $14,600</div><div class="s">÷ 32,286 students (fall 2026, all campuses)</div></div>
-    <div class="card tile"><div class="k">Differential tuition in college budgets</div><div class="v">$19.5M</div><div class="s">77% of it is Huntsman's</div></div>
+    <div class="card tile"><div class="k">USU general budget</div><div class="v">$471.1M</div><div class="s">State funds and tuition</div></div>
+    <div class="card tile"><div class="k">Goes to the colleges</div><div class="v">$163.4M</div><div class="s">35% of the total</div></div>
+    <div class="card tile"><div class="k">From extra charges</div><div class="v">$19.5M</div><div class="s">77% of it is business</div></div>
   </div>
-  <div class="card" style="margin-top:12px">
-    <div class="legend"><span><i style="background:var(--accent)"></i>Other college budget</span><span><i style="background:var(--dt)"></i>Funded by differential tuition</span></div>
-    <div id="budBars"></div>
-  </div>
-  <div class="card table-wrap" style="margin-top:12px">
+  <div class="legend" style="margin-top:28px"><span><i style="background:var(--accent)"></i>Other funding</span><span><i style="background:var(--dt)"></i>From extra charges</span></div>
+  <div id="budBars"></div>
+  <div class="table-wrap" style="margin-top:28px">
     <table>
-      <thead><tr><th>College</th><th>Budget</th><th>Employee FTE</th><th>Differential tuition</th><th>Share</th><th>Extra $ / credit</th><th>Students</th><th>Per student</th></tr></thead>
+      <thead><tr><th>College</th><th>Budget</th><th>From extra charges</th><th>Share</th><th>Students</th><th>Budget per student</th></tr></thead>
       <tbody id="budTable"></tbody>
     </table>
   </div>
-  <h3>Where the rest of the general budget goes</h3>
-  <div class="card" id="egBars"></div>
-  <ul class="tight note" style="margin-top:12px">
-    <li><strong>Huntsman depends on differential tuition far more than any other college</strong>: about half its budget, versus under 8% elsewhere. USU promises Huntsman keeps $10.8M but “would not receive more money.” The budget book lists $14.9M in Huntsman differential-tuition lines (incl. a $5.5M unassigned holding account); the gap from $10.8M is likely graduate differential tuition, which stays separate, but USU doesn't say.</li>
-    <li><strong>Students</strong> are fall 2026 headcount by primary college, all campuses and levels, from USU's enrollment dashboard. Colleges also teach non-majors (Arts &amp; Sciences teaches most general education), so “per student” compares budget to majors, not to who's in the classroom.</li>
-    <li><strong>Huntsman enrollment fell 5%</strong> (3,921 → 3,728) between fall 2025 and fall 2026, while Engineering grew 5%. Huntsman's differential tuition works out to ≈$4,000 per business student per year.</li>
-    <li><strong>Differential tuition was frozen for 2026–27.</strong> USU told the Board of Higher Education it is “ending the practice of automatically increasing differential tuition with base tuition,” so business and engineering students got smaller increases (1.98% and 2.91%) than everyone else (3.36%).</li>
-    <li><strong>Veterinary Medicine</strong> is a separate state line item and is excluded from the new model.</li>
-    <li>USU already moved $3.85M of student fees into tuition this year (“Fees-to-Tuition Initiative”).</li>
+  <ul class="tight note">
+    <li>Business gets about half its budget from its extra charge. No other college gets more than 8%.</li>
+    <li>USU froze the extra charges this year and says it will stop raising them automatically.</li>
+    <li>“Per student” divides each budget by the college's majors. Colleges also teach students from other majors.</li>
   </ul>
+  <h3>Where the rest of the budget goes</h3>
+  <div id="egBars"></div>
 </section>
 
 <!-- ============ NET PRICE ============ -->
 <section class="tab" id="netprice">
-  <div class="eyebrow">05 · Net price</div>
-  <h2>What the average student actually pays, by college</h2>
-  <p class="lede">Sticker price minus scholarships, grants and waivers, per student per year, today vs. under the proposal.
-    “Average student” means a full-time undergraduate at 15 credits, with USU's residency mix (70% Utah residents, 30% out of state).</p>
+  <h2>Net price by college</h2>
+  <p class="lede">What a typical full-time undergraduate pays per year after scholarships, grants and waivers. Based on USU's mix of 70% Utah residents and 30% out of state.</p>
 
-  <div class="card">
+  <div class="card panel">
     <div class="controls">
-      <div><input type="hidden" id="npMix" value="0.30"><label>Students</label>
-        <div>Average student (70% resident / 30% nonresident)</div>
-        <div class="note">USU doesn't publish aid split by residency, so only the blended average is shown. For your own situation use <a href="#money">Your money</a>.</div></div>
-      <div><label for="npView">Show</label>
-        <select id="npView"><option value="net">Net price (after aid)</option><option value="sticker">Sticker price (before aid)</option></select></div>
+      <div><input type="hidden" id="npMix" value="0.30"><label for="npView">Show</label>
+        <select id="npView"><option value="net">After financial aid</option><option value="sticker">Before financial aid</option></select></div>
     </div>
-    <div class="legend" style="margin-top:12px"><span><i style="background:var(--today)"></i>Today</span><span><i style="background:var(--accent)"></i>Proposed</span><span>Right column: change per year</span></div>
-    <div id="npBars"></div>
   </div>
+  <div class="legend" style="margin-top:20px"><span><i style="background:var(--today)"></i>Today</span><span><i style="background:var(--accent)"></i>Under the proposal</span></div>
+  <div id="npBars"></div>
 
-  <div class="card table-wrap" style="margin-top:12px">
+  <div class="table-wrap" style="margin-top:28px">
     <table>
-      <thead><tr><th>College</th><th>Students</th><th>Avg extra charge</th><th>Sticker today</th><th>Aid today</th><th>Net today</th><th>Sticker new</th><th>Aid new</th><th>Net new</th><th>Change</th></tr></thead>
+      <thead><tr><th>College</th><th>Students</th><th>Pays today</th><th>Would pay</th><th>Change per year</th></tr></thead>
       <tbody id="npTable"></tbody>
     </table>
   </div>
 
-  <details class="card" style="margin-top:12px" open>
+  <details class="card">
+    <summary>Full breakdown</summary>
+    <div class="table-wrap"><table>
+      <thead><tr><th>College</th><th>Average extra charge</th><th>Price today</th><th>Aid today</th><th>Price proposed</th><th>Aid proposed</th></tr></thead>
+      <tbody id="npTableFull"></tbody></table></div>
+  </details>
+  <details class="card">
     <summary>How this is calculated</summary>
     <ul class="tight note">
-      <li><strong>Sticker today</strong> = full-time base tuition + fees ($9,065/yr resident, $26,510 nonresident; USU 2026–27 schedule) + the college's <em>average</em> differential tuition per student
-        (its 2026–27 differential-tuition budget ÷ its fall 2026 headcount). Averages are low outside business because many students are freshmen or take courses outside their college.</li>
-      <li><strong>Sticker proposed</strong> = USU's 15-credit figures × 2 semesters ($10,814 resident, $33,458 nonresident), the same for every college.</li>
-      <li><strong>Aid today</strong> = USU's average grant, scholarship, waiver and athletic aid per degree-seeking undergraduate ($120.7M ÷ 19,574 = $6,169; Common Data Set, 2024–25),
-        with the USU-wide average for college-funded scholarships ($389) swapped out for that college's own scholarships per student. Student loans aren't counted as aid.</li>
-      <li><strong>Aid proposed</strong>: tuition waivers ($1,598/student today) are assumed to rise with tuition, like full-tuition awards do. Pell, state grants and fixed-dollar scholarships stay the same.</li>
-      <li><strong>Limits:</strong> every college gets the same residency mix and USU-wide aid average (real mixes differ); headcounts include graduate and Statewide students; aid is from 2024–25, prices from 2026–27.
-        Arts &amp; Sciences' scholarship total isn't published, so only the former College of Science's $211K is counted, which understates its aid.</li>
-      <li><strong>Cross-check:</strong> Huntsman reports 74% of its students get aid at a 72% average discount, ≈53% off sticker overall. This model gives Huntsman ≈37%, so if anything it
-        <em>understates</em> business students' aid, and business students' real net price is lower than shown.</li>
+      <li>Price is USU's full-time price plus each college's average extra charge per student.</li>
+      <li>Aid is USU's average grants, scholarships and waivers per undergraduate ($6,169 a year), adjusted for each college's own scholarships. Loans don't count.</li>
+      <li>Tuition waivers are assumed to grow with tuition. Pell grants and fixed scholarships stay the same.</li>
+      <li>Business is probably understated: the school reports 53% of its total price is covered by aid, more than this estimate.</li>
     </ul>
   </details>
 </section>
 
 <!-- ============ SCHOLARSHIPS ============ -->
 <section class="tab" id="scholarships">
-  <div class="eyebrow">06 · Financial aid</div>
-  <h2>Scholarships</h2>
-  <p class="lede">Who really pays differential tuition once scholarships, grants and waivers are counted, how that changes under the proposal,
-    and how much scholarship money each college gives its own students.</p>
-  <h3 style="margin-top:8px">Who actually pays differential tuition?</h3>
-  <p class="note" style="max-width:80ch">The sticker price isn't what everyone pays. Scholarships, grants and waivers cover part of the bill. One USU rule matters here:
-    <em>“the university's central scholarship budget will be made whole from differential tuition funds for students whose differential tuition is covered by central scholarships or waivers”</em>
-    (CEHHS FY26 report). In plain terms, when a Presidential-type award covers a student's differential tuition, the student's college pays that money back to the
-    scholarship office. So for those students, nobody really pays it: the college goes without.</p>
+  <h2>Scholarships and aid</h2>
+  <p class="lede">Scholarships and grants change who really pays. Here is how different kinds of aid interact with the proposal.</p>
 
-  <div class="card">
-    <div class="legend"><span><i style="background:var(--cost)"></i>Students &amp; families (cash or loans)</span><span><i style="background:var(--save)"></i>Scholarships, grants &amp; waivers</span></div>
-    <div id="whoPaysHsb"></div>
-    <p class="note" style="margin-bottom:0">Huntsman School, FY25: 74% of students received scholarships or grants (not loans), with an average 72% discount off total tuition among recipients
-      (DT Advisory Board minutes, Nov 2025). If aid covers differential tuition in the same proportion as the rest of the bill, students and families pay ≈47% of it and aid covers ≈53%.
-      About 30% of the scholarship support Huntsman students receive comes from the school itself; the rest is USU-wide (admission awards, waivers) and outside sources.</p>
-  </div>
-
-  <h3>Who pays the same costs, today vs. under the proposal</h3>
-  <div class="card table-wrap">
-    <table class="wrap">
-      <thead><tr><th>Student</th><th>Today: differential tuition</th><th>Proposal: shared pool (≈$515/student/semester)</th><th>Net effect</th></tr></thead>
+  <h3>How each kind of aid is affected</h3>
+  <div class="table-wrap">
+    <table class="wrap compare">
+      <thead><tr><th>If you have…</th><th>What changes</th><th>Effect</th></tr></thead>
       <tbody>
-        <tr><td><strong>Paying out of pocket or with loans, in a differential-tuition major</strong></td><td>Pays it directly ($27–$227/credit)</td><td>Pays a flat share like everyone else</td><td><span class="save">Business: less</span> · others: usually more, because the base price also rises</td></tr>
-        <tr><td><strong>Paying out of pocket, in a major with no extra charge</strong> (most of Arts &amp; Sciences, Quinney)</td><td>Pays none</td><td>Pays a share of other colleges' former charges</td><td><span class="cost">More</span>: this group picks up most of the shift</td></tr>
-        <tr><td><strong>Full-tuition award</strong> (Presidential, Ambassador, nonresident waivers)</td><td>Award covers it; the college reimburses the scholarship office</td><td>Award covers the whole higher rate; no reimbursement</td><td>Student ≈ unaffected. The cost moves from the college's budget to the central scholarship budget, which is funded by everyone's tuition.</td></tr>
-        <tr><td><strong>Utah State Promise</strong> (need-based, up to full tuition)</td><td>Not covered: Promise “does not pay differential tuition”</td><td>Possibly covered if it becomes base tuition</td><td><span class="save">Possible gain</span> for low-income students in differential-tuition majors (unconfirmed)</td></tr>
-        <tr><td><strong>Pell / fixed-dollar grants and scholarships</strong></td><td>Grant can be applied to it; less is left over for rent, food and books</td><td>Same grant, higher base bill</td><td><span class="cost">Less left over</span> for most students</td></tr>
-        <tr><td><strong>Hansen Differential Tuition Scholarship</strong> (business, need-based, up to $1,250/semester)</td><td>Donor money offsets differential tuition</td><td>The charge it offsets disappears</td><td>The donor fund would need a new purpose</td></tr>
-        <tr><td><strong>Nonresident with institutional aid</strong> (1,564 students, avg $15,299/yr)</td><td>Same as above, by award type</td><td>Sticker price +$3,474/semester at 15 credits</td><td>Fixed awards: <span class="cost">student pays it</span>. Waivers or percent-of-tuition: USU pays more</td></tr>
+        <tr><td><strong>No aid, major with no extra charge</strong></td><td>You start paying a share of other colleges' former charges.</td><td><span class="cost">Pay more</span></td></tr>
+        <tr><td><strong>No aid, business major</strong></td><td>Your $226.92-per-credit charge goes away.</td><td><span class="save">Pay less</span></td></tr>
+        <tr><td><strong>Full-tuition award</strong></td><td>Your award grows to cover the new price. USU's scholarship budget pays the difference.</td><td>About the same</td></tr>
+        <tr><td><strong>Utah State Promise</strong></td><td>Promise doesn't cover extra charges today. It might once they're part of tuition.</td><td><span class="save">Possibly less</span></td></tr>
+        <tr><td><strong>Pell grant or fixed scholarship</strong></td><td>Your award stays the same while the bill goes up.</td><td><span class="cost">Pay more</span></td></tr>
+        <tr><td><strong>Nonresident with aid</strong></td><td>Depends on whether your award is a fixed amount or a tuition waiver.</td><td>Usually more</td></tr>
       </tbody>
     </table>
   </div>
+  <p class="note">USU hasn't said how its promised “transition scholarships” for current students would work.</p>
 
-  <h3>How USU undergraduates' costs are covered (2024–25, all colleges)</h3>
-  <div class="card">
-    <div id="aidBars"></div>
-    <p class="note" style="margin-bottom:0">USU Common Data Set 2025–26 (2024–25 final figures), degree-seeking undergraduates. Student counts: 6,025 full-time undergrads got need-based grants
-      (avg $8,637); 5,241 with no need got institutional merit awards (avg $3,403); 293 athletes (avg $22,241). Student loans aren't aid in the sense of a discount: students repay them.</p>
-  </div>
+  <h3>Who pays business students' extra charge today</h3>
+  <div class="legend"><span><i style="background:var(--cost)"></i>Students and families</span><span><i style="background:var(--save)"></i>Scholarships and grants</span></div>
+  <div id="whoPaysHsb"></div>
+  <p class="note">74% of business students get aid, averaging 72% off. When a full-tuition award covers the extra charge, the college pays that money back to USU's scholarship office.</p>
 
-  <h3>Scholarship money by college</h3>
-  <div class="card"><div id="schBars"></div>
-    <p class="note">Huntsman students receive “more than $11.7 million” from all sources (2025–26); ≈$4M comes from the school itself, the comparable figure.</p></div>
-  <details class="card" style="margin-top:12px"><summary>Show as a table</summary>
+  <h3>Where undergraduates' money comes from</h3>
+  <div id="aidBars"></div>
+  <p class="note">All USU undergraduates, 2024–25. Students borrowed more in loans than they received in all grants and scholarships combined.</p>
+
+  <h3>Scholarships each college gives</h3>
+  <div id="schBars"></div>
+  <details class="card"><summary>Show as a table</summary>
     <div class="table-wrap"><table>
-      <thead><tr><th>College</th><th>Per year</th><th>Awards</th><th>Typical / average award</th><th>Year</th><th>Share of differential tuition spent on scholarships</th></tr></thead>
+      <thead><tr><th>College</th><th>Per year</th><th>Number of awards</th><th>Typical award</th></tr></thead>
       <tbody>
-        <tr><td>Huntsman School of Business</td><td>$4.0M (school-funded)</td><td>—</td><td>$500 to full tuition; 74% of students get aid</td><td>2024–25</td><td>≈ 0% (donor-funded)</td></tr>
-        <tr><td>Quinney Agriculture &amp; Natural Resources</td><td>$1.5M+</td><td>900+</td><td>≈ $1,700 avg (est.); Quinney Scholar $8,000/yr</td><td>2027–28 cycle</td><td>Not reported</td></tr>
-        <tr><td>Education, Health &amp; Human Sciences</td><td>$1.4M+</td><td>500+</td><td>≈ $2,800 avg (est.)</td><td>2024–25</td><td>3% (grad tuition waivers)</td></tr>
-        <tr><td>Engineering</td><td>≈ $500,000</td><td>90+</td><td>—</td><td>not dated</td><td>0%</td></tr>
-        <tr><td>Veterinary Medicine</td><td>$260,000+</td><td>—</td><td>—</td><td>not dated</td><td>No differential tuition</td></tr>
-        <tr><td>Former College of Science</td><td>$211,000+</td><td>—</td><td>—</td><td>Mar 2024</td><td>No differential tuition</td></tr>
-        <tr><td>Arts &amp; Sciences (incl. Caine)</td><td>Not published</td><td>450+</td><td>—</td><td>2026–27</td><td>Caine: none listed</td></tr>
+        <tr><td>Huntsman School of Business</td><td>$4.0M</td><td>—</td><td>$500 to full tuition</td></tr>
+        <tr><td>Quinney Agriculture &amp; Natural Resources</td><td>$1.5M</td><td>900+</td><td>About $1,700</td></tr>
+        <tr><td>Education, Health &amp; Human Sciences</td><td>$1.4M</td><td>500+</td><td>About $2,800</td></tr>
+        <tr><td>Engineering</td><td>$500,000</td><td>90+</td><td>—</td></tr>
+        <tr><td>Veterinary Medicine</td><td>$260,000</td><td>—</td><td>—</td></tr>
+        <tr><td>Arts &amp; Sciences</td><td>Not published</td><td>450+</td><td>—</td></tr>
       </tbody></table></div>
   </details>
-  <h3>How your scholarship interacts with the proposal</h3>
-  <div class="tiles">
-    <div class="card tile"><div class="k">Full-tuition awards</div><div class="v" style="font-size:18px">Mostly protected</div>
-      <div class="s">Presidential, Ambassador and other 100%-of-tuition awards pay whatever tuition is and already cover differential tuition. Fees may not be covered.</div></div>
-    <div class="card tile"><div class="k">Fixed-dollar awards</div><div class="v" style="font-size:18px">Full increase hits you</div>
-      <div class="s">Deans ($7,500/yr), Merit, Scholar, Land Grant, Trustee and most college/donor awards don't grow with tuition.</div></div>
-    <div class="card tile"><div class="k">Utah State Promise</div><div class="v" style="font-size:18px">Possible gain</div>
-      <div class="s">Pays “up to full tuition” but not differential tuition today. If that becomes base tuition, Promise may cover it. Unconfirmed.</div></div>
-    <div class="card tile"><div class="k">College scholarships</div><div class="v" style="font-size:18px">Not funded by the extra charge</div>
-      <div class="s">Huntsman ≈0%, Engineering 0%, CEHHS 3% of differential tuition goes to scholarships; most are donor-funded.</div></div>
-  </div>
-  <div class="card" style="margin-top:12px">
-    <ul class="tight">
-      <li><strong>Hansen Differential Tuition Scholarship</strong> (Huntsman, need-based, up to $1,250/semester) exists to offset differential tuition; its purpose would need redefining.</li>
-      <li><strong>Transition help is undefined</strong>: USU is “exploring scholarship options to help ease the transition,” with no amounts or rules.</li>
-      <li><strong>University-wide (2025–26):</strong> $90M non-federal aid to 14,187 students; $10.7M donor scholarships to 4,835 students. Avg non-need institutional award (full-time UG) $3,403; avg need-based grant $8,637.</li>
-    </ul>
-  </div>
 </section>
 
 <!-- ============ ACTION ============ -->
 <section class="tab" id="action">
-  <div class="eyebrow">07 · Get involved</div>
   <h2>Who decides, and how to weigh in</h2>
   <div class="card">
     <ol class="steps">
@@ -517,7 +470,7 @@
   <h3>Who to contact</h3>
   <p class="note">Only contacts published on official USU, USHE or Utah Legislature pages. Legislators are from the 2026 session.</p>
   <div class="card table-wrap">
-    <table class="wrap">
+    <table class="wrap contacts">
       <thead><tr><th>Who</th><th>Role</th><th>Contact</th></tr></thead>
       <tbody>
         <tr class="group"><td colspan="3">USU administration</td></tr>
@@ -547,7 +500,7 @@
 
   <h3>Email template</h3>
   <p class="note">Edit the [bracketed] parts. Use <a href="#money">Your money</a> for your own dollar figure. A short email with your own situation carries more weight than identical copies.</p>
-  <div class="card">
+  <div class="card panel">
     <label for="emSubj">Subject</label>
     <input id="emSubj" value="Concerns about the proposed tuition model ending the 12–18 credit plateau">
     <label for="emBody">Body</label>
@@ -588,7 +541,6 @@ Sincerely,
 
 <!-- ============ SOURCES ============ -->
 <section class="tab" id="sources">
-  <div class="eyebrow">08 · Methodology</div>
   <h2>Sources &amp; methods</h2>
   <div class="card">
     <h3 style="margin-top:0">Primary sources</h3>
@@ -615,7 +567,7 @@ Sincerely,
 </section>
 </main>
 
-<footer><div class="in"><div><b>USU Tuition Proposal Explained</b>Independent analysis by a USU student using public documents.<br>Not affiliated with or endorsed by Utah State University. Figures may change; see Sources &amp; methods.</div><div>Data: USU Budget Book 2026–27, tuition &amp; fee schedules,<br>Common Data Set 2025–26, USU enrollment dashboard.</div></div></footer>
+<footer><div class="in wrap-w"><div><b>USU Tuition Proposal Explained</b>Independent analysis by a USU student using public documents.<br>Not affiliated with or endorsed by Utah State University. Figures may change; see Sources &amp; methods.</div><div>Data: USU Budget Book 2026–27, tuition &amp; fee schedules,<br>Common Data Set 2025–26, USU enrollment dashboard.</div></div></footer>
 <div id="tip"></div>
 
 <script>
@@ -656,13 +608,13 @@ const EG_BASE = Object.values(COLLEGES).reduce((s, c) => s + (c.total - c.dt), 0
 
 // Majors -> college + differential tuition
 const MAJORS = [
-  { id: "bus", name: "Business", college: "huntsman", rate: 226.92, rateNote: "$226.92/credit on 3000–5000 business courses ($2.25 lower-division)" },
-  { id: "eng", name: "Engineering", college: "eng", rate: 50.32, rateNote: "$50.32/credit on 3000–5000 engineering courses ($2.09 lower-division)" },
-  { id: "laep", name: "Landscape Architecture", college: "qanr", rate: 61.50, rateNote: "$61.50/credit on 3000+ LAEP courses" },
-  { id: "arts", name: "Art, Music, Theatre", college: "artsci", rate: 39.90, rateNote: "$39.90/credit on all Art + Design, Music, Theatre courses" },
-  { id: "edu", name: "Education, Health & Human Sciences", college: "cehhs", rate: 27.24, rateNote: "$27.24/credit on 3000–5000 education courses ($5.46 lower-division)" },
-  { id: "artsciO", name: "Other Arts & Sciences (science, humanities, social sciences)", college: "artsci", rate: 0, rateNote: "No differential tuition" },
-  { id: "qanrO", name: "Other Agriculture & Natural Resources", college: "qanr", rate: 0, rateNote: "No differential tuition" },
+  { id: "bus", name: "Business", college: "huntsman", rate: 226.92, rateNote: "Business adds $226.92 per upper-division credit" },
+  { id: "eng", name: "Engineering", college: "eng", rate: 50.32, rateNote: "Engineering adds $50.32 per upper-division credit" },
+  { id: "laep", name: "Landscape Architecture", college: "qanr", rate: 61.50, rateNote: "Landscape architecture adds $61.50 per upper-division credit" },
+  { id: "arts", name: "Art, Music, Theatre", college: "artsci", rate: 39.90, rateNote: "Art, music and theatre add $39.90 per credit on all their courses" },
+  { id: "edu", name: "Education", college: "cehhs", rate: 27.24, rateNote: "Education adds $27.24 per upper-division credit" },
+  { id: "artsciO", name: "Other Arts & Sciences (science, humanities, social sciences)", college: "artsci", rate: 0, rateNote: "Your major has no extra charge" },
+  { id: "qanrO", name: "Other Agriculture & Natural Resources", college: "qanr", rate: 0, rateNote: "Your major has no extra charge" },
 ];
 
 // What each college's differential tuition pays for
@@ -716,6 +668,8 @@ function showTab() {
 addEventListener("hashchange", showTab);
 showTab();
 addEventListener("load", () => setTimeout(() => window.scrollTo(0, 0), 0));
+const mastEl = document.querySelector(".mast");
+addEventListener("scroll", () => document.body.classList.toggle("scrolled", scrollY > mastEl.offsetHeight - 10), { passive: true });
 
 /* ============ YOUR MONEY ============ */
 $("iMaj").innerHTML = MAJORS.map(m => `<option value="${m.id}">${m.name}</option>`).join("");
@@ -750,9 +704,9 @@ function calcMoney() {
 
   // ---- bill
   let schT = 0, schP = 0; const notes = [];
-  if (sch === "fixed") { schT = schP = Math.max(0, +$("iSchAmt").value || 0); notes.push("Fixed-dollar awards don't grow with tuition, so the full increase reaches you."); }
-  if (sch === "full") notes.push("Full-tuition awards pay whatever tuition is (including differential tuition today), so most of this change is absorbed by the award. The uncovered fee portion can't be calculated because USU hasn't split the new rate into tuition vs. fees.");
-  if (sch === "promise") notes.push("Promise covers up to full tuition but not differential tuition today. If it covers the folded-in amount, the proposal could be neutral or better for you. USU hasn't confirmed this.");
+  if (sch === "fixed") { schT = schP = Math.max(0, +$("iSchAmt").value || 0); notes.push("A fixed award doesn't grow with tuition, so you pay the full increase."); }
+  if (sch === "full") notes.push("A full-tuition award grows with the new price, so it covers most of the change. Some fees may not be covered.");
+  if (sch === "promise") notes.push("Promise doesn't cover extra charges today. If it covers the new price in full, you could come out even or ahead. USU hasn't confirmed this.");
   if (PROPOSED[res][c] === undefined) notes.push(res === "res" ? "Proposed total computed from USU's draft per-credit rates." :
     "Estimated: USU only published nonresident totals for 12 and 15 credits; this uses the same ≈3.17× resident ratio.");
   const covered = sch === "full" || sch === "promise";
@@ -774,25 +728,28 @@ function calcMoney() {
   const col = maj.college, colName = COLLEGES[col].name;
   const sumCols = (eg) => Object.keys(COLLEGES).reduce((s, k) => s + eg["col_" + k], 0);
 
+  const otherFees = FEES.slice(1).reduce((s, f) => s + feeAmt(f), 0);
+  const sumIds = (eg, ids) => ids.reduce((s, id) => s + eg[id], 0);
   const rows = [
-    { label: "Your college's differential-tuition programs", sub: dt ? colName : "You pay none today", t: dt, p: 0,
-      tip: () => dt ? `Today ${money2(dt)} goes straight to ${colName}'s differential-tuition budget. Under the proposal this charge ends; those programs are funded from the shared pool (next row).` : "No differential tuition in your courses today." },
-    { label: "Former college charges, now shared by everyone", sub: "Differential tuition & course fees, all colleges (est.)", t: 0, p: POOLED_SHARE,
-      tip: () => `≈${money(POOLED_SHARE)} per student per semester: USU's $27.3M of separate charges, minus ≈$9M of non-building fees, over 17,743 Logan undergrads.<br>By college (differential-tuition share): ` +
+    { label: "Your college's extra charge", sub: dt || cf ? "Plus any course fees" : "None today", t: dt + cf, p: 0,
+      tip: () => dt ? `Today ${money2(dt)} goes straight to ${colName}${cf ? `, plus ${money(cf)} in course fees` : ""}. Under the proposal this charge ends.` : "You pay no extra charge today." },
+    { label: "Shared pool for all colleges' extra charges", sub: "Replaces extra charges and course fees", t: 0, p: POOLED_SHARE,
+      tip: () => `About ${money(POOLED_SHARE)} per student per semester, split across colleges: ` +
         Object.values(COLLEGES).filter(c => c.dt).map(c => `${c.name.split(" ")[0]} ${money(POOLED_SHARE * c.dt / DT_TOTAL)}`).join(", ") },
-    { label: "Course & lab fees", sub: cf ? "Paid per course today" : "None entered", t: cf, p: 0, tip: () => "Folded into the shared pool under the proposal." },
-    { label: "Academic colleges (instruction)", sub: "All colleges + libraries, from general tuition", t: sumCols(egT), p: sumCols(egP),
+    { label: "Teaching", sub: "Colleges and libraries", t: sumCols(egT), p: sumCols(egP),
       tip: () => Object.entries(COLLEGES).map(([k, c]) => `${c.name}: ${money(egT["col_" + k])} → ${money(egP["col_" + k])}`).join("<br>") },
-    ...EG_OTHER.map(x => ({ label: x.label, sub: x.sub, t: egT[x.id], p: egP[x.id], tip: () => `${(x.v / EG_BASE * 100).toFixed(1)}% of the general budget (${short(x.v)}).` })),
-    { label: "Building fee", sub: "Building bonds & construction", t: feeAmt(FEES[0]), p: BUILDING_NEW, tip: () => `Today 35.89% of mandatory fees (${money2(feeAmt(FEES[0]))}); proposed $193 flat for 12+ credits.` },
-    { label: "Athletics fee", sub: "Mandatory fee", t: feeAmt(FEES[1]), p: feeAmt(FEES[1]), tip: () => "Assumed to keep today's funding when folded into tuition." },
-    { label: "Rec, shuttle, activities, music & theatre, SNAC", sub: "Mandatory fees", t: FEES.slice(2).reduce((s, f) => s + feeAmt(f), 0), p: FEES.slice(2).reduce((s, f) => s + feeAmt(f), 0),
-      tip: () => FEES.slice(2).map(f => `${f.label}: ${money2(feeAmt(f))}`).join("<br>") + "<br>Assumed to keep today's funding." },
+    { label: "Employee benefits", sub: "Health insurance and retirement", t: egT.benefits, p: egP.benefits, tip: () => "USU pays benefits for all employees from one central pool." },
+    { label: "Administration and reserves", sub: "Leadership, finance, central funds", t: sumIds(egT, ["admin", "central", "research"]), p: sumIds(egP, ["admin", "central", "research"]),
+      tip: () => "President, provost, finance, marketing, advancement, research office, and central reserves and initiatives." },
+    { label: "Statewide campuses", sub: "USU's other campuses", t: egT.statewide, p: egP.statewide, tip: () => "Operating costs of USU's campuses outside Logan." },
+    { label: "Buildings", sub: "Maintenance and building fee", t: egT.facilities + feeAmt(FEES[0]), p: egP.facilities + BUILDING_NEW,
+      tip: () => `Maintenance and utilities, plus the building fee (${money2(feeAmt(FEES[0]))} today, $193 proposed).` },
+    { label: "Student services", sub: "Advising, athletics, recreation, shuttle", t: sumIds(egT, ["success", "athleticsEG"]) + otherFees, p: sumIds(egP, ["success", "athleticsEG"]) + otherFees,
+      tip: () => "Advising and student success, athletics, campus recreation, activities, the Aggie Shuttle, music and theatre. Fee-funded services are assumed to keep today's funding." },
   ].filter(r => r.t > 0.5 || r.p > 0.5);
 
   const max = Math.max(...rows.flatMap(r => [r.t, r.p]));
-  $("flow").innerHTML = `<div class="note" style="margin-bottom:6px">Your bill before scholarships: <strong>${money(tTot)}</strong> today → <strong>${money(P)}</strong> proposed</div>` +
-    rows.map((r, i) => {
+  $("flow").innerHTML = rows.map((r, i) => {
       const dd = r.p - r.t;
       return `<div class="flow-row" data-i="${i}"><div class="lab">${r.label}<small>${r.sub}</small></div>
         <div class="pair">
@@ -806,14 +763,12 @@ function calcMoney() {
   // own college callout
   const ownT = egT["col_" + col] + dt;
   const ownP = egP["col_" + col] + POOLED_SHARE * COLLEGES[col].dt / DT_TOTAL;
-  $("ownCollege").innerHTML = `<strong>Money reaching your own college (${colName}):</strong> about <strong>${money(ownT)}</strong> today → <strong>${money(ownP)}</strong> under the proposal.
-    ${dt > ownP - egP["col_" + col] ? `Today your differential tuition (${money(dt)}) funds your college directly; under the proposal those programs are paid by every Logan student through the shared pool.` :
-      `Under the proposal you help fund other colleges' former differential-tuition programs through the shared pool (≈${money(POOLED_SHARE)}).`}
-    <span class="note">Your college's total budget doesn't shrink: USU says colleges keep current funding. What changes is who pays for it.</span>`;
+  $("ownCollege").innerHTML = `<strong>Your college.</strong> About <strong>${money(ownT)}</strong> of your bill reaches ${colName} today, and about <strong>${money(ownP)}</strong> would under the proposal.
+    Your college's total budget stays the same either way. What changes is who pays for it.`;
 
   // DT uses
   const u = DT_USES[col];
-  $("dtUses").innerHTML = (u && COLLEGES[col].dt) ? `<p class="note">${colName} · source: ${u.src}${maj.rate ? "" : " (your major's courses don't carry it)"}</p>
+  $("dtUses").innerHTML = (u && COLLEGES[col].dt) ? `<p class="note">${colName}. Source: ${u.src}.</p>
     <div class="table-wrap"><table><tbody>${u.items.map(([k, v]) => `<tr><td>${k}</td><td>${u.pct ? v + "%" : money(v)}</td>
       ${dt ? `<td class="note">your ≈${money(dt * (u.pct ? v / 100 : v / u.items.reduce((s, x) => s + x[1], 0)))}</td>` : "<td></td>"}</tr>`).join("")}</tbody></table></div>` :
     `<p class="note">${colName}: no differential-tuition programs.</p>`;
@@ -832,7 +787,7 @@ function drawMajors() {
   const max = Math.max(...rows.map(r => Math.abs(r.d)), 1) * 1.4;
   $("majBars").innerHTML = rows.map((r, i) => {
     const w = Math.abs(r.d) / max * 50, pos = r.d >= 0;
-    return `<div class="bar-row" data-i="${i}"><div class="bar-label">${r.name}<small>${r.college ? COLLEGES[r.college].name : "No differential tuition"}</small></div>
+    return `<div class="bar-row" data-i="${i}"><div class="bar-label">${r.name}${r.college ? (COLLEGES[r.college].name !== r.name ? `<small>${COLLEGES[r.college].name}</small>` : "") : "<small>No extra charge</small>"}</div>
       <div class="track"><div class="bar" style="top:14px;${pos ? `left:50%;background:var(--cost)` : `right:50%;background:var(--save);border-radius:4px 0 0 4px`};width:${w}%"></div>
       <div class="bar-val" style="top:11px;${pos ? `left:calc(50% + ${w}% + 6px)` : `right:calc(50% + ${w}% + 6px)`}">${signed(r.d)}</div></div></div>`;
   }).join("");
@@ -841,7 +796,7 @@ function drawMajors() {
       (r.rate ? `<br><span class="note">${r.need <= c ? "Breaks even at " + r.need + " credits" : "Can't break even at " + c + " credits"}</span>` : "")); });
   $("majTable").innerHTML = rows.map(r => `<tr><td>${r.name}</td><td>${r.rate ? money2(r.rate) : "—"}</td><td>${money(r.t)}</td><td>${money(P)}</td>
     <td><span class="${r.d >= 0 ? "cost" : "save"}">${signed(r.d)}</span></td><td>${r.rate ? (r.need <= c ? r.need + " cr" : "never") : "—"}</td></tr>`).join("");
-  $("majNote").textContent = `Assumes ${c} total credits with ${x} in your major's upper-division courses (Caine: any of its courses). Freshmen taking mostly lower-division courses pay almost no differential tuition now ($2–5/credit), so they look like “Most other majors.” Course fees not included. Hover a bar for the math.`;
+  $("majNote").textContent = `${c} credits, ${x} of them upper-division courses in your major. Freshmen pay almost no extra charge today, so they look like “Most other majors.” Hover a bar for the math.`;
 }
 ["mRes", "mCr", "mDt"].forEach(id => $(id).addEventListener("input", drawMajors));
 drawMajors();
@@ -856,7 +811,7 @@ drawMajors();
     const pr = 1.1 * ug(c) + b, pn = NONRES_RATIO * 1.1 * ug(c) + b;
     const dr = pr - GT.res[c], dn = pn - GT.non[c];
     const cell = d => `<td><span class="${d > 0 ? "cost" : "save"}">${signed(d)}</span></td>`;
-    return `<tr><td>${c}${c < 12 ? " <span class='note'>(+ unstated building fee)</span>" : ""}</td><td>${money(GT.res[c])}</td><td>≈ ${money(pr)}</td>${cell(dr)}<td>${money(GT.non[c])}</td><td>≈ ${money(pn)}</td>${cell(dn)}</tr>`;
+    return `<tr><td>${c}</td><td>${money(GT.res[c])}</td><td>≈ ${money(pr)}</td>${cell(dr)}<td>${money(GT.non[c])}</td><td>≈ ${money(pn)}</td>${cell(dn)}</tr>`;
   }).join("");
 })();
 
@@ -874,14 +829,10 @@ drawMajors();
   $("budBars").querySelectorAll(".bar-row").forEach(el => { const b = COLLEGES[el.dataset.k];
     hoverTip(el, () => `<strong>${b.name}</strong><br>Budget ${money(b.total)}<br>Differential tuition ${money(b.dt)} (${(b.dt / b.total * 100).toFixed(1)}%)<br>Employee FTE ${b.fte}` +
       (b.students ? `<br>${b.students.toLocaleString()} students (fall 2026) · ≈ ${money(b.total / b.students)} per student` : "")); });
-  $("budTable").innerHTML = Object.entries(COLLEGES).map(([k, b]) => `<tr><td>${b.name}</td><td>${money(b.total)}</td><td>${b.fte}</td>
-    <td>${b.dt ? money(b.dt) : "—"}</td><td>${b.dt ? (b.dt / b.total * 100).toFixed(1) + "%" : "—"}</td>
-    <td>${rate[k] == null ? "—" : "$" + (typeof rate[k] === "number" ? rate[k].toFixed(2) : rate[k])}</td>
-    <td>${b.students ? b.students.toLocaleString() + `<br><span class="note">${b.prev > b.students ? "▼" : "▲"} from ${b.prev.toLocaleString()}</span>` : "—"}</td>
-    <td>${b.students ? "≈ " + money(b.total / b.students) : "—"}${b.students && b.dt ? `<br><span class="note">DT ≈ ${money(b.dt / b.students)}</span>` : ""}</td></tr>`).join("") +
-    `<tr><td>Veterinary Medicine <span class="note">(separate state line item)</span></td><td>${money(23488500)}</td><td>71.1</td><td>—</td><td>—</td><td>—</td><td>144<br><span class="note">▲ from 83</span></td><td>≈ ${money(23488500 / 144)}</td></tr>
-     <tr><td>General University <span class="note">(undeclared, non-degree, concurrent enrollment)</span></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>11,679<br><span class="note">▲ from 8,841</span></td><td>—</td></tr>
-     <tr><td><strong>All colleges</strong></td><td><strong>${money(list.reduce((s, b) => s + b.total, 0))}</strong></td><td>1,421.6</td><td>${money(DT_TOTAL)}</td><td>${(DT_TOTAL / 163428694 * 100).toFixed(1)}%</td><td></td><td>32,286</td><td></td></tr>`;
+  $("budTable").innerHTML = Object.entries(COLLEGES).filter(([k]) => k !== "lib").map(([k, b]) => `<tr><td>${b.name}</td><td>${short(b.total)}</td>
+    <td>${b.dt ? short(b.dt) : "—"}</td><td>${b.dt ? Math.round(b.dt / b.total * 100) + "%" : "—"}</td>
+    <td>${b.students.toLocaleString()}</td><td>${money(b.total / b.students)}</td></tr>`).join("") +
+    `<tr><td><strong>All colleges and libraries</strong></td><td><strong>${short(list.reduce((s, b) => s + b.total, 0))}</strong></td><td><strong>${short(DT_TOTAL)}</strong></td><td><strong>${Math.round(DT_TOTAL / 163428694 * 100)}%</strong></td><td></td><td></td></tr>`;
 
   const eg = [{ label: "Colleges & libraries", v: 163428694 }, ...EG_OTHER.map(x => ({ label: x.label, v: x.v }))].sort((a, b) => b.v - a.v);
   const m2 = eg[0].v * 1.18;
@@ -903,7 +854,7 @@ drawMajors();
 (function () {
   const stu = 1 - 0.74 * 0.72, aid = 0.74 * 0.72; // Huntsman FY25
   const hsbDt = COLLEGES.huntsman.dt;
-  $("whoPaysHsb").innerHTML = `<div class="bar-row" style="border-top:0"><div class="bar-label">Huntsman differential tuition<small>${short(hsbDt)} budgeted, 2026–27</small></div>
+  $("whoPaysHsb").innerHTML = `<div class="bar-row" style="border-top:0"><div class="bar-label">Business school<small>${short(hsbDt)} in extra charges</small></div>
     <div class="track"><div class="bar" style="top:10px;height:22px;left:0;width:${stu * 100}%;background:var(--cost);border-radius:4px 0 0 4px"></div>
       <div class="bar" style="top:10px;height:22px;left:calc(${stu * 100}% + 2px);width:calc(${aid * 100}% - 2px);background:var(--save)"></div>
       <div class="bar-val" style="top:12px;left:8px;color:#fff">${Math.round(stu * 100)}% ≈ ${short(hsbDt * stu)}</div>
@@ -955,7 +906,7 @@ drawMajors();
     const max = Math.max(...rows.flatMap(r => [r[key[0]], r[key[1]]]));
     $("npBars").innerHTML = rows.map((r, i) => {
       const t = r[key[0]], p = r[key[1]], d = p - t;
-      return `<div class="flow-row" data-i="${i}"><div class="lab">${r.name}<small>${r.students.toLocaleString()} students · ${r.dtPer >= 1 ? money(r.dtPer) + "/yr avg differential tuition" : "no differential tuition"}</small></div>
+      return `<div class="flow-row" data-i="${i}"><div class="lab">${r.name}<small>${r.students.toLocaleString()} students</small></div>
         <div class="pair"><div class="ln"><div class="b" style="width:${t / max * 85}%;background:var(--today)"></div>${money(t)}</div>
           <div class="ln"><div class="b" style="width:${p / max * 85}%;background:var(--accent)"></div>${money(p)}</div></div>
         <div class="d"><span class="${d > 0 ? "cost" : "save"}">${signed(d)}</span></div></div>`;
@@ -963,9 +914,10 @@ drawMajors();
     $("npBars").querySelectorAll(".flow-row").forEach(el => { const r = rows[+el.dataset.i];
       hoverTip(el, () => `<strong>${r.name}</strong><br>Today: ${money(r.sT)} sticker − ${money(r.aidT)} aid = <strong>${money(r.nT)}</strong><br>Proposed: ${money(r.sP)} sticker − ${money(r.aidP)} aid = <strong>${money(r.nP)}</strong>` +
         `<br><span class="note">College scholarships ≈ ${money(r.sch / r.students)}/student${r.schNote ? " (" + r.schNote + ")" : ""}</span>`); });
-    $("npTable").innerHTML = rows.map(r => `<tr><td>${r.name}</td><td>${r.students.toLocaleString()}</td><td>${r.dtPer >= 1 ? money(r.dtPer) : "—"}</td>
-      <td>${money(r.sT)}</td><td>−${money(r.aidT)}</td><td><strong>${money(r.nT)}</strong></td><td>${money(r.sP)}</td><td>−${money(r.aidP)}</td><td><strong>${money(r.nP)}</strong></td>
-      <td><span class="${r.nP - r.nT > 0 ? "cost" : "save"}">${signed(r.nP - r.nT)}</span></td></tr>`).join("");
+    $("npTable").innerHTML = rows.map(r => `<tr><td>${r.name}</td><td>${r.students.toLocaleString()}</td>
+      <td>${money(r.nT)}</td><td>${money(r.nP)}</td><td><span class="${r.nP - r.nT > 0 ? "cost" : "save"}">${signed(r.nP - r.nT)}</span></td></tr>`).join("");
+    $("npTableFull").innerHTML = rows.map(r => `<tr><td>${r.name}</td><td>${r.dtPer >= 1 ? money(r.dtPer) : "—"}</td>
+      <td>${money(r.sT)}</td><td>−${money(r.aidT)}</td><td>${money(r.sP)}</td><td>−${money(r.aidP)}</td></tr>`).join("");
   }
   ["npMix", "npView"].forEach(id => $(id).addEventListener("input", draw));
   draw();
