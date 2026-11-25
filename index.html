@@ -282,6 +282,25 @@
   ol.precedents { list-style: none; padding: 0; margin: 12px 0 0; max-width: 78ch; }
   ol.precedents li { padding: 14px 0; border-top: 1px solid var(--rule); line-height: 1.6; }
   ol.precedents li strong.school { display: block; font: 600 18px/1.4 var(--serif); color: var(--navy); margin-bottom: 4px; }
+  ol.short-reasons { list-style: none; counter-reset: s; padding: 0; margin: 24px 0 0; max-width: 78ch; }
+  ol.short-reasons li { counter-increment: s; position: relative; padding: 12px 0 12px 44px; border-top: 1px solid var(--rule); line-height: 1.55; }
+  ol.short-reasons li::before { content: counter(s); position: absolute; left: 0; top: 10px; font: 600 22px var(--serif); color: var(--amber); }
+  ol.short-reasons li strong { font: 600 18px/1.4 var(--serif); color: var(--navy); }
+  .more-link { margin: 14px 0 0; font-weight: 600; } .more-link a { text-decoration: none; } .more-link a:hover { text-decoration: underline; }
+  #whopays ol.reasons { margin-top: 8px; }
+  details.contact-group { margin-top: 10px; padding: 12px 0; }
+  details.contact-group summary { font-size: 17px; }
+  .ba-list { display: grid; grid-template-columns: 1fr 1fr; max-width: 860px; margin-top: 6px; border-top: 2px solid var(--navy); }
+  .ba-list > div { padding: 11px 24px 11px 0; border-bottom: 1px solid var(--rule); line-height: 1.5; }
+  .ba-list > div:nth-child(even) { padding-left: 24px; border-left: 1px solid var(--rule2); color: var(--ink); font-weight: 500; }
+  .ba-list .ba-h { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); padding-top: 10px; padding-bottom: 8px; }
+  @media (max-width: 600px) {
+    .ba-list { grid-template-columns: 1fr; }
+    .ba-list .ba-h { display: none; }
+    .ba-list > div { padding: 3px 0 !important; border: 0 !important; }
+    .ba-list > div:nth-child(odd) { padding-top: 12px !important; border-top: 1px solid var(--rule) !important; }
+    .ba-list > div::before { content: attr(data-l); display: block; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--faint); }
+  }
   .callout { border-left: 3px solid var(--navy); background: var(--parch); padding: 16px 20px; margin: 32px 0; font-size: 16px; line-height: 1.65; }
   .callout > strong:first-child { font-family: var(--serif); font-size: 18px; color: var(--navy); }
   .warn { border-left: 3px solid var(--amber); background: var(--parch); padding: 14px 18px; margin-top: 24px; font-size: 15px; }
@@ -309,6 +328,7 @@
 <header class="top"><div class="navbar wrap-w">
   <nav class="tabs" role="tablist">
       <a href="#overview" role="tab">Overview</a>
+      <a href="#whopays" role="tab">Who pays</a>
       <a href="#factcheck" role="tab">Fact check</a>
       <span class="grp" aria-hidden="true"></span>
       <a href="#money" role="tab">Your bill</a>
@@ -353,6 +373,24 @@
     <div class="card tile"><div class="k">Logan resident, 18 credits</div><div class="v">+$1,453</div><div class="s">per semester, from USU's draft rates</div></div>
   </div>
 
+  <ol class="short-reasons">
+    <li><strong>Some programs cost more, and today the students in them pay for it.</strong> The business school relies on its extra charge far more than any other college.</li>
+    <li><strong>The proposal moves that cost onto the majority.</strong> Most students would help pay for programs they don't take.</li>
+    <li><strong>Students with the least room in their budget get no cushion.</strong> Pell grants and fixed scholarships don't grow with tuition.</li>
+    <li><strong>Finishing on time gets more expensive.</strong> Utah expects 15 credits a semester, and those credits would now cost more.</li>
+  </ol>
+  <p class="more-link"><a href="#whopays">See the evidence for each point →</a></p>
+
+  <div class="callout"><strong>What happens next.</strong> Student information sessions are Jan. 12–13. The Truth-in-Tuition hearing is in early March,
+    and the Utah Board of Higher Education decides in late March. <a href="#action">How to weigh in</a></div>
+</section>
+
+<!-- ============ WHO PAYS ============ -->
+<section class="tab" id="whopays">
+  <h2>Who pays</h2>
+  <p class="lede">The evidence behind each point on the Overview, with links to the official documents.</p>
+
+
   <ol class="reasons">
     <li><strong>Some programs cost more, and today the students in them pay for it.</strong>
       The business school's extra charge, $226.92 per upper-division credit, funds about half its budget. No other college relies on its charge for more than 8%
@@ -364,10 +402,14 @@
       Pell grants and fixed-amount scholarships don't grow with tuition. 6,025 full-time undergraduates relied on need-based grants in 2024–25
       (<a href="https://www.usu.edu/oda/files/common-data-sets/CDS2025-26.pdf">Common Data Set</a>). USU's promised transition scholarships have no amounts or rules yet.</li>
     <li><strong>Finishing on time gets more expensive.</strong>
-      Utah law caps most bachelor's degrees at 120 credits, 15 a semester for four years, and pushes for faster degrees
-      (<a href="https://le.utah.gov/Session/2025/bills/enrolled/HB0265.pdf">H.B. 265, 2025</a>). Credits 13–18 are free today; under the draft, 15 credits cost $875 more and 18 credits $1,453 more per semester.
-      Today a Logan resident saves about $9,065 by finishing in four years at 15 credits instead of five years at 12. Under the proposal, that saving shrinks to about $3,204.</li>
+      Utah law caps most bachelor's degrees at 120 credits, or 15 a semester for four years (<a href="https://le.utah.gov/Session/2025/bills/enrolled/HB0265.pdf">H.B. 265, 2025</a>). Credits 13–18 are free today but would cost extra under the draft, so finishing on time saves far less (see the table below).</li>
   </ol>
+
+  <h3>How much each college depends on its extra charges</h3>
+  <div id="relyChart"></div>
+  <p class="note">Share of each college's 2026–27 budget that comes from its extra per-credit charges, including graduate charges (<a href="https://www.usu.edu/budget/budgetbook">USU budget book</a>). Graduate charges stay separate under the proposal. For business, USU says $10.8 million in undergraduate charges would keep going to the school but come from every student's tuition (<a href="https://www.usu.edu/president/tuition-model/">USU</a>).</p>
+
+  <h3>Finishing in four years vs. five</h3>
   <div class="table-wrap" style="margin-top:8px;max-width:760px">
     <table>
       <thead><tr><th>Path to a 120-credit degree</th><th>Today</th><th>Proposed</th></tr></thead>
@@ -393,35 +435,8 @@
   </ol>
   <p class="note">IUP's experience shows per-credit pricing can be reversed. Missouri's shows a university can make costs clearer and still keep a flat price for full-time loads.</p>
 
-  <h3>How much each college depends on its extra charges</h3>
-  <div id="relyChart"></div>
-  <p class="note">Share of each college's 2026–27 budget that comes from its extra per-credit charges, including graduate charges (<a href="https://www.usu.edu/budget/budgetbook">USU budget book</a>). Graduate charges stay separate under the proposal. For business, USU says $10.8 million in undergraduate charges would keep going to the school but come from every student's tuition (<a href="https://www.usu.edu/president/tuition-model/">USU</a>).</p>
-
   <p class="usu-view"><strong>USU's view:</strong> one price is more transparent. In its words, “Students already help pay for each other's programs through tuition.
     One rate makes that consistent and transparent.” (<a href="https://www.usu.edu/president/tuition-model/">USU President's Office</a>)</p>
-
-  <details class="card">
-    <summary>Full side-by-side comparison</summary>
-  <div class="table-wrap" style="margin-top:12px">
-    <table class="wrap cmp" style="margin-top:0">
-      <thead><tr><th></th><th>Today</th><th>Proposed</th></tr></thead>
-      <tbody>
-        <tr><td>How full-time tuition is set</td><td>One flat price for 12–18 credits ($4,532)</td><td>A base charge plus a price per credit ($4,646 at 12 credits, $5,985 at 18)</td></tr>
-        <tr><td>Credits 13–18</td><td>Free</td><td>About $254 each for credits 13–15, $192 each above 15</td></tr>
-        <tr><td>Extra charges on some courses</td><td>Per credit: business $226.92, landscape architecture $61.50, engineering $50.32, art, music and theatre $39.90, education $27.24</td><td>None</td></tr>
-        <tr><td>Course and online fees</td><td>Charged per course</td><td>Included in tuition</td></tr>
-        <tr><td>Mandatory student fees</td><td>$396.55, charged separately</td><td>Mostly included; a $193 building fee stays separate</td></tr>
-        <tr><td>Knowing your cost in advance</td><td>Depends on your major and courses</td><td>Same price for every major</td></tr>
-        <tr><td>Who pays for higher-cost programs</td><td>Mostly the students in them</td><td>All students, through one rate</td></tr>
-        <tr><td>Statewide campuses (under 65 credits)</td><td>Two resident rates: $2,524 or $4,085</td><td>One rate: $2,976 at 15 credits</td></tr>
-        <tr><td>Total USU collects</td><td colspan="2">About the same, plus a $750,000 contingency</td></tr>
-      </tbody>
-    </table>
-  </div>
-  </details>
-
-  <div class="callout"><strong>What happens next.</strong> Student information sessions are Jan. 12–13. The Truth-in-Tuition hearing is in early March,
-    and the Utah Board of Higher Education decides in late March. <a href="#action">How to weigh in</a></div>
 </section>
 
 <!-- ============ FACT CHECK ============ -->
@@ -606,7 +621,9 @@
   <div id="aidBars"></div>
   <p class="note">All USU undergraduates, 2024–25. Students borrowed more in loans than they received in all grants and scholarships combined.</p>
 
-  <h3>Scholarships each college gives</h3>
+  <details class="card">
+    <summary>Scholarships each college gives</summary>
+
   <blockquote class="src"><p>“…scholarships are generally funded by donors rather than differential tuition.”</p><cite><a href="https://huntsman.usu.edu/files/minutes-nov-5-2026.pdf">Huntsman Differential Tuition Advisory Board minutes, Nov. 5, 2026</a></cite></blockquote>
 
   <div id="schBars"></div>
@@ -622,6 +639,7 @@
         <tr><td>Arts &amp; Sciences</td><td>Not published*</td><td>450+</td><td>—</td></tr>
       </tbody></table></div>
     <p class="note">*Only the former College of Science, now part of Arts &amp; Sciences, published a total: $211,000 in 2024.</p>
+  </details>
   </details>
 </section>
 
@@ -643,37 +661,6 @@
     </ol>
   <blockquote class="src"><p>“State law requires a public hearing whenever an institution considers increasing undergraduate tuition, so students and the public can comment before a decision is made.”</p><cite><a href="https://www.usu.edu/president/tuition-model/">USU President's Office, Approval Process</a></cite></blockquote>
     <p class="note">Precedent: for 2026–27 USU asked for 3.97% and the Board approved 3.22%. The Board does change USU's numbers.</p>
-  </div>
-
-  <h3>Who to contact</h3>
-  <p class="note">Only contacts published on official USU, USHE or Utah Legislature pages. Legislators are from the 2026 session.</p>
-  <div class="card table-wrap">
-    <table class="wrap contacts">
-      <thead><tr><th>Who</th><th>Role</th><th>Contact</th></tr></thead>
-      <tbody>
-        <tr class="group"><td colspan="3">USU administration</td></tr>
-        <tr><td>Brad L. Mortensen</td><td>USU President; proposal comes from his office</td><td><a href="mailto:brad.mortensen@usu.edu">brad.mortensen@usu.edu</a></td></tr>
-        <tr><td>Jessica Oyler</td><td>VP / Chief of Staff</td><td><a href="mailto:jessica.oyler@usu.edu">jessica.oyler@usu.edu</a></td></tr>
-        <tr><td>Chris Corcoran</td><td>Provost &amp; Executive VP</td><td>USU directory</td></tr>
-        <tr><td>David T. Cowley</td><td>VP, Finance &amp; Administrative Services</td><td>435-797-1146</td></tr>
-        <tr><td>Whitney Pugh</td><td>Executive Director, Budget &amp; Planning</td><td>435-797-1174</td></tr>
-        <tr class="group"><td colspan="3">USU Board of Trustees</td></tr>
-        <tr><td>Janalyn Brown</td><td>Secretary to the Board; ask her to share your email with the trustees</td><td><a href="mailto:janalyn.brown@usu.edu">janalyn.brown@usu.edu</a></td></tr>
-        <tr><td>Tessa White / Gina Gagon</td><td>Chair / Vice Chair</td><td>Via board secretary; (435) 797-7172</td></tr>
-        <tr><td>Max Alder</td><td>USUSA President, voting trustee</td><td>No published email</td></tr>
-        <tr class="group"><td colspan="3">Student government (USUSA)</td></tr>
-        <tr><td>J.J. Watts</td><td>Executive VP, chair of the Student Fee Board</td><td><a href="mailto:executivevp.ususa@usu.edu">executivevp.ususa@usu.edu</a> <span class="note">(also listed as execvp.ususa@usu.edu)</span></td></tr>
-        <tr><td>Kylie Back</td><td>Logan VP</td><td><a href="mailto:loganvp.ususa@usu.edu">loganvp.ususa@usu.edu</a></td></tr>
-        <tr><td>College senators</td><td>Your college's student senator</td><td>for example <a href="mailto:engrsenator.ususa@usu.edu">engrsenator.ususa@usu.edu</a>, <a href="mailto:huntsmansenator.ususa@usu.edu">huntsmansenator.ususa@usu.edu</a></td></tr>
-        <tr class="group"><td colspan="3">State</td></tr>
-        <tr><td>Amanda Covington</td><td>Chair, Utah Board of Higher Education</td><td>801-646-4784 · <a href="https://ushe.edu/report-a-concern/">Report a concern</a></td></tr>
-        <tr><td>Sen. Chris H. Wilson</td><td>Logan (SD 2); Senate Education + Higher Ed Appropriations</td><td><a href="https://le.utah.gov/asp/roster/leglookup.asp?house=S&amp;leg=Wilson,_C.">le.utah.gov</a></td></tr>
-        <tr><td>Sen. Ann Millner / Rep. Karen M. Peterson</td><td>Chairs, Higher Ed Appropriations Subcommittee</td><td><a href="https://le.utah.gov/committee/committee.jsp?com=APPHED">le.utah.gov</a></td></tr>
-        <tr><td>Your legislators</td><td>Find yours by address</td><td><a href="https://le.utah.gov/GIS/findDistrict.jsp">le.utah.gov/GIS/findDistrict.jsp</a></td></tr>
-        <tr class="group"><td colspan="3">Press</td></tr>
-        <tr><td>The Utah Statesman</td><td>Student newspaper</td><td><a href="https://usustatesman.com">usustatesman.com</a></td></tr>
-      </tbody>
-    </table>
   </div>
 
   <h3>Email template</h3>
@@ -718,6 +705,61 @@ Sincerely,
     </div>
     <p class="note">“Open in my email app” addresses the President and CCs the board secretary, the USUSA executive VP and the chief of staff. Nothing sends until you press send.</p>
   </div>
+
+  <h3>Who to contact</h3>
+  <p class="note">Only contacts published on official USU, USHE or Utah Legislature pages. Legislators are from the 2026 session.</p>
+  <details class="card contact-group" open>
+    <summary>USU administration</summary>
+    <div class="table-wrap"><table class="wrap contacts">
+      <thead><tr><th>Who</th><th>Role</th><th>Contact</th></tr></thead>
+      <tbody>
+        <tr><td>Brad L. Mortensen</td><td>USU President; proposal comes from his office</td><td><a href="mailto:brad.mortensen@usu.edu">brad.mortensen@usu.edu</a></td></tr>
+        <tr><td>Jessica Oyler</td><td>VP / Chief of Staff</td><td><a href="mailto:jessica.oyler@usu.edu">jessica.oyler@usu.edu</a></td></tr>
+        <tr><td>Chris Corcoran</td><td>Provost &amp; Executive VP</td><td>USU directory</td></tr>
+        <tr><td>David T. Cowley</td><td>VP, Finance &amp; Administrative Services</td><td>435-797-1146</td></tr>
+        <tr><td>Whitney Pugh</td><td>Executive Director, Budget &amp; Planning</td><td>435-797-1174</td></tr>
+      </tbody></table></div>
+  </details>
+  <details class="card contact-group">
+    <summary>USU Board of Trustees</summary>
+    <div class="table-wrap"><table class="wrap contacts">
+      <thead><tr><th>Who</th><th>Role</th><th>Contact</th></tr></thead>
+      <tbody>
+        <tr><td>Janalyn Brown</td><td>Secretary to the Board; ask her to share your email with the trustees</td><td><a href="mailto:janalyn.brown@usu.edu">janalyn.brown@usu.edu</a></td></tr>
+        <tr><td>Tessa White / Gina Gagon</td><td>Chair / Vice Chair</td><td>Via board secretary; (435) 797-7172</td></tr>
+        <tr><td>Max Alder</td><td>USUSA President, voting trustee</td><td>No published email</td></tr>
+      </tbody></table></div>
+  </details>
+  <details class="card contact-group">
+    <summary>Student government (USUSA)</summary>
+    <div class="table-wrap"><table class="wrap contacts">
+      <thead><tr><th>Who</th><th>Role</th><th>Contact</th></tr></thead>
+      <tbody>
+        <tr><td>J.J. Watts</td><td>Executive VP, chair of the Student Fee Board</td><td><a href="mailto:executivevp.ususa@usu.edu">executivevp.ususa@usu.edu</a> <span class="note">(also listed as execvp.ususa@usu.edu)</span></td></tr>
+        <tr><td>Kylie Back</td><td>Logan VP</td><td><a href="mailto:loganvp.ususa@usu.edu">loganvp.ususa@usu.edu</a></td></tr>
+        <tr><td>College senators</td><td>Your college's student senator</td><td>for example <a href="mailto:engrsenator.ususa@usu.edu">engrsenator.ususa@usu.edu</a>, <a href="mailto:huntsmansenator.ususa@usu.edu">huntsmansenator.ususa@usu.edu</a></td></tr>
+      </tbody></table></div>
+  </details>
+  <details class="card contact-group">
+    <summary>State</summary>
+    <div class="table-wrap"><table class="wrap contacts">
+      <thead><tr><th>Who</th><th>Role</th><th>Contact</th></tr></thead>
+      <tbody>
+        <tr><td>Amanda Covington</td><td>Chair, Utah Board of Higher Education</td><td>801-646-4784 · <a href="https://ushe.edu/report-a-concern/">Report a concern</a></td></tr>
+        <tr><td>Sen. Chris H. Wilson</td><td>Logan (SD 2); Senate Education + Higher Ed Appropriations</td><td><a href="https://le.utah.gov/asp/roster/leglookup.asp?house=S&amp;leg=Wilson,_C.">le.utah.gov</a></td></tr>
+        <tr><td>Sen. Ann Millner / Rep. Karen M. Peterson</td><td>Chairs, Higher Ed Appropriations Subcommittee</td><td><a href="https://le.utah.gov/committee/committee.jsp?com=APPHED">le.utah.gov</a></td></tr>
+        <tr><td>Your legislators</td><td>Find yours by address</td><td><a href="https://le.utah.gov/GIS/findDistrict.jsp">le.utah.gov/GIS/findDistrict.jsp</a></td></tr>
+      </tbody></table></div>
+  </details>
+  <details class="card contact-group">
+    <summary>Press</summary>
+    <div class="table-wrap"><table class="wrap contacts">
+      <thead><tr><th>Who</th><th>Role</th><th>Contact</th></tr></thead>
+      <tbody>
+        <tr><td>The Utah Statesman</td><td>Student newspaper</td><td><a href="https://usustatesman.com">usustatesman.com</a></td></tr>
+      </tbody></table></div>
+  </details>
+
 </section>
 
 <!-- ============ SOURCES ============ -->
