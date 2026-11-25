@@ -279,6 +279,9 @@
   .sentence select { max-width: 100%; }
   .sentence-form .note { margin-top: 4px; }
   @media (max-width: 760px) { .sentence, .sentence select, .sentence input { font-size: 19px; } .sentence { line-height: 2.1; } }
+  ol.precedents { list-style: none; padding: 0; margin: 12px 0 0; max-width: 78ch; }
+  ol.precedents li { padding: 14px 0; border-top: 1px solid var(--rule); line-height: 1.6; }
+  ol.precedents li strong.school { display: block; font: 600 18px/1.4 var(--serif); color: var(--navy); margin-bottom: 4px; }
   .callout { border-left: 3px solid var(--navy); background: var(--parch); padding: 16px 20px; margin: 32px 0; font-size: 16px; line-height: 1.65; }
   .callout > strong:first-child { font-family: var(--serif); font-size: 18px; color: var(--navy); }
   .warn { border-left: 3px solid var(--amber); background: var(--parch); padding: 14px 18px; margin-top: 24px; font-size: 15px; }
@@ -376,6 +379,19 @@
     </table>
   </div>
   <p class="note">Logan resident with no extra charge, before aid. USU's published per-semester prices times the number of semesters, assuming today's prices hold; summers not included.</p>
+
+  <h3>Other schools have tried this</h3>
+  <ol class="precedents">
+    <li><strong class="school">Indiana University of Pennsylvania switched to per-credit tuition, then went back.</strong>
+      In fall 2016, IUP dropped its flat rate and began charging in-state undergraduates by the credit. Its president called it fairer because
+      “students pay for the credits that they take” (<a href="https://www.iup.edu/news-events/news/2016/03/iup-to-pilot-new-per-credit-tuition-pricing-program.html">IUP, 2016</a>). In 2022 the state system approved a return to a flat rate up to 18 credits.
+      IUP said students taking 15 credits would save almost 20%, $1,854 a year, and students taking 18 credits would save 32% (<a href="https://www.iup.edu/news-events/news/2022/03/tuition-affordability-plan-approved-by-board-of-governors.html">IUP, 2022</a>).</li>
+    <li><strong class="school">The University of Missouri got the transparency without ending its flat rate.</strong>
+      Missouri folded dozens of separate course fees into a few program-based tuition rates, the same goal USU gives. Its flagship campus also planned
+      “a flat rate for full-time students taking a course load of 12 to 18 hours,” saying students would be “incentivized to take at least 15 hours each semester”
+      (<a href="https://www.umsystem.edu/ums/news/news_releases/20220517218880519_news">University of Missouri System, 2022</a>).</li>
+  </ol>
+  <p class="note">IUP's experience shows per-credit pricing can be reversed. Missouri's shows a university can make costs clearer and still keep a flat price for full-time loads.</p>
 
   <h3>How much each college depends on its extra charges</h3>
   <div id="relyChart"></div>
@@ -719,6 +735,7 @@ Sincerely,
       <li>Enrollment: <a href="https://www.usu.edu/oda/enrollment.php">USU Office of Data &amp; Analytics enrollment dashboard</a> (headcount by college; exported via the dashboard's CSV view for 2025–26 and 2026–27; totals match USU's published 29,831 and 32,286) · <a href="https://www.usu.edu/about/at-a-glance/">USU at a glance</a></li>
       <li>Financial aid: <a href="https://www.usu.edu/oda/files/common-data-sets/CDS2025-26.pdf">Common Data Set 2025–26, section H</a> · <a href="https://huntsman.usu.edu/files/DT_Advisory_Board_Meeting_Minutes_Nov_6_2025.pdf">Huntsman differential tuition minutes (Nov. 2025)</a> · <a href="https://huntsman.usu.edu/scholarships/hansen">Hansen Differential Tuition Scholarship</a></li>
       <li><a href="https://ushe.edu/wp-content/uploads/pdf/agendas/2026/032726/USU_Tuition_Fees.pdf">USU's 2026–27 tuition &amp; fee proposal to the Board of Higher Education</a> (differential tuition freeze)</li>
+      <li>Other universities: <a href="https://www.iup.edu/news-events/news/2016/03/iup-to-pilot-new-per-credit-tuition-pricing-program.html">IUP per-credit pilot (2016)</a> · <a href="https://www.iup.edu/news-events/news/2022/03/tuition-affordability-plan-approved-by-board-of-governors.html">IUP return to flat rate (2022)</a> · <a href="https://www.umsystem.edu/ums/news/news_releases/20220517218880519_news">University of Missouri tuition structure (2022)</a></li>
       <li>State law: <a href="https://le.utah.gov/~2025/bills/static/HB0265.html">H.B. 265, Higher Education Strategic Reinvestment (2025)</a> (<a href="https://le.utah.gov/Session/2025/bills/enrolled/HB0265.pdf">enrolled text</a>): 120-credit cap on bachelor's degrees, accelerated three-year degrees</li>
       <li>Governance: <a href="https://www.usu.edu/president/staff/">President's staff</a> · <a href="https://www.usu.edu/trustees/members/">Trustees</a> · <a href="https://www.usu.edu/trustees/schedule">Trustee schedule</a> · <a href="https://www.usu.edu/student-success/student-fees">Student Fee Board</a> · <a href="https://www.utah.gov/pmn/files/1326039.pdf">USHE 2026–27 meeting schedule</a> · <a href="https://ushe.edu/tuition-and-fee-increases-remain-modest-following-board-review-and-adjustments/">USHE 2026–27 tuition decisions</a></li>
     </ul>
