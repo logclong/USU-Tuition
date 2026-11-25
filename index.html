@@ -267,6 +267,18 @@
     .table-wrap table:not(.wrap) td[data-label]:not(:first-child)::before { display: inline; float: left; margin: 2px 12px 0 0; text-align: left; }
     table.fc td:nth-child(2) { width: auto; }
   }
+  /* ---------- Your bill: fill-in sentence ---------- */
+  .sentence-form { border-top: 1px solid var(--rule2); border-bottom: 1px solid var(--rule); padding: 18px 0 14px; margin-bottom: 8px; }
+  .sentence { font: 400 22px/2.15 var(--serif); color: var(--ink); max-width: 52ch; margin: 0 0 6px; }
+  .sentence select, .sentence input { display: inline; width: auto; height: auto; padding: 0 4px 1px; margin: 0 2px; border: 0; border-bottom: 2px solid var(--amber);
+    border-radius: 0; background: transparent; font: 600 22px var(--serif); color: var(--navy); cursor: pointer; }
+  .sentence input { width: 4.5ch; text-align: center; cursor: text; -moz-appearance: textfield; }
+  .sentence input::-webkit-outer-spin-button, .sentence input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .sentence select:focus, .sentence input:focus { outline: 2px solid var(--amber); outline-offset: 2px; }
+  .sentence select:disabled { opacity: .45; cursor: default; }
+  .sentence select { max-width: 100%; }
+  .sentence-form .note { margin-top: 4px; }
+  @media (max-width: 760px) { .sentence, .sentence select, .sentence input { font-size: 19px; } .sentence { line-height: 2.1; } }
   .callout { border-left: 3px solid var(--navy); background: var(--parch); padding: 16px 20px; margin: 32px 0; font-size: 16px; line-height: 1.65; }
   .callout > strong:first-child { font-family: var(--serif); font-size: 18px; color: var(--navy); }
   .warn { border-left: 3px solid var(--amber); background: var(--parch); padding: 14px 18px; margin-top: 24px; font-size: 15px; }
@@ -427,27 +439,15 @@
   <h2>Your bill</h2>
   <p class="lede">Enter your situation to see what you'd pay under the proposal, and what your school's extra charge pays for today. For Logan undergraduates.</p>
 
-  <div class="card panel">
-    <div class="controls">
-      <div><label for="iRes">Residency</label>
-        <select id="iRes"><option value="res">Utah resident</option><option value="non">Nonresident</option></select></div>
-      <div><label for="iCr">Credits this semester</label><select id="iCr"></select></div>
-      <div><label for="iMaj">Major</label>
-        <select id="iMaj"></select></div>
-      <div><label for="iDt">Upper-division credits in your major: <strong id="iDtV">9</strong></label>
-        <input id="iDt" type="range" min="0" max="18" step="1" value="9">
-        <div class="note" id="iDtNote"></div></div>
-      <div><label for="iCf">Course fees today (optional)</label>
-        <input id="iCf" type="number" min="0" step="1" value="0"></div>
-      <div><label for="iSch">Scholarship</label>
-        <select id="iSch">
-          <option value="none">None</option>
-          <option value="fixed">Fixed amount (Deans, Merit, college or donor)</option>
-          <option value="full">Full tuition (Presidential, Ambassador)</option>
-          <option value="promise">Utah State Promise</option>
-        </select>
-        <div id="iSchAmtWrap"><label for="iSchAmt">Amount per semester</label><input id="iSchAmt" type="number" min="0" step="50" value="0"></div></div>
-    </div>
+  <div class="sentence-form">
+    <p class="sentence">I'm a <select id="iRes" aria-label="Residency"><option value="res">Utah resident</option><option value="non">nonresident</option></select>
+      taking <select id="iCr" aria-label="Credits this semester"></select> credits as a <select id="iMaj" aria-label="Major"></select> major,
+      with <select id="iDt" aria-label="Upper-division credits in your major"></select> upper-division credits in my major.<span id="iDtV" hidden></span></p>
+    <p class="sentence">I pay $<input id="iCf" type="number" min="0" step="1" value="0" aria-label="Course fees today"> in course fees, and my scholarship is
+      <select id="iSch" aria-label="Scholarship"><option value="none">none</option><option value="fixed">a fixed amount</option><option value="full">full tuition</option><option value="promise">the Utah State Promise</option></select><span id="iSchAmtWrap">
+      of $<input id="iSchAmt" type="number" min="0" step="50" value="0" aria-label="Scholarship amount per semester"> a semester</span>.</p>
+    <p class="note" id="iDtNote"></p>
+  </div>
   </div>
 
   <div class="result">
@@ -869,7 +869,8 @@ addEventListener("scroll", () => document.body.classList.toggle("scrolled", scro
 })();
 
 /* ============ YOUR MONEY ============ */
-$("iMaj").innerHTML = MAJORS.map(m => `<option value="${m.id}">${m.name}</option>`).join("");
+$("iMaj").innerHTML = MAJORS.map(m => `<option value="${m.id}">${m.name.replace(/ \(.*\)$/, "").replace(/^Other /, "")}</option>`).join("");
+$("iDt").innerHTML = Array.from({ length: 19 }, (_, i) => `<option value="${i}"${i === 9 ? " selected" : ""}>${i}</option>`).join("");
 function fillCredits(sel, res, cur) {
   const opts = [12, 13, 14, 15, 16, 17, 18];
   sel.innerHTML = opts.map(c => `<option ${c === cur ? "selected" : ""}>${c}</option>`).join("");
@@ -926,9 +927,24 @@ function calcMoney() {
     <div class="table-wrap"><table><tbody>${u.items.map(([k, v]) => `<tr><td>${k}</td><td>${u.pct ? v + "%" : money(v)}</td></tr>`).join("")}</tbody></table></div>` :
     `<p class="note">${colName} adds no extra charge to its courses today, so its programs are paid from general tuition and state funds.</p>`;
 }
+// Size each fill-in dropdown to the option it shows, so the sentence reads naturally
+const sizer = document.createElement("span");
+sizer.style.cssText = "position:absolute;visibility:hidden;white-space:pre;font:600 22px var(--serif)";
+document.body.appendChild(sizer);
+function sizeSentence() {
+  document.querySelectorAll(".sentence select").forEach(s => {
+    sizer.style.fontSize = getComputedStyle(s).fontSize;
+    sizer.textContent = s.options[s.selectedIndex] ? s.options[s.selectedIndex].text : "";
+    s.style.width = (sizer.offsetWidth + 30) + "px";
+  });
+}
+document.querySelectorAll(".sentence select").forEach(s => s.addEventListener("input", sizeSentence));
+addEventListener("resize", sizeSentence);
+if (document.fonts) document.fonts.ready.then(sizeSentence);
 $("iRes").addEventListener("change", () => { fillCredits($("iCr"), $("iRes").value, +$("iCr").value); calcMoney(); });
 ["iCr", "iMaj", "iDt", "iCf", "iSch", "iSchAmt"].forEach(id => $(id).addEventListener("input", calcMoney));
 calcMoney();
+sizeSentence();
 
 /* ============ BY MAJOR ============ */
 function drawMajors() {
